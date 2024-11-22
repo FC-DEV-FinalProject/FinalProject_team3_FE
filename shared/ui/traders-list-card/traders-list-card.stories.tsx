@@ -32,3 +32,14 @@ export const Default: StoryType = {
     traderId: '1234',
   },
 }
+
+export const WithoutButton: StoryType = {
+  args: {
+    nickname: '고양이는야옹하고울지',
+    profileImage: 'https://lh3.googleusercontent.com/a/your-image-id',
+    strategyCount: 10,
+    subscriberCount: 10,
+    traderId: '1234',
+    hasLinkButton: false,
+  },
+}

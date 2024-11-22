@@ -13,6 +13,7 @@ interface Props {
   strategyCount: number
   subscriberCount: number
   traderId: string
+  hasLinkButton?: boolean
 }
 
 const TradersListCard = ({
@@ -21,6 +22,7 @@ const TradersListCard = ({
   strategyCount,
   subscriberCount,
   traderId,
+  hasLinkButton = true,
 }: Props) => {
   return (
     <div className={cx('traders-list-card')}>
@@ -36,16 +38,18 @@ const TradersListCard = ({
           <Avatar src={profileImage} size="large" />
         </div>
       </div>
-      <div className="link-button-wrapper">
-        <LinkButton
-          href={'${PATH.TRADERS}/${traderId}'}
-          size="medium"
-          variant="filled"
-          className={cx('link-button')}
-        >
-          전략 목록 상세보기
-        </LinkButton>
-      </div>
+      {hasLinkButton && (
+        <div className="link-button-wrapper">
+          <LinkButton
+            href={'${PATH.TRADERS}/${traderId}'}
+            size="medium"
+            variant="filled"
+            className={cx('link-button')}
+          >
+            전략 목록 상세보기
+          </LinkButton>
+        </div>
+      )}
     </div>
   )
 }
