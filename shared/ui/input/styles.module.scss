@@ -19,16 +19,24 @@
   &.small {
     width: 132px;
   }
+
+  &.compact {
+    width: 240px;
+  }
+
   &.medium {
     width: 300px;
   }
+
   &.large {
     width: 400px;
   }
+
   &.full {
     width: 100%;
     height: 100%;
   }
+
   &:disabled {
     color: $color-gray-500;
     border-color: $color-gray-400;

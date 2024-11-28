@@ -13,7 +13,7 @@ const meta: Meta<typeof Input> = {
   argTypes: {
     inputSize: {
       control: { type: 'radio' },
-      options: ['small', 'medium', 'large', 'full'],
+      options: ['small', 'compact', 'medium', 'large', 'full'],
     },
     type: {
       control: { type: 'select' },
@@ -34,6 +34,13 @@ export const Small: StoryType = {
   },
 }
 
+export const Compact: StoryType = {
+  args: {
+    inputSize: 'compact',
+    placeholder: 'Compact input',
+  },
+}
+
 export const Medium: StoryType = {
   args: {
     inputSize: 'medium',
@@ -51,7 +58,7 @@ export const Large: StoryType = {
 export const Full: StoryType = {
   args: {
     inputSize: 'full',
-    placeholder: 'full input',
+    placeholder: 'Full input',
   },
 }
 

@@ -9,7 +9,7 @@ import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
 
-export type InputSizeType = 'small' | 'medium' | 'large' | 'full'
+export type InputSizeType = 'small' | 'compact' | 'medium' | 'large' | 'full'
 
 interface Props extends ComponentPropsWithoutRef<'input'> {
   inputSize?: InputSizeType
