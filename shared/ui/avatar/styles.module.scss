@@ -1,10 +1,12 @@
 $avatar-small: 24px;
 $avatar-medium: 32px;
 $avatar-large: 72px;
+$avatar-extra-large: 160px;
 
 $svg-small: 20px;
 $svg-medium: 24px;
 $svg-large: 54px;
+$svg-extra-large: 160px;
 
 .avatar {
   position: relative;
@@ -44,6 +46,16 @@ $svg-large: 54px;
       width: $svg-large;
       height: $svg-large;
       margin-bottom: 4px;
+    }
+  }
+
+  &.extra-large {
+    width: $avatar-extra-large;
+    height: $avatar-extra-large;
+
+    svg {
+      width: $svg-extra-large;
+      height: $svg-extra-large;
     }
   }
 

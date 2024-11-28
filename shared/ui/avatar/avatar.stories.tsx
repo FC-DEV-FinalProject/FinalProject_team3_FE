@@ -12,7 +12,7 @@ const meta = {
   argTypes: {
     size: {
       control: 'radio',
-      options: ['small', 'medium', 'large'],
+      options: ['small', 'medium', 'large', 'extra-large'],
       defaultValue: 'small',
     },
     src: {
@@ -39,6 +39,7 @@ export const Sizes: StoryType = {
       <Avatar size="small" />
       <Avatar size="medium" />
       <Avatar size="large" />
+      <Avatar size="extra-large" />
     </div>
   ),
 }
