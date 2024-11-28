@@ -3,6 +3,7 @@ import {
   BarsIcon,
   BookmarkIcon,
   BookmarkOutlineIcon,
+  CameraIcon,
   CategoryIcon,
   ChangeIcon,
   CheckIcon,
@@ -73,6 +74,7 @@ const icons = [
   { name: 'ModalSubscribeIcon', icon: ModalSubscribeIcon },
   { name: 'ModalCheckIcon', icon: ModalCheckIcon },
   { name: 'RegisterIcon', icon: RegisterIcon },
+  { name: 'CameraIcon', icon: CameraIcon },
 ]
 
 export const Icons: Story = {
