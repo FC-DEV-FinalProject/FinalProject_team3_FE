@@ -1,20 +1,109 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 897px;
+  height: 854px;
+  border: 1px solid $color-gray-700;
+}
+
+.text {
+  margin-top: 44px;
+  @include typo-b1;
+  margin-bottom: 22px;
+  color: $color-gray-700;
+  margin-left: 35px;
+}
+
+.line {
+  width: 820px;
+  height: 1px;
+  background-color: $color-gray-300;
+  margin-left: 35px;
+}
+
+.content-wrapper {
+  display: flex;
+  max-width: 820px;
+  justify-content: space-between;
+  margin-top: 65px;
+}
+
+.left-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin-right: 50px;
+}
+
 .avatar-wrapper {
   position: relative;
   display: inline-block;
-
-  .avartar {
-    width: 160px;
-    height: 160px;
-  }
+  margin-bottom: 35px;
 
   .camera-icon {
     position: absolute;
-    bottom: 0;
-    right: 0;
+    bottom: 40px;
+    right: 10px;
     width: 36px;
     height: 36px;
     transform: translate(50%, 50%);
     background: $color-white;
     border-radius: 50%;
+  }
+}
+
+.right-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  .full-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 60px;
+  }
+
+  .name {
+    color: $color-gray-500;
+    margin-bottom: 15px;
+    @include typo-b3;
+  }
+
+  .row {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    margin-bottom: 60px;
+
+    .input {
+      flex: 1;
+    }
+  }
+
+  .note {
+    font-size: 12px;
+    color: $color-gray-600;
+    margin-top: 15px;
+    @include typo-c1;
+  }
+
+  .password-row {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+  }
+}
+
+.button-wrapper {
+  margin-top: 130px;
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  width: 100%;
+  height: 40px;
+
+  .left-button {
+    padding: 12px 24px;
+    width: 112px;
   }
 }

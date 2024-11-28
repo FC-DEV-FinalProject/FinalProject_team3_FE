@@ -3,7 +3,6 @@ import classNames from 'classnames/bind'
 
 import Avatar from '../avatar'
 import { Button } from '../button'
-import { ErrorMessage } from '../error-message'
 import { Input } from '../input'
 import styles from './styles.module.scss'
 
@@ -11,39 +10,76 @@ const cx = classNames.bind(styles)
 
 interface Props {
   className?: string
+  isProfileImageDelete: boolean
+  onClick?: () => void
 }
 
-export const UserInfo = ({ className }: Props) => {
+export const UserInfo = ({ isProfileImageDelete, onClick, className }: Props) => {
   return (
-    <div className={cx('container')}>
-      <p>개인정보</p>
-      <div className={cx('avatar-wrapper')}>
-        <Avatar size="large"></Avatar>
+    <div>
+      <p className={cx('text')}>개인정보</p>
+      <div className={cx('line')}></div>
+      <div className={cx('container')}>
+        <div className={cx('content-wrapper')}>
+          <div className={cx('left-wrapper')}>
+            <div className={cx('avatar-wrapper')}>
+              <Avatar size="extra-large" />
+              <CameraIcon className={cx('camera-icon')} onClick={onClick} />
+            </div>
+            {isProfileImageDelete && <Button onClick={onClick}>프로필사진 삭제</Button>}
+          </div>
 
-        <CameraIcon className={cx('camera-icon')} />
-      </div>
-      <Button>프로필사진 삭제</Button>
+          <div className={cx('right-wrapper')}>
+            <div className={cx('full-row')}>
+              <p className={cx('name')}>이름</p>
+              <Input className={cx('input')} />
+            </div>
 
-      <div className={cx('input-wrapper')}>
-        <p>이름</p>
-        <Input />
-        <p>닉네임</p>
-        <Input />
-        <p>이메일</p>
-        <Input />
-        <p>휴대전화</p>
-        <Input />
-        <p>생년월일</p>
-        <Input />
-        <p>비밀번호</p>
-        <Input />
-        <ErrorMessage />
-        <p>비밀번호 확인</p>
-        <Input />
-      </div>
-      <div className={cx('button-wrapper')}>
-        <Button>취소</Button>
-        <Button>저장하기</Button>
+            <div className={cx('row')}>
+              <div>
+                <p className={cx('name')}>닉네임</p>
+                <Input className={cx('input')} />
+              </div>
+              <div>
+                <p className={cx('name')}>이메일</p>
+                <Input className={cx('input')} />
+              </div>
+            </div>
+
+            <div className={cx('row')}>
+              <div>
+                <p className={cx('name')}>휴대전화</p>
+                <Input className={cx('input')} />
+              </div>
+              <div>
+                <p className={cx('name')}>생년월일</p>
+                <Input className={cx('input')} />
+              </div>
+            </div>
+
+            <div className={cx('password-row')}>
+              <div>
+                <p className={cx('name')}>비밀번호</p>
+                <Input className={cx('input')} />
+              </div>
+              <div>
+                <p className={cx('name')}>비밀번호 확인</p>
+                <Input className={cx('input')} />
+              </div>
+            </div>
+
+            <p className={cx('note')}>* 비밀번호는 문자, 숫자 포함 6~20자로 구성되어야 합니다.</p>
+          </div>
+        </div>
+
+        <div className={cx('button-wrapper')}>
+          <Button className={cx('left-button')} onClick={onClick}>
+            취소
+          </Button>
+          <Button variant="filled" onClick={onClick}>
+            저장하기
+          </Button>
+        </div>
       </div>
     </div>
   )

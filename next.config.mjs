@@ -25,10 +25,10 @@ const nextConfig = {
         has: [
           {
             type: 'header',
-            key: 'host'
-          }
-        ]
-      }
+            key: 'host',
+          },
+        ],
+      },
     ]
   },
   webpack: (config, { isServer }) => {
