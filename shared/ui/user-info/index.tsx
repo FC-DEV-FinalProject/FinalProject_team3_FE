@@ -1,23 +1,24 @@
-import { useState } from 'react'
+'use client'
+
+import { ChangeEvent, useState } from 'react'
 
 import { CameraIcon } from '@/public/icons'
 import classNames from 'classnames/bind'
 
 import Avatar from '../avatar'
 import { Button } from '../button'
-import { ErrorMessage } from '../error-message'
 import { Input } from '../input'
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
 
 interface Props {
-  className?: string
   onClick?: () => void
 }
 
 export const UserInfo = ({ onClick }: Props) => {
   const [isEditable, setIsEditable] = useState(false)
+  const [value, setValue] = useState('')
 
   const handleUserInfoEdit = () => {
     setIsEditable(true)
@@ -26,6 +27,11 @@ export const UserInfo = ({ onClick }: Props) => {
   const handleUserInfoView = () => {
     setIsEditable(false)
   }
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value)
+  }
+
   return (
     <div>
       <p className={cx('text')}>개인 정보</p>
@@ -48,18 +54,34 @@ export const UserInfo = ({ onClick }: Props) => {
             )}
             <div className={cx('first-row')}>
               <p className={cx('title')}>이름</p>
-              <Input inputSize="compact" className={cx('input')} disabled={true} />
+              <Input
+                id="name"
+                name="name"
+                value={value}
+                inputSize="compact"
+                className={cx('input')}
+                disabled={true}
+              />
             </div>
 
             <div className={cx('row')}>
               <div>
                 <p className={cx('title')}>이메일</p>
-                <Input inputSize="compact" className={cx('input')} disabled={true} />
+                <Input inputSize="compact" value={value} className={cx('input')} disabled={true} />
               </div>
               <div>
                 <p className={cx('title')}>휴대전화</p>
                 <div className={cx('position')}>
-                  <Input inputSize="compact" className={cx('input')} disabled={!isEditable} />
+                  <Input
+                    id="phone"
+                    name="phone"
+                    value={value}
+                    onChange={handleInputChange}
+                    className={cx('input')}
+                    inputSize="compact"
+                    disabled={!isEditable}
+                  />
+
                   {isEditable && <Button onClick={onClick}>확인</Button>}
                 </div>
               </div>
@@ -68,12 +90,21 @@ export const UserInfo = ({ onClick }: Props) => {
             <div className={cx('row')}>
               <div>
                 <p className={cx('title')}>생년월일</p>
-                <Input inputSize="compact" className={cx('input')} disabled={true} />
+                <Input inputSize="compact" value={value} className={cx('input')} disabled={true} />
               </div>
               <div>
                 <p className={cx('title')}>닉네임</p>
                 <div className={cx('position')}>
-                  <Input inputSize="compact" className={cx('input')} disabled={!isEditable} />
+                  <Input
+                    id="nickname"
+                    name="nickname"
+                    inputSize="compact"
+                    value={value}
+                    onChange={handleInputChange}
+                    className={cx('input')}
+                    disabled={!isEditable}
+                  />
+
                   {isEditable && <Button onClick={onClick}>확인</Button>}
                 </div>
               </div>
@@ -83,12 +114,31 @@ export const UserInfo = ({ onClick }: Props) => {
               <div className={cx('password-row')}>
                 <div>
                   <p className={cx('title')}>비밀번호</p>
-                  <Input inputSize="compact" className={cx('input')} />
+                  <Input
+                    id="password"
+                    name="password"
+                    type="password"
+                    inputSize="compact"
+                    value={value}
+                    onChange={handleInputChange}
+                    placeholder="비밀번호를 입력하세요"
+                    className={cx('input')}
+                    errorMessage={''}
+                  />
                 </div>
                 <div>
                   <p className={cx('title')}>비밀번호 확인</p>
                   <div className={cx('position')}>
-                    <Input inputSize="compact" className={cx('input')} />
+                    <Input
+                      id="passwordConfirm"
+                      name="passwordConfirm"
+                      type="password"
+                      value={value}
+                      onChange={handleInputChange}
+                      placeholder="한 번 더 입력하세요"
+                      className={cx('input')}
+                      inputSize="compact"
+                    />
                     <Button onClick={onClick}>변경</Button>
                   </div>
                 </div>
@@ -96,10 +146,9 @@ export const UserInfo = ({ onClick }: Props) => {
             )}
             {isEditable && (
               <div>
-                <ErrorMessage />
                 <p className={cx('notification')}>
                   * 비밀번호는 문자, 숫자 포함 6~20자로 구성되어야 합니다.
-                </p>{' '}
+                </p>
               </div>
             )}
           </div>
