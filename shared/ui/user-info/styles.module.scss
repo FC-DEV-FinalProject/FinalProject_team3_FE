@@ -1,0 +1,20 @@
+.avatar-wrapper {
+  position: relative;
+  display: inline-block;
+
+  .avartar {
+    width: 160px;
+    height: 160px;
+  }
+
+  .camera-icon {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 36px;
+    height: 36px;
+    transform: translate(50%, 50%);
+    background: $color-white;
+    border-radius: 50%;
+  }
+}
