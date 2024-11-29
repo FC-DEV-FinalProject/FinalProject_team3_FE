@@ -19,10 +19,15 @@ const meta: Meta<typeof Input> = {
       control: { type: 'select' },
       options: ['email', 'password', 'tel', 'text'],
     },
+    isWhiteDisabled: {
+      control: { type: 'boolean' },
+      description: 'White disabled input',
+    },
   },
   tags: ['autodocs'],
 }
 
+export default meta
 type StoryType = StoryObj<typeof Input>
 
 export const Default: StoryType = {}
@@ -62,4 +67,19 @@ export const Full: StoryType = {
   },
 }
 
-export default meta
+export const Disabled: StoryType = {
+  args: {
+    inputSize: 'medium',
+    placeholder: 'Disabled input',
+    disabled: true,
+  },
+}
+
+export const WhiteDisabled: StoryType = {
+  args: {
+    inputSize: 'medium',
+    placeholder: 'White disabled input',
+    isWhiteDisabled: true,
+    disabled: true,
+  },
+}

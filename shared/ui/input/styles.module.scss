@@ -43,4 +43,13 @@
     background-color: $color-gray-200;
     cursor: not-allowed;
   }
+
+  &.white-disabled {
+    &:disabled {
+      color: $color-gray-500;
+      border-color: $color-gray-400;
+      background-color: $color-white;
+      cursor: not-allowed;
+    }
+  }
 }
