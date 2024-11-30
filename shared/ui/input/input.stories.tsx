@@ -80,6 +80,5 @@ export const WhiteDisabled: StoryType = {
     inputSize: 'medium',
     placeholder: 'White disabled input',
     isWhiteDisabled: true,
-    disabled: true,
   },
 }
