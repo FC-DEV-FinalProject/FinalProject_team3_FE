@@ -6,12 +6,7 @@ const addIndexAndButton = (data: any[][], active?: boolean) => {
   return data?.map((d, idx) => [
     idx + 1,
     ...d,
-    <Button
-      variant={active ? 'outline' : 'filled'}
-      size="small"
-      style={buttonStyles}
-      key={idx}
-    >
+    <Button variant={active ? 'outline' : 'filled'} size="small" style={buttonStyles} key={idx}>
       {active ? '비활성화' : '활성화'}
     </Button>,
   ])

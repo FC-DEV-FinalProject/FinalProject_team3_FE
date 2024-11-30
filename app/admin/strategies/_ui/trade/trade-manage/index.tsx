@@ -1,11 +1,9 @@
-import { CSSProperties } from 'react'
-
 import classNames from 'classnames/bind'
 
-import { Button } from '@/shared/ui/button'
-
-import ManageTable from '../../shared/manage-table'
+import ActiveTradeManageTable from './active-trade-manage-table'
+import InactiveTradeManageTable from './inactive-trade-manage-table'
 import styles from './styles.module.scss'
+import TradePostButton from './trade-post-button'
 
 const cx = classNames.bind(styles)
 
@@ -24,20 +22,11 @@ const cx = classNames.bind(styles)
 const TradeManage = () => {
   return (
     <div className={cx('container')}>
-      <Button variant="filled" size="small" style={buttonStyles}>
-        매매 유형 등록하기
-      </Button>
-      <ManageTable data={[]} active domain="매매 유형" />
-      <ManageTable data={[]} domain="매매 유형" />
+      <TradePostButton />
+      <ActiveTradeManageTable />
+      <InactiveTradeManageTable />
     </div>
   )
-}
-
-const buttonStyles: CSSProperties = {
-  position: 'absolute',
-  top: '-144px',
-  right: 0,
-  padding: '12px 24px',
 }
 
 export default TradeManage

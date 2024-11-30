@@ -31,4 +31,18 @@ const ManageTable = ({ active, domain, data }: Props) => {
   )
 }
 
+const Skeleton = ({ active, domain }: Pick<Props, 'active' | 'domain'>) => {
+  return (
+    <div className={cx('container')}>
+      <span className={cx('title')}>{active ? '활성화' : '비활성화'}</span>
+      <VerticalTable.Skeleton
+        tableHead={['No.', domain === '종목' ? '종목명' : '매매 유형', '분류', '상태']}
+        countPerPage={8} //TODO: 이거 디자인에 맞춰서 크기 조절
+      />
+    </div>
+  )
+}
+
+ManageTable.Skeleton = Skeleton
+
 export default ManageTable
