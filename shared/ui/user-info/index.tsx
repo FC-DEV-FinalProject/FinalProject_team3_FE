@@ -60,14 +60,21 @@ export const UserInfo = ({ onClick }: Props) => {
                 value={value}
                 inputSize="compact"
                 className={cx('input')}
-                disabled={true}
+                isWhiteDisabled={!isEditable ? true : undefined}
+                disabled={isEditable}
               />
             </div>
 
             <div className={cx('row')}>
               <div>
                 <p className={cx('title')}>이메일</p>
-                <Input inputSize="compact" value={value} className={cx('input')} disabled={true} />
+                <Input
+                  inputSize="compact"
+                  value={value}
+                  className={cx('input')}
+                  isWhiteDisabled={!isEditable ? true : undefined}
+                  disabled={isEditable}
+                />
               </div>
               <div>
                 <p className={cx('title')}>휴대전화</p>
@@ -79,7 +86,7 @@ export const UserInfo = ({ onClick }: Props) => {
                     onChange={handleInputChange}
                     className={cx('input')}
                     inputSize="compact"
-                    disabled={!isEditable}
+                    isWhiteDisabled={!isEditable ? true : undefined}
                   />
 
                   {isEditable && <Button onClick={onClick}>확인</Button>}
@@ -90,7 +97,13 @@ export const UserInfo = ({ onClick }: Props) => {
             <div className={cx('row')}>
               <div>
                 <p className={cx('title')}>생년월일</p>
-                <Input inputSize="compact" value={value} className={cx('input')} disabled={true} />
+                <Input
+                  inputSize="compact"
+                  value={value}
+                  className={cx('input')}
+                  isWhiteDisabled={!isEditable ? true : undefined}
+                  disabled={isEditable}
+                />
               </div>
               <div>
                 <p className={cx('title')}>닉네임</p>
@@ -102,7 +115,7 @@ export const UserInfo = ({ onClick }: Props) => {
                     value={value}
                     onChange={handleInputChange}
                     className={cx('input')}
-                    disabled={!isEditable}
+                    isWhiteDisabled={!isEditable ? true : undefined}
                   />
 
                   {isEditable && <Button onClick={onClick}>확인</Button>}
@@ -128,19 +141,17 @@ export const UserInfo = ({ onClick }: Props) => {
                 </div>
                 <div>
                   <p className={cx('title')}>비밀번호 확인</p>
-                  <div className={cx('position')}>
-                    <Input
-                      id="passwordConfirm"
-                      name="passwordConfirm"
-                      type="password"
-                      value={value}
-                      onChange={handleInputChange}
-                      placeholder="한 번 더 입력하세요"
-                      className={cx('input')}
-                      inputSize="compact"
-                    />
-                    <Button onClick={onClick}>변경</Button>
-                  </div>
+
+                  <Input
+                    id="passwordConfirm"
+                    name="passwordConfirm"
+                    type="password"
+                    value={value}
+                    onChange={handleInputChange}
+                    placeholder="한 번 더 입력하세요"
+                    className={cx('input')}
+                    inputSize="compact"
+                  />
                 </div>
               </div>
             )}
