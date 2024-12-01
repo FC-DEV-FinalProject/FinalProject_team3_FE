@@ -1,12 +1,14 @@
 $avatar-small: 24px;
 $avatar-medium: 32px;
 $avatar-large: 72px;
-$avatar-extra-large: 148px;
+$avatar-xlarge: 100px;
+$avatar-xxlarge: 148px;
 
 $svg-small: 20px;
 $svg-medium: 24px;
 $svg-large: 54px;
-$svg-extra-large: 110px;
+$svg-xlarge: 75px;
+$svg-xxlarge: 110px;
 
 .avatar {
   position: relative;
@@ -49,13 +51,23 @@ $svg-extra-large: 110px;
     }
   }
 
-  &.extra-large {
-    width: $avatar-extra-large;
-    height: $avatar-extra-large;
+  &.xlarge {
+    width: $avatar-xlarge;
+    height: $avatar-xlarge;
 
     svg {
-      width: $svg-extra-large;
-      height: $svg-extra-large;
+      width: $svg-xlarge;
+      height: $svg-xlarge;
+    }
+  }
+
+  &.xxlarge {
+    width: $avatar-xxlarge;
+    height: $avatar-xxlarge;
+
+    svg {
+      width: $svg-xxlarge;
+      height: $svg-xxlarge;
     }
   }
 

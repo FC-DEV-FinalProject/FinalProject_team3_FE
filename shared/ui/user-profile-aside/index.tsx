@@ -23,7 +23,7 @@ export const UserProfileAside = ({ type, name, email }: Props) => {
           <p className={cx('email')}>{email}</p>
         </div>
         <div className={cx('right-wrapper')}>
-          <Avatar size="large" />
+          <Avatar size="xlarge" />
         </div>
       </div>
     </div>

@@ -11,7 +11,7 @@ import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
 
-type AvatarSizeType = 'small' | 'medium' | 'large' | 'extra-large'
+type AvatarSizeType = 'small' | 'medium' | 'large' | 'xlarge' | 'xxlarge'
 
 interface Props {
   src?: string | StaticImageData

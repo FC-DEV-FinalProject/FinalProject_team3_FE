@@ -41,7 +41,7 @@ export const UserInfo = ({ onClick }: Props) => {
         <div className={cx('content-wrapper')}>
           <div className={cx('left-wrapper')}>
             <div className={cx('avatar-wrapper')}>
-              <Avatar size="extra-large" />
+              <Avatar size="xxlarge" />
               {isEditable && <CameraIcon className={cx('camera-icon')} onClick={onClick} />}
             </div>
             {isEditable && <Button onClick={onClick}>프로필 사진 삭제</Button>}
