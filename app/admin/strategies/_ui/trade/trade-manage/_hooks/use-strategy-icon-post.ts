@@ -1,6 +1,7 @@
 import { ChangeEvent, useState } from 'react'
 
-import axios from 'axios'
+import getPresignedUrl from '../_api/get-presigned-url'
+import uploadFileWithPresignedUrl from '../_api/upload-file-with-presigned-url'
 
 interface FormDataModel {
   imageFile: File | null
@@ -43,46 +44,34 @@ const useStrategyIconPost = () => {
   const isSubmitable = Object.values(formData).every((value) => Boolean(value))
 
   const onFormSubmit = async (e: React.FormEvent) => {
-    if (!isSubmitable) return
-
     e.preventDefault()
     const { imageFile, typeName } = formData
 
+    if (!imageFile || !typeName) return
+
     try {
-      console.log('imageFile', imageFile, 'typeName', typeName)
+      // console.log('imageFile', imageFile, 'typeName', typeName)
 
-      const presignedResponse = await axios.post('/api/admin/strategies/trade-type', {
-        tradeTypeName: '자동',
-        tradeTypeIconUrl: imageFile?.name,
-        size: imageFile?.size,
-      })
+      const presignedUrl = await getPresignedUrl(typeName, imageFile.name, imageFile.size)
 
-      console.log('p', presignedResponse)
+      // console.log('p', presignedUrl)
 
-      // const { presignedUrl } = presignedResponse.data.result
-
-      // await axios.put(presignedUrl, imageFile, {
-      //   headers: {
-      //     'Content-Type': imageFile.type,
-      //   },
-      // })
+      await uploadFileWithPresignedUrl(presignedUrl, imageFile)
 
       alert('이미지가 성공적으로 업로드되었습니다!')
       setFormData(initailFormData)
-    } catch (error) {
-      console.error('이미지 업로드 실패:', error)
+    } catch (err) {
+      console.error('이미지 업로드 실패:', err)
       alert('업로드 중 문제가 발생했습니다.')
     }
   }
 
   return {
     imagePreview,
-    setImagePreview,
     onTypeNameInputChange,
     onImageInputChange,
     isSubmitable,
     onFormSubmit,
-    formData,
   }
 }
 
