@@ -1,10 +1,11 @@
-import { ReactNode } from 'react'
+import { ReactNode, useState } from 'react'
 
 import classNames from 'classnames/bind'
 
 import Pagination from '@/shared/ui/pagination'
 import VerticalTable from '@/shared/ui/table/vertical'
 
+import { COUNT_PER_PAGE } from './constant'
 import styles from './styles.module.scss'
 import addIndexToData from './utils/add-index-to-data'
 
@@ -17,16 +18,26 @@ interface Props {
 }
 
 const ManageTable = ({ active, domain, data }: Props) => {
+  const [currentPage, setCurrentPage] = useState(1)
+
+  const hasData = data?.length > 0
+
   return (
     <div className={cx('container')}>
       <span className={cx('title')}>{active ? '활성화' : '비활성화'}</span>
       <VerticalTable
         tableHead={['No.', domain === '종목' ? '종목명' : '매매 유형', '분류', '상태']}
         tableBody={addIndexToData(data, active)}
-        countPerPage={8}
+        countPerPage={COUNT_PER_PAGE}
         currentPage={1}
       />
-      <Pagination currentPage={1} maxPage={3} onPageChange={() => {}} />
+      {hasData && domain === '종목' && (
+        <Pagination
+          currentPage={currentPage}
+          maxPage={3}
+          onPageChange={(page) => setCurrentPage(page)}
+        />
+      )}
     </div>
   )
 }
