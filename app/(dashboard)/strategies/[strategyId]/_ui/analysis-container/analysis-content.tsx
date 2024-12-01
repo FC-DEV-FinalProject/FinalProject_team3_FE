@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind'
 
-import { DailyAnalysisModel, MonthlyAnalysisModel } from '@/shared/types/strategy-details-data'
+import { DailyAnalysisModel, MonthlyAnalysisModel } from '@/shared/types/strategy-data'
 import { Button } from '@/shared/ui/button'
 import Pagination from '@/shared/ui/pagination'
 import VerticalTable from '@/shared/ui/table/vertical'
@@ -36,6 +36,7 @@ interface AnalysisContentProps {
   analysisData: DailyAnalysisModel[] | MonthlyAnalysisModel[]
   currentPage: number
   onPageChange: (page: number) => void
+  isEditable?: boolean
 }
 
 const AnalysisContent = ({
@@ -43,19 +44,39 @@ const AnalysisContent = ({
   analysisData,
   currentPage,
   onPageChange,
+  isEditable = false,
 }: AnalysisContentProps) => {
   const tableHeader = type === 'daily' ? DAILY_TABLE_HEADER : MONTHLY_TABLE_HEADER
 
   return (
     <div className={cx('table-wrapper', 'analysis')}>
-      <Button size="small" className={cx('excel-button')} variant="filled">
-        엑셀 다운받기
-      </Button>
+      {!isEditable && (
+        <Button size="small" className={cx('excel-button')} variant="filled">
+          엑셀 다운받기
+        </Button>
+      )}
+      {isEditable && (
+        <div className={cx('button-container')}>
+          <div className={cx('button-wrapper')}>
+            <Button size="small" className={cx('upload-button')} variant="filled">
+              엑셀 업로드
+            </Button>
+            <Button size="small" className={cx('upload-button')} variant="outline">
+              직접 입력
+            </Button>
+          </div>
+          <Button size="small" variant="filled">
+            전체 삭제
+          </Button>
+        </div>
+      )}
+
       <VerticalTable
         tableHead={tableHeader}
         tableBody={analysisData}
         currentPage={currentPage}
         countPerPage={COUNT_PER_PAGE}
+        isEditable={isEditable}
       />
       <Pagination
         currentPage={currentPage}

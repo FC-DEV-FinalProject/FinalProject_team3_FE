@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic'
 import classNames from 'classnames/bind'
 import Highcharts from 'highcharts'
 
-import { ProfitRateChartDataModel } from '@/shared/types/strategy-details-data'
+import { ProfitRateChartDataModel } from '@/shared/types/strategy-data'
 
 import styles from './styles.module.scss'
 
@@ -33,8 +33,8 @@ const AreaChart = ({ profitRateChartData: data }: Props) => {
     },
     yAxis: {
       visible: false,
-      min: Math.min(...data.yAxis),
-      max: Math.max(...data.yAxis),
+      min: Math.min(...data.profitRates),
+      max: Math.max(...data.profitRates),
     },
     legend: { enabled: false },
     plotOptions: {
@@ -56,9 +56,9 @@ const AreaChart = ({ profitRateChartData: data }: Props) => {
     series: [
       {
         type: 'areaspline',
-        data: data.xAxis.map((x, idx) => ({
+        data: data.dates.map((x, idx) => ({
           x: new Date(x).getTime(),
-          y: data.yAxis[idx],
+          y: data.profitRates[idx],
         })),
         color: {
           linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },

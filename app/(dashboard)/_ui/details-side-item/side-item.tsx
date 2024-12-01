@@ -13,9 +13,10 @@ interface Props {
   title: Omit<TitleType, '트레이더' | '최소 투자 금액' | '투자 원금'>
   data: number | string
   profileImage?: string
+  isMyStrategy?: boolean
 }
 
-const SideItem = ({ title, data, profileImage }: Props) => {
+const SideItem = ({ title, data, profileImage, isMyStrategy = false }: Props) => {
   return (
     <div className={cx('side-item')}>
       <div className={cx('title')}>{title}</div>
@@ -26,9 +27,11 @@ const SideItem = ({ title, data, profileImage }: Props) => {
               <Avatar src={profileImage} />
               <p>{data}</p>
             </div>
-            <LinkButton href={PATH.MY_QUESTIONS} size="small" style={{ height: '30px' }}>
-              문의하기
-            </LinkButton>
+            {!isMyStrategy && (
+              <LinkButton href={PATH.MY_QUESTIONS} size="small" style={{ height: '30px' }}>
+                문의하기
+              </LinkButton>
+            )}
           </>
         ) : (
           <p>{data}</p>

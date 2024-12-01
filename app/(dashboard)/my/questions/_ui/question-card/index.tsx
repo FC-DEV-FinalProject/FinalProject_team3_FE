@@ -1,5 +1,8 @@
+import Link from 'next/link'
+
 import classNames from 'classnames/bind'
 
+import { PATH } from '@/shared/constants/path'
 import type { QuestionStatusType } from '@/shared/types/questions'
 import Avatar from '@/shared/ui/avatar'
 import Label from '@/shared/ui/label'
@@ -17,12 +20,14 @@ export interface QuestionCardProps {
 }
 
 interface Props extends QuestionCardProps {
+  qnaId: number
   strategyName: string
   title: string
   status: QuestionStatusType
 }
 
 const QuestionCard = ({
+  qnaId,
   strategyName,
   title,
   contents,
@@ -33,19 +38,21 @@ const QuestionCard = ({
 }: Props) => {
   return (
     <div className={cx('card-container')}>
-      <div className={cx('top-wrapper')}>
-        <strong className={cx('strategy-name')}>{strategyName}</strong>
-        <span className={cx('created-at')}>{formatDateTime(createdAt)}</span>
-      </div>
-      <h2 className={cx('title')}>{title}</h2>
-      <p className={cx('contents')}>{contents}</p>
-      <div className={cx('bottom-wrapper')}>
-        <div className={cx('avatar-wrapper')}>
-          <Avatar src={profileImage} size="medium" />
-          <span>{nickname}</span>
+      <Link href={`${PATH.MY_QUESTIONS}/${qnaId}`}>
+        <div className={cx('top-wrapper')}>
+          <strong className={cx('strategy-name')}>{strategyName}</strong>
+          <span className={cx('created-at')}>{formatDateTime(createdAt)}</span>
         </div>
-        <Label color={status === '답변 완료' ? 'indigo' : 'orange'}>{status}</Label>
-      </div>
+        <h2 className={cx('title')}>{title}</h2>
+        <p className={cx('contents')}>{contents}</p>
+        <div className={cx('bottom-wrapper')}>
+          <div className={cx('avatar-wrapper')}>
+            <Avatar src={profileImage} size="medium" />
+            <span>{nickname}</span>
+          </div>
+          <Label color={status === '답변 완료' ? 'indigo' : 'orange'}>{status}</Label>
+        </div>
+      </Link>
     </div>
   )
 }

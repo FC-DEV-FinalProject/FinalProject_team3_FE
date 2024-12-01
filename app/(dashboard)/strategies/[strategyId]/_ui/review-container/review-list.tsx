@@ -1,5 +1,6 @@
 import classNames from 'classnames/bind'
 
+import { useAuthStore } from '@/shared/stores/use-auth-store'
 import Pagination from '@/shared/ui/pagination'
 
 import ReviewItem from './review-item'
@@ -27,6 +28,7 @@ interface Props {
 
 const ReviewList = ({ reviews, totalReview, currentPage, setCurrentPage }: Props) => {
   const handlePageChange = (page: number) => setCurrentPage(page)
+  const user = useAuthStore((state) => state.user)
 
   return (
     <>
@@ -39,7 +41,8 @@ const ReviewList = ({ reviews, totalReview, currentPage, setCurrentPage }: Props
             createdAt={review.createdAt}
             starRating={review.starRating}
             content={review.content}
-            isReviewer={'' === review.nickname}
+            isReviewer={user?.nickname === review.nickname}
+            isAdmin={user?.role.includes('admin') ?? false}
           />
         ))}
       </ul>

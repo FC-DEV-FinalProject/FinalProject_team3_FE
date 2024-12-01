@@ -1,19 +1,27 @@
 import axiosInstance from '@/shared/api/axios'
-import { StrategiesModel } from '@/shared/types/strategy-details-data'
-
-// 실제 api 나오면 수정 필요함
-// totalElements 사용해서 hasmore값 계산해야될 것 같음
+import { StrategiesModel } from '@/shared/types/strategy-data'
 
 interface StrategiesResponseModel {
+  isSuccess: boolean
+  message: string
   result: {
-    strategies: StrategiesModel[]
-    hasMore: boolean
+    content: StrategiesModel[]
+    page: number
+    size: number
+    totalElements: number
+    totalPages: number
+    first: boolean
+    last: boolean
   }
 }
 
-export const getMyStrategyList = async ({ page = 1, size = 4 }: { page: number; size: number }) => {
+export const getMyStrategyList = async ({ page = 1, size }: { page: number; size: number }) => {
   const response = await axiosInstance.get<StrategiesResponseModel>(
-    `/api/my-strategies/page=${page}&size=${size}`
+    `/api/my-strategies?userId=1&page=${page}&size=${size}`
   )
-  return response.data.result
+  const { content, totalElements, page: page_, size: size_ } = response.data.result
+  return {
+    strategies: content,
+    hasMore: totalElements > page_ * size_,
+  }
 }

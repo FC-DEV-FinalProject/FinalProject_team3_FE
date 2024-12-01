@@ -5,7 +5,7 @@ import { LinkButton } from '@/shared/ui/link-button'
 const HeaderLinks = () => {
   return (
     <Button.ButtonGroup gap="24px">
-      <LinkButton href={PATH.HOME} size="small">
+      <LinkButton href={PATH.STRATEGIES} size="small">
         대시보드
       </LinkButton>
       <LinkButton href={PATH.SIGN_IN} size="small">

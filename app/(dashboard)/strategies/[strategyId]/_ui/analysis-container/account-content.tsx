@@ -4,6 +4,7 @@ import Image from 'next/image'
 
 import classNames from 'classnames/bind'
 
+import { Button } from '@/shared/ui/button'
 import Pagination from '@/shared/ui/pagination'
 
 import styles from './styles.module.scss'
@@ -21,9 +22,10 @@ interface Props {
   imagesData?: ImageDataModel[]
   currentPage: number
   onPageChange: (page: number) => void
+  isEditable?: boolean
 }
 
-const AccountContent = ({ imagesData, currentPage, onPageChange }: Props) => {
+const AccountContent = ({ imagesData, currentPage, onPageChange, isEditable = false }: Props) => {
   const croppedImagesData = imagesData?.slice(
     COUNT_PER_PAGE * (currentPage - 1),
     COUNT_PER_PAGE * (currentPage - 1) + COUNT_PER_PAGE
@@ -33,6 +35,16 @@ const AccountContent = ({ imagesData, currentPage, onPageChange }: Props) => {
 
   return (
     <div className={cx('table-wrapper')}>
+      {isEditable && (
+        <div className={cx('edit-button-container')}>
+          <Button size="small" className={cx('edit-button')} variant="filled">
+            실계좌 이미지 업로드
+          </Button>
+          <Button size="small" className={cx('delete-button')} variant="outline">
+            선택 삭제
+          </Button>
+        </div>
+      )}
       {croppedImagesData && croppedImagesData.length !== 0 ? (
         <>
           <div className={cx('account-images-container', isTwoLines && 'line')}>

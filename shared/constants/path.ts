@@ -20,6 +20,7 @@ export const PATH = {
   FAVORITES: '/my/favorites',
   MY_STRATEGIES: '/my/strategies',
   STRATEGIES_MANAGE: '/my/strategies/manage',
+  ADD_STRATEGY: '/my/strategies/add',
   MY_QUESTIONS: '/my/questions',
 
   // Admin

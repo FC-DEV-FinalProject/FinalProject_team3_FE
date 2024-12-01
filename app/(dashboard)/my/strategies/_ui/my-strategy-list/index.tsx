@@ -27,11 +27,10 @@ const MyStrategyList = () => {
   })
 
   const strategies = data?.pages.flatMap((page) => page.strategies) || []
-
   return (
     <>
       {strategies.map((strategy) => (
-        <StrategiesItem key={strategy.strategyId} strategiesData={strategy} />
+        <StrategiesItem key={strategy.strategyId} strategiesData={strategy} type="my" />
       ))}
       <div ref={loadMoreRef} />
       {isFetchingNextPage && <div>로딩 중...</div>}

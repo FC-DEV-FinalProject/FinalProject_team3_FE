@@ -1,6 +1,7 @@
 'use client'
 
 import { useMSWStore } from '@/shared/stores/msw'
+import { useAuthStore } from '@/shared/stores/use-auth-store'
 import BackHeader from '@/shared/ui/header/back-header'
 import Title from '@/shared/ui/title'
 
@@ -14,14 +15,15 @@ import SubscriberItem from './_ui/subscriber-item'
 
 export type InformationType = { title: TitleType; data: string | number } | InformationModel[]
 
-const StrategyDetailPage = ({ params }: { params: { strategyId: string } }) => {
+const StrategyDetailPage = ({ params }: { params: { strategyId: number } }) => {
   const isReady = useMSWStore((state) => state.isReady)
+  const user = useAuthStore((state) => state.user)
   const { data } = useGetDetailsInformationData({
     isReady,
     strategyId: params.strategyId,
   })
 
-  const { detailsSideData, detailsInformationData } = data || {}
+  const { detailsSideData, detailsInformationData: information } = data || {}
 
   const hasDetailsSideData = detailsSideData?.map((data) => {
     if (!Array.isArray(data)) return data.data !== undefined
@@ -31,15 +33,24 @@ const StrategyDetailPage = ({ params }: { params: { strategyId: string } }) => {
     <div>
       <BackHeader label={'목록으로 돌아가기'} />
       <Title label={'전략 상세보기'} />
-      {detailsInformationData && <DetailsInformation information={detailsInformationData} />}
-      <AnalysisContainer />
+      {information && <DetailsInformation information={information} />}
+      <AnalysisContainer strategyId={params.strategyId} />
       <ReviewContainer strategyId={params.strategyId} />
       <SideContainer>
-        <SubscriberItem subscribers={99} />
-        {hasDetailsSideData?.[0] &&
+        {information && (
+          <SubscriberItem
+            isMyStrategy={user?.nickname === information.nickname}
+            subscribers={information?.subscriptionCount}
+          />
+        )}
+        {information &&
+          hasDetailsSideData?.[0] &&
           detailsSideData?.map((data, idx) => (
             <div key={`${data}_${idx}`}>
-              <DetailsSideItem information={data} />
+              <DetailsSideItem
+                information={data}
+                isMyStrategy={user?.nickname === information.nickname}
+              />
             </div>
           ))}
       </SideContainer>

@@ -9,7 +9,7 @@ const meta: Meta<typeof SearchInput> = {
     placeholder: 'Search...',
   },
   argTypes: {
-    handleSearchIconClick: { action: 'clicked' },
+    onSearchIconClick: { action: 'clicked' },
   },
   tags: ['autodocs'],
 }

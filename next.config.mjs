@@ -11,23 +11,21 @@ const nextConfig = {
   },
   async rewrites() {
     return [
+      // {
+      //   source: '/api/users/reissue/refreshtoken',
+      //   destination: '/api/users/reissue/refreshtoken',
+      // },
+      // {
+      //   source: '/api/users/login',
+      //   destination: '/api/users/login',
+      // },
       {
-        source: '/api/users/reissue/refreshtoken',
-        destination: '/api/users/reissue/refreshtoken',
+        source: '/api/strategies/:path*',
+        destination: 'http://15.164.90.102:8081/api/strategies/:path*',
       },
       {
-        source: '/api/users/login',
-        destination: '/api/users/login',
-      },
-      {
-        source: '/api/:path*',
-        destination: 'http://15.164.90.102:8081/api/:path*',
-        has: [
-          {
-            type: 'header',
-            key: 'host',
-          },
-        ],
+        source: '/api/main/:path*',
+        destination: 'http://15.164.90.102:8081/api/main/:path*',
       },
     ]
   },

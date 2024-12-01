@@ -1,11 +1,15 @@
 import { HttpResponse, http } from 'msw'
 
-const data = [
+import { StrategyDetailsInformationModel } from '@/shared/types/strategy-data'
+
+export const strategiesDetailsInformationMockData: StrategyDetailsInformationModel[] = [
   {
-    strategyId: '1',
+    strategyId: 1,
     strategyName: 'Dynamic ETF 전략',
-    stockTypeIconUrls: ['/images/stock.png'],
-    stockTypeNames: ['해외지수선물'],
+    stockTypeInfo: {
+      stockTypeIconUrls: ['/images/stock.png'],
+      stockTypeNames: ['해외지수선물'],
+    },
     tradeTypeIconUrl: '/images/trade.png',
     tradeTypeName: '자동',
     operationCycle: 'DAY',
@@ -24,13 +28,15 @@ const data = [
     smScore: 72.1,
     finalProfitLossDate: '2024.03.11',
     createdAt: '2024.01.11',
-    subscribed: true,
+    isSubscribed: true,
   },
   {
-    strategyId: '2',
+    strategyId: 2,
     strategyName: '고수익 ETF',
-    stockTypeIconUrls: ['/images/stock.png'],
-    stockTypeNames: ['해외지수선물'],
+    stockTypeInfo: {
+      stockTypeIconUrls: ['/images/stock.png'],
+      stockTypeNames: ['해외지수선물'],
+    },
     tradeTypeIconUrl: '/images/trade.png',
     tradeTypeName: '자동',
     operationCycle: 'DAY',
@@ -49,13 +55,15 @@ const data = [
     smScore: 65.4,
     finalProfitLossDate: '2024.03.11',
     createdAt: '2024.01.11',
-    subscribed: true,
+    isSubscribed: true,
   },
   {
-    strategyId: '3',
+    strategyId: 3,
     strategyName: 'Futures Pro',
-    stockTypeIconUrls: ['/images/stock.png'],
-    stockTypeNames: ['해외지수선물'],
+    stockTypeInfo: {
+      stockTypeIconUrls: ['/images/stock.png'],
+      stockTypeNames: ['해외지수선물'],
+    },
     tradeTypeIconUrl: '/images/trade.png',
     tradeTypeName: '자동',
     operationCycle: 'DAY',
@@ -74,13 +82,15 @@ const data = [
     smScore: 79.6,
     finalProfitLossDate: '2024.03.11',
     createdAt: '2024.01.11',
-    subscribed: true,
+    isSubscribed: true,
   },
   {
-    strategyId: '4',
+    strategyId: 4,
     strategyName: '월별 수익 전략',
-    stockTypeIconUrls: ['/images/stock.png'],
-    stockTypeNames: ['해외지수선물'],
+    stockTypeInfo: {
+      stockTypeIconUrls: ['/images/stock.png'],
+      stockTypeNames: ['해외지수선물'],
+    },
     tradeTypeIconUrl: '/images/trade.png',
     tradeTypeName: '자동',
     operationCycle: 'DAY',
@@ -99,13 +109,15 @@ const data = [
     smScore: 68.4,
     finalProfitLossDate: '2024.03.11',
     createdAt: '2024.01.11',
-    subscribed: true,
+    isSubscribed: true,
   },
   {
-    strategyId: '5',
+    strategyId: 5,
     strategyName: '리스크 관리 전략',
-    stockTypeIconUrls: ['/images/stock.png'],
-    stockTypeNames: ['해외지수선물'],
+    stockTypeInfo: {
+      stockTypeIconUrls: ['/images/stock.png'],
+      stockTypeNames: ['해외지수선물'],
+    },
     tradeTypeIconUrl: '/images/trade.png',
     tradeTypeName: '자동',
     operationCycle: 'DAY',
@@ -124,13 +136,13 @@ const data = [
     smScore: 62.3,
     finalProfitLossDate: '2024.03.11',
     createdAt: '2024.01.11',
-    subscribed: true,
+    isSubscribed: true,
   },
 ]
 
 const reviewData = [
   {
-    strategyId: '1',
+    strategyId: 1,
     averageRating: 3.8,
     reviewCount: 4,
     reviews: {
@@ -203,7 +215,7 @@ const reviewData = [
     },
   },
   {
-    strategyId: '2',
+    strategyId: 2,
     averageRating: 3.8,
     reviewCount: 4,
     reviews: {
@@ -253,7 +265,9 @@ const reviewData = [
 export const strategyDetailsHandlers = [
   http.get('/api/strategies/:strategyId', ({ params }) => {
     const { strategyId } = params
-    const strategyData = data.find((item) => item.strategyId === strategyId)
+    const strategyData = strategiesDetailsInformationMockData.find(
+      (item) => item.strategyId === Number(strategyId)
+    )
     if (strategyData) {
       return HttpResponse.json({ ...strategyData })
     }
@@ -273,7 +287,7 @@ export const strategyDetailsHandlers = [
     const page = parseInt(url.searchParams.get('page') || '1')
     const size = parseInt(url.searchParams.get('size') || '4')
 
-    const reviewDataForStrategy = reviewData.find((item) => item.strategyId === strategyId)
+    const reviewDataForStrategy = reviewData.find((item) => item.strategyId === Number(strategyId))
     if (!isNaN(page) && !isNaN(size) && reviewDataForStrategy) {
       const { content, totalElements } = reviewDataForStrategy.reviews
       const slicedContent = content.slice(size * (page - 1), size * (page - 1) + size)

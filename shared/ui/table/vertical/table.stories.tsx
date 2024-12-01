@@ -93,4 +93,10 @@ Primary.args = {
   countPerPage: 7,
 }
 
+export const NoData = Table.bind({})
+NoData.args = {
+  // @ts-expect-error rornlcksg
+  tableBody: [],
+}
+
 export default meta

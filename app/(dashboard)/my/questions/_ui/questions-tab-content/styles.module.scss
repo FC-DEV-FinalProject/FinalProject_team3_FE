@@ -1,0 +1,16 @@
+.question-list {
+  padding-top: 24px;
+
+  li {
+    margin-bottom: 24px;
+  }
+}
+
+.empty-message {
+  margin: 12px 0;
+  @include typo-b2;
+}
+
+.pagination-wrapper {
+  margin-bottom: 24px;
+}

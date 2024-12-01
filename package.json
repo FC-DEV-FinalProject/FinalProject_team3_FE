@@ -10,7 +10,8 @@
     "prettier": "prettier --write .",
     "storybook": "storybook dev -p 6006",
     "type-check": "tsc --noEmit -p ./tsconfig.json",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "deploy-storybook": "npx chromatic --project-token $CHROMATIC_PROJECT_TOKEN"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.59.19",

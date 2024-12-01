@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from '@storybook/react'
 
-import { StrategiesModel } from '@/shared/types/strategy-details-data'
+import { StrategiesModel } from '@/shared/types/strategy-data'
 
 import StrategiesItem from './index'
 
@@ -22,13 +22,16 @@ export const Primary = strategy.bind({})
 Primary.args = {
   strategiesData: [
     {
-      strategyId: '123',
-      strategyName: '리치테크 FuturesDay',
-      nickname: 'MACS',
-      stockTypeIconUrls: [],
-      stockTypeNames: [],
+      strategyId: 1,
+      strategyName: 'Dynamic ETF 전략',
+      traderImgUrl: '/images/trader1.png',
+      nickname: 'AlphaTrader',
+      stockTypeInfo: {
+        stockTypeIconUrls: ['/images/stock.png'],
+        stockTypeNames: ['해외지수선물'],
+      },
       profitRateChartData: {
-        xAxis: [
+        dates: [
           '2023-01-01',
           '2023-01-02',
           '2023-01-03',
@@ -39,27 +42,30 @@ Primary.args = {
           '2023-01-08',
           '2023-01-09',
         ],
-        yAxis: [7.2, 5.2, 25, 12.8, 17.2, 11.4, 20, 16, 18],
+        profitRates: [7.2, 5.2, 25, 12.8, 17.2, 11.4, 20, 16, 18],
       },
-      tradeTypeIconUrl: '',
-      tradeTypeName: '',
-      mdd: '-20,580,856',
-      smScore: 60.6,
-      cumulativeProfitLossRate: 120.1,
-      recentYearProfitLossRate: 30.1,
-      subscriptionCnt: 23,
+      tradeTypeIconUrl: '/images/trade.png',
+      tradeTypeName: '자동',
+      mdd: -15432567,
+      smScore: 72.1,
+      cumulativeProfitRate: 140.5,
+      recentYearProfitLossRate: 35.2,
+      subscriptionCount: 45,
+      averageRating: 4.9,
+      totalReviews: 34,
       isSubscribed: true,
-      averageRating: 4.8,
-      totalReview: 12,
     },
     {
-      strategyId: '12345',
-      strategyName: 'ETF 레버리지/인버',
-      nickname: '수밍',
-      stockTypeIconUrls: [],
-      stockTypeNames: [],
+      strategyId: 2,
+      strategyName: '고수익 ETF',
+      traderImgUrl: '/images/trader2.png',
+      nickname: 'BetaTrader',
+      stockTypeInfo: {
+        stockTypeIconUrls: ['/images/stock.png'],
+        stockTypeNames: ['해외지수선물'],
+      },
       profitRateChartData: {
-        xAxis: [
+        dates: [
           '2023-01-01',
           '2023-01-02',
           '2023-01-03',
@@ -70,18 +76,18 @@ Primary.args = {
           '2023-01-08',
           '2023-01-09',
         ],
-        yAxis: [7.2, 5.2, 25, 12.8, 17.2, 11.4, 20, 16, 18],
+        profitRates: [7.2, 5.2, 25, 12.8, 17.2, 11.4, 20, 16, 18],
       },
-      tradeTypeIconUrl: '',
-      tradeTypeName: '',
-      mdd: '-20,580,856',
-      smScore: 60.6,
-      cumulativeProfitLossRate: 120.1,
-      recentYearProfitLossRate: 30.1,
-      subscriptionCnt: 23,
+      tradeTypeIconUrl: '/images/trade.png',
+      tradeTypeName: '자동',
+      mdd: -12786543,
+      smScore: 65.4,
+      cumulativeProfitRate: 125.3,
+      recentYearProfitLossRate: 28.4,
+      subscriptionCount: 67,
+      averageRating: 4.6,
+      totalReviews: 19,
       isSubscribed: false,
-      averageRating: 4.8,
-      totalReview: 12,
     },
   ],
 }

@@ -11,11 +11,11 @@ const cx = classNames.bind(styles)
 
 interface Props extends ComponentPropsWithoutRef<'input'> {
   placeholder?: string
-  handleSearchIconClick?: () => void
+  onSearchIconClick?: () => void
 }
 
 export const SearchInput = forwardRef<HTMLInputElement, Props>(
-  ({ placeholder = '', handleSearchIconClick, value, onChange, ...props }: Props, ref) => {
+  ({ placeholder = '', onSearchIconClick, value, onChange, ...props }: Props, ref) => {
     return (
       <div className={cx('search-input-container')}>
         <input
@@ -26,7 +26,7 @@ export const SearchInput = forwardRef<HTMLInputElement, Props>(
           className={cx('search-input')}
           {...props}
         />
-        <SearchIcon className={cx('search-icon')} onClick={handleSearchIconClick} />
+        <SearchIcon className={cx('search-icon')} onClick={onSearchIconClick} />
       </div>
     )
   }

@@ -14,6 +14,7 @@ interface Props {
   createdAt: string
   starRating: number
   isReviewer: boolean
+  isAdmin: boolean
 }
 
 const ReviewItem = ({
@@ -23,6 +24,7 @@ const ReviewItem = ({
   starRating,
   content,
   isReviewer,
+  isAdmin,
 }: Props) => {
   const editedCreatedAt = createdAt.slice(0, -3)
 
@@ -36,12 +38,15 @@ const ReviewItem = ({
           <span>{editedCreatedAt}</span>
           <StarRating starRating={starRating} />
         </div>
-        {isReviewer && (
-          <div className={cx('button-wrapper')}>
-            <button>수정</button>
-            <button>삭제</button>
-          </div>
-        )}
+        <div className={cx('button-wrapper')}>
+          {isReviewer && (
+            <>
+              <button>수정</button>
+              <button>삭제</button>
+            </>
+          )}
+          {!isReviewer && isAdmin && <button>삭제</button>}
+        </div>
       </div>
       <div className={cx('content')}>{content}</div>
     </li>

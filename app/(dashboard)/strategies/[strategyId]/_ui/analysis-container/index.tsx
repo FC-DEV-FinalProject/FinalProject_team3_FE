@@ -6,20 +6,26 @@ import classNames from 'classnames/bind'
 
 import Select from '@/shared/ui/select'
 
+import useGetAnalysisChart from '../../_hooks/query/use-get-analysis-chart'
 import AnalysisChart from './analysis-chart'
-import { analysisChartData } from './example'
 import styles from './styles.module.scss'
 import TabsWithTable from './tabs-width-table'
 import { YAXIS_OPTIONS } from './yaxis-options'
 
 const cx = classNames.bind(styles)
 
-type OptionsType = (typeof YAXIS_OPTIONS)[keyof typeof YAXIS_OPTIONS]
+export type AnalysisChartOptionsType = keyof typeof YAXIS_OPTIONS
 
-const AnalysisContainer = () => {
-  const [firstValue, setFirstValue] = useState<OptionsType>('잔고')
-  const [secondValue, setSecondValue] = useState<OptionsType>('잔고')
+interface Props {
+  strategyId: number
+  type?: 'default' | 'my'
+}
 
+const AnalysisContainer = ({ strategyId, type = 'default' }: Props) => {
+  const [firstOption, setFirstOption] = useState<AnalysisChartOptionsType>('PRINCIPAL')
+  const [secondOption, setSecondOption] =
+    useState<AnalysisChartOptionsType>('CUMULATIVE_PROFIT_LOSS')
+  const { data: chartData } = useGetAnalysisChart({ strategyId, firstOption, secondOption })
   const optionsToArray = Object.entries(YAXIS_OPTIONS)
   const options: { value: string; label: string }[] = []
 
@@ -30,27 +36,30 @@ const AnalysisContainer = () => {
   return (
     <div className={cx('container')}>
       <div className={cx('analysis-header')}>
-        <p>분석</p>
-        <div>
-          <Select
-            size="large"
-            options={options}
-            value={firstValue}
-            onChange={(newValue) => setFirstValue(newValue as OptionsType)}
-          />
-          <Select
-            size="large"
-            options={options}
-            value={secondValue}
-            onChange={(newValue) => setSecondValue(newValue as OptionsType)}
-          />
+        <p className={cx({ my: type === 'my' })}>분석</p>
+        {type === 'default' && (
+          <div>
+            <Select
+              size="large"
+              options={options}
+              value={firstOption}
+              onChange={(newValue) => setFirstOption(newValue as AnalysisChartOptionsType)}
+            />
+            <Select
+              size="large"
+              options={options}
+              value={secondOption}
+              onChange={(newValue) => setSecondOption(newValue as AnalysisChartOptionsType)}
+            />
+          </div>
+        )}
+      </div>
+      {type === 'default' && (
+        <div className={cx('chart-wrapper')}>
+          <AnalysisChart analysisChartData={chartData} />
         </div>
-      </div>
-      <div className={cx('chart-wrapper')}>
-        <AnalysisChart analysisChartData={analysisChartData} />
-      </div>
-
-      <TabsWithTable />
+      )}
+      <TabsWithTable isEditable={type === 'my' ? true : false} />
     </div>
   )
 }

@@ -4,7 +4,7 @@ import getReviews from '../../_api/get-reviews'
 
 interface Props {
   isReady: boolean
-  strategyId: string
+  strategyId: number
   page: number | undefined
 }
 

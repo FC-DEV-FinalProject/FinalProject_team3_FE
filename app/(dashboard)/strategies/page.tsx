@@ -4,6 +4,7 @@ import classNames from 'classnames/bind'
 
 import Title from '@/shared/ui/title'
 
+import SearchBarContainer from './_ui/search-bar'
 import SideContainer from './_ui/side-container'
 import StrategyList from './_ui/strategy-list'
 import styles from './page.module.scss'
@@ -18,7 +19,7 @@ const StrategiesPage = () => {
         <StrategyList />
       </Suspense>
       <SideContainer>
-        <p className={cx('search-bar')}>Search-Bar</p>
+        <SearchBarContainer />
       </SideContainer>
     </div>
   )

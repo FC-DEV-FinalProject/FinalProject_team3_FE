@@ -15,7 +15,7 @@ import styles from './styles.module.scss'
 const cx = classNames.bind(styles)
 
 interface Props {
-  strategyId: string
+  strategyId: number
 }
 
 const ReviewContainer = ({ strategyId }: Props) => {

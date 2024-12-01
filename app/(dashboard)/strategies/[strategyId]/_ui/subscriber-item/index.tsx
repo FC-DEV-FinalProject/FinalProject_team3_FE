@@ -17,14 +17,16 @@ interface Props {
 const SubscriberItem = ({ isMyStrategy = false, subscribers, onClick }: Props) => {
   return (
     <div className={cx('container')}>
-      <div className={cx('wrapper')}>
-        <div className={cx('contents')}>구독 | {subscribers}</div>
-        {!isMyStrategy && (
-          <Button size="small" variant="filled" onClick={onClick}>
-            구독하기
-          </Button>
-        )}
+      <div>
+        <span>구독 </span>
+        <span>| </span>
+        <span>{subscribers}</span>
       </div>
+      {!isMyStrategy && (
+        <Button size="small" variant="filled" onClick={onClick}>
+          구독하기
+        </Button>
+      )}
     </div>
   )
 }

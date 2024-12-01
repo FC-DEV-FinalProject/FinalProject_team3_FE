@@ -1,13 +1,13 @@
 import { useQuery } from '@tanstack/react-query'
 
-import { StrategyDetailsInformationModel } from '@/shared/types/strategy-details-data'
+import { StrategyDetailsInformationModel } from '@/shared/types/strategy-data'
 
 import getDetailsInformation from '../../_api/get-details-information'
 import { InformationType } from '../../page'
 
 interface Props {
   isReady: boolean
-  strategyId: string
+  strategyId: number
 }
 
 const useGetDetailsInformationData = ({

@@ -1,12 +1,15 @@
 .container {
   width: 100%;
   padding: 20px;
+
   table {
     width: 100%;
     font-size: $text-c1;
+
     thead {
       background-color: $color-gray-100;
     }
+
     td {
       padding: 0 20px;
       height: 40px;
@@ -15,5 +18,29 @@
       border-top: 1px solid $color-gray-200;
       border-bottom: 1px solid $color-gray-200;
     }
+
+    .button-container {
+      padding: 0;
+      text-align: right;
+    }
+
+    .edit-button,
+    .delete-button {
+      min-width: 60px;
+      height: 24px;
+      padding: 7px 16px;
+    }
+    .edit-button {
+      border: 1px solid $color-gray-300;
+      margin-right: 8px;
+    }
   }
+}
+
+.no-data {
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+  color: $color-gray-600;
+  @include typo-b1;
 }

@@ -2,7 +2,7 @@ import axios from 'axios'
 
 import { COUNT_PER_PAGE } from '../_ui/review-container/review-list'
 
-const getReviews = async (strategyId: string, page: number | undefined) => {
+const getReviews = async (strategyId: number, page: number | undefined) => {
   if (!strategyId && !page) return
 
   try {

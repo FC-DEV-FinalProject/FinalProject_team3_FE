@@ -82,14 +82,16 @@ $color-selected-text: #171717;
   border-radius: 4px;
   background-color: $color-white;
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.25);
-  overflow: hidden;
+  overflow-y: auto;
 
   &.small {
     width: $small-width;
+    max-height: 180px;
   }
 
   &.large {
     width: $large-width;
+    max-height: 200px;
   }
 }
 

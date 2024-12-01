@@ -16,7 +16,11 @@ import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
 
-const TabsWithTable = () => {
+interface Props {
+  isEditable?: boolean
+}
+
+const TabsWithTable = ({ isEditable = false }: Props) => {
   const [activeTab, setActiveTab] = useState('statistics')
   const [currentPage, setCurrentPage] = useState(1)
 
@@ -43,6 +47,7 @@ const TabsWithTable = () => {
           analysisData={tableBody}
           currentPage={currentPage}
           onPageChange={handlePageChange}
+          isEditable={isEditable}
         />
       ),
     },
@@ -69,6 +74,7 @@ const TabsWithTable = () => {
             imagesData={[]}
             currentPage={currentPage}
             onPageChange={handlePageChange}
+            isEditable={isEditable}
           />
         </div>
       ),

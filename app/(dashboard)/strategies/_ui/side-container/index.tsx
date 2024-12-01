@@ -6,6 +6,7 @@ const cx = classNames.bind(styles)
 
 interface Props {
   children: React.ReactNode
+  hasButton?: boolean
 }
 
 const SideContainer = ({ children }: Props) => {

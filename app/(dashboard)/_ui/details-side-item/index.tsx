@@ -22,9 +22,10 @@ export interface InformationModel {
 interface Props {
   information: InformationModel | InformationModel[]
   profileImage?: string
+  isMyStrategy?: boolean
 }
 
-const DetailsSideItem = ({ information, profileImage }: Props) => {
+const DetailsSideItem = ({ information, profileImage, isMyStrategy = true }: Props) => {
   const isArray = Array.isArray(information)
   return (
     <>
@@ -40,7 +41,12 @@ const DetailsSideItem = ({ information, profileImage }: Props) => {
           ))}
         </div>
       ) : (
-        <SideItem title={information.title} data={information.data} profileImage={profileImage} />
+        <SideItem
+          title={information.title}
+          data={information.data}
+          profileImage={profileImage}
+          isMyStrategy={isMyStrategy}
+        />
       )}
     </>
   )

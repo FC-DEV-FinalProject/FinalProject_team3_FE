@@ -1,7 +1,7 @@
 import { getMyStrategyList } from '@/app/(dashboard)/my/_api/get-my-strategy-list'
 import { useInfiniteQuery } from '@tanstack/react-query'
 
-import { StrategiesModel } from '@/shared/types/strategy-details-data'
+import { StrategiesModel } from '@/shared/types/strategy-data'
 
 interface StrategiesPageModel {
   strategies: StrategiesModel[]
