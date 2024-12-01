@@ -33,10 +33,11 @@ export const UserInfo = ({ onClick }: Props) => {
   }
 
   return (
-    <div>
+    <div className={cx('container')}>
       <p className={cx('text')}>개인 정보</p>
       <div className={cx('line')}></div>
-      <div className={cx('container')}>
+
+      <div className={cx('content')}>
         <div className={cx('content-wrapper')}>
           <div className={cx('left-wrapper')}>
             <div className={cx('avatar-wrapper')}>
