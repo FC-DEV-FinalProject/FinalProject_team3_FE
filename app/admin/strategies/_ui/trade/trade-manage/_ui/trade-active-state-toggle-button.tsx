@@ -4,7 +4,7 @@ import { CSSProperties } from 'react'
 
 import { Button } from '@/shared/ui/button'
 
-import useToggoleTradeActiveState from '../_hooks/use-toggle-trade-active-state'
+import useToggoleTradeActiveState from '../_hooks/query/use-toggle-trade-active-state'
 
 interface Props {
   active?: boolean

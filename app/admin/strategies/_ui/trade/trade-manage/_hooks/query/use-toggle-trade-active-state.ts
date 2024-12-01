@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-import ToggleTradeActiveState from '../_api/toggle-trade-active-state'
+import ToggleTradeActiveState from '../../_api/toggle-trade-active-state'
 
 const useToggoleTradeActiveState = (tradeTypeId: number) => {
   const queryClient = useQueryClient()

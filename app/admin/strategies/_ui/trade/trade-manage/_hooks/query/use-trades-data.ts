@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 
-import getTrades from '../_api/get-trades'
+import getTrades from '../../_api/get-trades'
 
 type ArgType = 'active' | 'inactive'
 
