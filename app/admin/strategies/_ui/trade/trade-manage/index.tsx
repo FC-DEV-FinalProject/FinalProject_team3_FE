@@ -1,9 +1,9 @@
 import classNames from 'classnames/bind'
 
-import ActiveTradeManageTable from './active-trade-manage-table'
-import InactiveTradeManageTable from './inactive-trade-manage-table'
+import ActiveTradeManageTable from './_ui/active-trade-manage-table'
+import InactiveTradeManageTable from './_ui/inactive-trade-manage-table'
+import TradePostButton from './_ui/trade-post-button'
 import styles from './styles.module.scss'
-import TradePostButton from './trade-post-button'
 
 const cx = classNames.bind(styles)
 

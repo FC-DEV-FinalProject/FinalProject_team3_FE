@@ -27,7 +27,7 @@ const ManageTable = ({ active, domain, data }: Props) => {
       <span className={cx('title')}>{active ? '활성화' : '비활성화'}</span>
       <VerticalTable
         tableHead={['No.', domain === '종목' ? '종목명' : '매매 유형', '분류', '상태']}
-        tableBody={addIndexToData(data, active)}
+        tableBody={addIndexToData(data)}
         countPerPage={COUNT_PER_PAGE}
         currentPage={1}
       />
