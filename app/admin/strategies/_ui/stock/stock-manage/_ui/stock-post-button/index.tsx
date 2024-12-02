@@ -14,11 +14,11 @@ import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
 
-const TradePostButton = () => {
+const StockPostButton = () => {
   const { isModalOpen, openModal, closeModal } = useModal()
   const onPostButtonClick = () => openModal()
   const { onFormSubmit, imagePreview, onImageInputChange, onTypeNameInputChange, isSubmitable } =
-    useStrategyIconPost('trade')
+    useStrategyIconPost('stock')
 
   return (
     <>
@@ -28,15 +28,15 @@ const TradePostButton = () => {
         size="small"
         className={cx('post-button')}
       >
-        매매 유형 등록하기
+        종목 등록하기
       </Button>
-      <Modal icon={<RegisterIcon />} message="매매유형 등록" isOpen={isModalOpen}>
+      <Modal icon={<RegisterIcon />} message="종목 등록" isOpen={isModalOpen}>
         <form onSubmit={onFormSubmit} className={cx('form')}>
           <div className={cx('input-container')}>
             <div className={cx('input-field')}>
-              유형
+              종목
               <Input
-                placeholder="유형을 입력해주세요."
+                placeholder="종목명을 입력해주세요."
                 className={cx('input')}
                 onChange={onTypeNameInputChange}
               />
@@ -60,4 +60,4 @@ const TradePostButton = () => {
   )
 }
 
-export default TradePostButton
+export default StockPostButton

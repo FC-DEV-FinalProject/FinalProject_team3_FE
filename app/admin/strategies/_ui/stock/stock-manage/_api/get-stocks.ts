@@ -17,6 +17,7 @@ const getStocks = async (activateState: boolean, page: number, size: number) => 
     return res.data
   } catch (err) {
     console.log('Error : ' + err)
+    throw err
   }
 }
 

@@ -8,9 +8,11 @@ interface FormDataModel {
   typeName: string
 }
 
+export type DomainType = 'trade' | 'stock'
+
 const initailFormData = { imageFile: null, typeName: '' }
 
-const useStrategyIconPost = () => {
+const useStrategyIconPost = (domain: DomainType) => {
   const [imagePreview, setImagePreview] = useState('')
   const [formData, setFormData] = useState<FormDataModel>(initailFormData)
 
@@ -52,7 +54,7 @@ const useStrategyIconPost = () => {
     try {
       // console.log('imageFile', imageFile, 'typeName', typeName)
 
-      const presignedUrl = await getPresignedUrl(typeName, imageFile.name, imageFile.size)
+      const presignedUrl = await getPresignedUrl(typeName, imageFile.name, imageFile.size, domain)
 
       // console.log('p', presignedUrl)
 

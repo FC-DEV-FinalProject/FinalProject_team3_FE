@@ -31,8 +31,6 @@ const ManageTable = ({
   maxPage,
   setCurrentPage,
 }: Props) => {
-  // const [currentPage, setCurrentPage] = useState(1)
-
   const hasData = data?.length > 0
 
   return (
