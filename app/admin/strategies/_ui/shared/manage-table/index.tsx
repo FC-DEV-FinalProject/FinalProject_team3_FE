@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react'
+import { Dispatch, ReactNode, SetStateAction } from 'react'
 
 import classNames from 'classnames/bind'
 
@@ -15,10 +15,23 @@ interface Props {
   active?: boolean
   domain: '종목' | '매매 유형'
   data: (ReactNode | string | number)[][]
+  //TODO: domain이 종록일 때만 쓰는 속성들 컨트롤 하는 법 고민해보기
+  size?: number
+  currentPage?: number
+  setCurrentPage?: Dispatch<SetStateAction<number>>
+  maxPage?: number
 }
 
-const ManageTable = ({ active, domain, data }: Props) => {
-  const [currentPage, setCurrentPage] = useState(1)
+const ManageTable = ({
+  active,
+  domain,
+  data,
+  size = COUNT_PER_PAGE,
+  currentPage = 1,
+  maxPage,
+  setCurrentPage,
+}: Props) => {
+  // const [currentPage, setCurrentPage] = useState(1)
 
   const hasData = data?.length > 0
 
@@ -28,27 +41,27 @@ const ManageTable = ({ active, domain, data }: Props) => {
       <VerticalTable
         tableHead={['No.', domain === '종목' ? '종목명' : '매매 유형', '분류', '상태']}
         tableBody={addIndexToData(data)}
-        countPerPage={COUNT_PER_PAGE}
-        currentPage={1}
+        countPerPage={size}
+        currentPage={1} // 공통 컴포넌트와의 호환성 문제...
       />
       {hasData && domain === '종목' && (
         <Pagination
           currentPage={currentPage}
-          maxPage={3}
-          onPageChange={(page) => setCurrentPage(page)}
+          maxPage={maxPage ?? 3}
+          onPageChange={(page) => setCurrentPage?.(page)}
         />
       )}
     </div>
   )
 }
 
-const Skeleton = ({ active, domain }: Pick<Props, 'active' | 'domain'>) => {
+const Skeleton = ({ active, domain, size }: Pick<Props, 'active' | 'domain' | 'size'>) => {
   return (
     <div className={cx('container')}>
       <span className={cx('title')}>{active ? '활성화' : '비활성화'}</span>
       <VerticalTable.Skeleton
         tableHead={['No.', domain === '종목' ? '종목명' : '매매 유형', '분류', '상태']}
-        countPerPage={8} //TODO: 이거 디자인에 맞춰서 크기 조절
+        countPerPage={size} //TODO: 이거 디자인에 맞춰서 크기 조절
       />
     </div>
   )

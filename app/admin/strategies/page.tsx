@@ -16,7 +16,7 @@ const cx = classNames.bind(styles)
 const tabs = ['종목', '매매유형'] as const
 
 const AdminStrategiesPage = () => {
-  const [activeTab, setActiveTab] = useState<(typeof tabs)[number]>('매매유형')
+  const [activeTab, setActiveTab] = useState<(typeof tabs)[number]>('종목')
 
   return (
     <>
