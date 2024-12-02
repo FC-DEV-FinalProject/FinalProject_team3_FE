@@ -13,7 +13,7 @@ const InactiveTradeManageTable = () => {
 
   const { data } = useStocksData('inactive', currentPage, TABLE_BODY_SIZE)
   const tableData =
-    data?.result?.content.map(({ stockTypeName, stockTypeIconUrl, stockTypeId }) => [
+    data?.content.map(({ stockTypeName, stockTypeIconUrl, stockTypeId }) => [
       stockTypeName,
       <img src={stockTypeIconUrl} alt={stockTypeName} key={stockTypeName} />,
       <StockActiveStateToggleButton stockTypeId={stockTypeId} key={stockTypeId} />,
@@ -25,7 +25,7 @@ const InactiveTradeManageTable = () => {
       size={TABLE_BODY_SIZE}
       currentPage={currentPage}
       setCurrentPage={setCurrentPage}
-      maxPage={data?.result.totalPages}
+      maxPage={data?.totalPages}
       domain="종목"
     />
   )

@@ -13,13 +13,15 @@ const TABLE_BODY_SIZE = 10
 const ActiveStockManageTable = () => {
   const [currentPage, setCurrentPage] = useState(1)
 
-  const { data } = useStocksData('active', currentPage, TABLE_BODY_SIZE)
+  const { isLoading, data } = useStocksData('active', currentPage, TABLE_BODY_SIZE)
   const tableData =
-    data?.result?.content.map(({ stockTypeName, stockTypeIconUrl, stockTypeId }) => [
+    data?.content.map(({ stockTypeName, stockTypeIconUrl, stockTypeId }) => [
       stockTypeName,
       <img src={stockTypeIconUrl} alt={stockTypeName} key={stockTypeName} />,
       <StockActiveStateToggleButton stockTypeId={stockTypeId} active key={stockTypeId} />,
     ]) ?? []
+
+  if (isLoading) return <ManageTable.Skeleton domain="종목" />
 
   return (
     <ManageTable
@@ -27,11 +29,11 @@ const ActiveStockManageTable = () => {
       size={TABLE_BODY_SIZE}
       currentPage={currentPage}
       setCurrentPage={setCurrentPage}
-      maxPage={data?.result.totalPages}
+      maxPage={data?.totalPages}
       active
       domain="종목"
     />
   )
 }
 
-export default withSuspense(ActiveStockManageTable, <ManageTable.Skeleton domain="종목" />)
+export default ActiveStockManageTable
