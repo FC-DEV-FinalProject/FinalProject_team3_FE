@@ -6,6 +6,7 @@ import withSuspense from '@/shared/utils/with-suspense'
 
 import ManageTable from '../../../shared/manage-table'
 import useStocksData from '../_hooks/query/use-stocks-data'
+import StockActiveStateToggleButton from './stock-active-state-toggle-button'
 
 const TABLE_BODY_SIZE = 10
 
@@ -17,7 +18,7 @@ const ActiveStockManageTable = () => {
     data?.result?.content.map(({ stockTypeName, stockTypeIconUrl, stockTypeId }) => [
       stockTypeName,
       <img src={stockTypeIconUrl} alt={stockTypeName} key={stockTypeName} />,
-      // <StockActiveStateToggleButton stockTypeId={stockTypeId} active key={stockTypeId} />,
+      <StockActiveStateToggleButton stockTypeId={stockTypeId} active key={stockTypeId} />,
     ]) ?? []
 
   return (
