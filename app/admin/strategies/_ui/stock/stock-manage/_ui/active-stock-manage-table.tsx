@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 
-import withSuspense from '@/shared/utils/with-suspense'
+import Image from 'next/image'
 
 import ManageTable from '../../../shared/manage-table'
 import useStocksData from '../_hooks/query/use-stocks-data'
@@ -17,7 +17,13 @@ const ActiveStockManageTable = () => {
   const tableData =
     data?.content.map(({ stockTypeName, stockTypeIconUrl, stockTypeId }) => [
       stockTypeName,
-      <img src={stockTypeIconUrl} alt={stockTypeName} key={stockTypeName} />,
+      <Image
+        src={stockTypeIconUrl}
+        alt={stockTypeName}
+        width={24}
+        height={24}
+        key={stockTypeName}
+      />,
       <StockActiveStateToggleButton stockTypeId={stockTypeId} active key={stockTypeId} />,
     ]) ?? []
 

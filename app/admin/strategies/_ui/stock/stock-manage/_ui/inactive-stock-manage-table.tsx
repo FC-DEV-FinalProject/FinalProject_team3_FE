@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+import Image from 'next/image'
+
 import withSuspense from '@/shared/utils/with-suspense'
 
 import ManageTable from '../../../shared/manage-table'
@@ -15,7 +17,13 @@ const InactiveTradeManageTable = () => {
   const tableData =
     data?.content.map(({ stockTypeName, stockTypeIconUrl, stockTypeId }) => [
       stockTypeName,
-      <img src={stockTypeIconUrl} alt={stockTypeName} key={stockTypeName} />,
+      <Image
+        src={stockTypeIconUrl}
+        alt={stockTypeName}
+        width={24}
+        height={24}
+        key={stockTypeName}
+      />,
       <StockActiveStateToggleButton stockTypeId={stockTypeId} key={stockTypeId} />,
     ]) ?? []
 
