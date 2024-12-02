@@ -1,7 +1,10 @@
 'use client'
 
+import { FormEvent } from 'react'
+
 import FileInput from '@/app/admin/strategies/_ui/shared/file-input'
 import { RegisterIcon } from '@/public/icons'
+import { useQueryClient } from '@tanstack/react-query'
 import classNames from 'classnames/bind'
 
 import useModal from '@/shared/hooks/custom/use-modal'
@@ -17,8 +20,26 @@ const cx = classNames.bind(styles)
 const StockPostButton = () => {
   const { isModalOpen, openModal, closeModal } = useModal()
   const onPostButtonClick = () => openModal()
-  const { onFormSubmit, imagePreview, onImageInputChange, onTypeNameInputChange, isSubmitable } =
-    useStrategyIconPost('stock')
+  const queryClient = useQueryClient()
+
+  const {
+    typeName,
+    onSubmit,
+    imagePreview,
+    onImageInputChange,
+    onTypeNameInputChange,
+    isSubmitable,
+  } = useStrategyIconPost('stock')
+
+  const onFormSubmit = async (e: FormEvent) => {
+    try {
+      await onSubmit(e)
+      closeModal()
+      queryClient.invalidateQueries({ queryKey: ['adminStocks'] })
+    } catch (err) {
+      console.error('Error : ' + err)
+    }
+  }
 
   return (
     <>
@@ -38,6 +59,7 @@ const StockPostButton = () => {
               <Input
                 placeholder="종목명을 입력해주세요."
                 className={cx('input')}
+                value={typeName}
                 onChange={onTypeNameInputChange}
               />
             </div>

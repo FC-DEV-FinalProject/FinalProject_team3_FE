@@ -1,7 +1,10 @@
 'use client'
 
+import { FormEvent } from 'react'
+
 import FileInput from '@/app/admin/strategies/_ui/shared/file-input'
 import { RegisterIcon } from '@/public/icons'
+import { useQueryClient } from '@tanstack/react-query'
 import classNames from 'classnames/bind'
 
 import useModal from '@/shared/hooks/custom/use-modal'
@@ -17,8 +20,27 @@ const cx = classNames.bind(styles)
 const TradePostButton = () => {
   const { isModalOpen, openModal, closeModal } = useModal()
   const onPostButtonClick = () => openModal()
-  const { onFormSubmit, imagePreview, onImageInputChange, onTypeNameInputChange, isSubmitable } =
-    useStrategyIconPost('trade')
+
+  const queryClient = useQueryClient()
+
+  const {
+    typeName,
+    onSubmit,
+    imagePreview,
+    onImageInputChange,
+    onTypeNameInputChange,
+    isSubmitable,
+  } = useStrategyIconPost('trade')
+
+  const onFormSubmit = async (e: FormEvent) => {
+    try {
+      await onSubmit(e)
+      closeModal()
+      queryClient.invalidateQueries({ queryKey: ['adminTrades'] })
+    } catch (err) {
+      console.error('Error : ' + err)
+    }
+  }
 
   return (
     <>
