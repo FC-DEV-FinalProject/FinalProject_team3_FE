@@ -8,7 +8,7 @@ const useStocksData = (activateState: ArgType, page: number, size: number) => {
   const isActive = activateState === 'active' ? true : false
 
   return useSuspenseQuery({
-    queryKey: ['adminstocks', activateState, page, size],
+    queryKey: ['adminStocks', activateState, page, size],
     queryFn: () => getStocks(isActive, page, size),
   })
 }

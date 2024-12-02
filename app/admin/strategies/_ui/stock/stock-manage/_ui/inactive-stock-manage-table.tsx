@@ -26,7 +26,6 @@ const InactiveTradeManageTable = () => {
       currentPage={currentPage}
       setCurrentPage={setCurrentPage}
       maxPage={data?.result.totalPages}
-      active
       domain="종목"
     />
   )
