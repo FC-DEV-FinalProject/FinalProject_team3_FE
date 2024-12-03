@@ -41,17 +41,17 @@ const SearchBarContainer = () => {
     }
   }
 
-  const onReset = () => {
-    resetState()
+  const onReset = async () => {
+    await resetState()
     if (searchRef.current) {
       searchRef.current.value = ''
     }
     refetch()
   }
 
-  const onSearch = () => {
-    validateRangeValues()
-    if (errOptions === null) {
+  const onSearch = async () => {
+    await validateRangeValues()
+    if (errOptions === null || errOptions.length === 0) {
       refetch()
     }
   }

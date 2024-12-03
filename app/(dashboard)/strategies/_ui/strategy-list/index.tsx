@@ -1,5 +1,7 @@
 'use client'
 
+import { useEffect } from 'react'
+
 import ListHeader from '@/app/(dashboard)/_ui/list-header'
 import StrategiesItem from '@/app/(dashboard)/_ui/strategies-item'
 import classNames from 'classnames/bind'
@@ -14,6 +16,8 @@ import usePostStrategies from '../../_hooks/query/use-post-strategies'
 import useSearchingItemStore from '../search-bar/_store/use-searching-item-store'
 import styles from './styles.module.scss'
 
+/* eslint-disable react-hooks/exhaustive-deps */
+
 const cx = classNames.bind(styles)
 
 const StrategyList = () => {
@@ -22,7 +26,13 @@ const StrategyList = () => {
     pageSize: STRATEGIES_PAGE_COUNT,
   })
   const searchTerms = useSearchingItemStore((state) => state.searchTerms)
+  const { resetState } = useSearchingItemStore((state) => state.actions)
   const { data } = usePostStrategies({ page, size, searchTerms })
+
+  useEffect(() => {
+    resetState()
+  }, [])
+
   const strategiesData = data?.content as StrategiesModel[]
   const totalPages = (data?.totalPages as number) || null
 
