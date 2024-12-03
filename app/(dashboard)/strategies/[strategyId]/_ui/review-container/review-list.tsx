@@ -1,5 +1,6 @@
 import classNames from 'classnames/bind'
 
+import { REVIEW_PAGE_COUNT } from '@/shared/constants/count-per-page'
 import { useAuthStore } from '@/shared/stores/use-auth-store'
 import Pagination from '@/shared/ui/pagination'
 
@@ -7,8 +8,6 @@ import ReviewItem from './review-item'
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
-
-export const COUNT_PER_PAGE = 4
 
 interface ReviewContentModel {
   reviewId: number
@@ -48,7 +47,7 @@ const ReviewList = ({ reviews, totalReview, currentPage, setCurrentPage }: Props
       </ul>
       <Pagination
         currentPage={currentPage}
-        maxPage={Math.ceil(totalReview / COUNT_PER_PAGE)}
+        maxPage={Math.ceil(totalReview / REVIEW_PAGE_COUNT)}
         onPageChange={handlePageChange}
       />
     </>

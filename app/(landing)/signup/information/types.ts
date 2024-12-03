@@ -25,6 +25,7 @@ export interface SignupFormErrorsModel {
   name?: SignupErrorMessageType | null
   nickname?: SignupErrorMessageType | null
   email?: SignupErrorMessageType | null
+  emailConfirm?: SignupErrorMessageType | null
   password?: SignupErrorMessageType | null
   passwordConfirm?: SignupErrorMessageType | null
   phone?: SignupErrorMessageType | null
@@ -54,6 +55,7 @@ export interface SignupFormDataModel {
   email: string
   emailDomain: string
   role: UserType
+  code: string
   infoAgreement: boolean
 }
 

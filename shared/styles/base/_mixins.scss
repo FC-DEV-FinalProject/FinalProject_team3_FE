@@ -5,19 +5,19 @@
 }
 
 @mixin tablet-sm {
-  @media (min-width: #{$breakpoint-sm}) and (max-width: #{$breakpoint-md - 1}) {
+  @media (max-width: #{$breakpoint-md - 1}) {
     @content;
   }
 }
 
 @mixin tablet-md {
-  @media (min-width: #{$breakpoint-md}) and (max-width: #{$breakpoint-lg - 1}) {
+  @media (max-width: #{$breakpoint-lg - 1}) {
     @content;
   }
 }
 
 @mixin desktop {
-  @media (min-width: #{$breakpoint-lg}) and (max-width: #{$breakpoint-xl - 1}) {
+  @media (max-width: #{$breakpoint-xl - 1}) {
     @content;
   }
 }
@@ -39,24 +39,52 @@
   @extend %base-headline;
   font-size: $text-h1;
   font-weight: $text-bold;
+
+  @include tablet-md {
+    font-size: $text-h2;
+  }
+
+  @include mobile {
+    font-size: $text-h3;
+  }
 }
 
 @mixin typo-h2 {
   @extend %base-headline;
   font-size: $text-h2;
   font-weight: $text-bold;
+
+  @include tablet-md {
+    font-size: $text-h3;
+  }
+
+  @include mobile {
+    font-size: $text-h4;
+  }
 }
 
 @mixin typo-h3 {
   @extend %base-headline;
   font-size: $text-h3;
   font-weight: $text-semibold;
+
+  @include tablet-md {
+    font-size: $text-h4;
+  }
+
+  @include mobile {
+    font-size: $text-b1;
+  }
 }
 
 @mixin typo-h4 {
   @extend %base-headline;
   font-size: $text-h4;
   font-weight: $text-semibold;
+
+  @include tablet-md {
+    font-size: $text-b1;
+  }
 }
 
 // body
@@ -70,6 +98,10 @@
 @mixin typo-b1 {
   @extend %base-body;
   font-size: $text-b1;
+
+  @include tablet-md {
+    font-size: $text-b2;
+  }
 }
 
 @mixin typo-b2 {
@@ -111,5 +143,16 @@
     -webkit-line-clamp: $lines;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+}
+
+// skeleton
+@mixin skeleton {
+  border-radius: 6px;
+  background-color: $color-gray-200;
+
+  div {
+    border-radius: 6px;
+    background-color: $color-gray-300;
   }
 }

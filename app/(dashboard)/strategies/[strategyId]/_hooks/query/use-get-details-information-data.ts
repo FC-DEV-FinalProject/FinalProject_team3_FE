@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
+import { UseQueryResult, useQuery } from '@tanstack/react-query'
 
 import { StrategyDetailsInformationModel } from '@/shared/types/strategy-data'
 
@@ -6,25 +6,18 @@ import getDetailsInformation from '../../_api/get-details-information'
 import { InformationType } from '../../page'
 
 interface Props {
-  isReady: boolean
   strategyId: number
 }
 
 const useGetDetailsInformationData = ({
-  isReady,
   strategyId,
-}: Props): {
-  data:
-    | {
-        detailsSideData: InformationType[]
-        detailsInformationData: StrategyDetailsInformationModel
-      }
-    | undefined
-} => {
+}: Props): UseQueryResult<{
+  detailsSideData: InformationType[]
+  detailsInformationData: StrategyDetailsInformationModel
+}> => {
   return useQuery({
     queryKey: ['strategyDetails', strategyId],
-    queryFn: () => getDetailsInformation(isReady, strategyId),
-    enabled: isReady,
+    queryFn: () => getDetailsInformation(strategyId),
   })
 }
 

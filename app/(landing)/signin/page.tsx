@@ -30,7 +30,6 @@ const SignInPage = () => {
 
   const setKeepLoggedIn = useAuthStore((state) => state.setKeepLoggedIn)
   const isKeepLoggedIn = useAuthStore((state) => state.isKeepLoggedIn)
-
   const [formData, setFormData] = useState<LoginFormDataModel>({
     email: '',
     password: '',
@@ -65,10 +64,10 @@ const SignInPage = () => {
     }
 
     try {
-      const { data } = await loginMutation.mutateAsync(formData)
+      const response = await loginMutation.mutateAsync(formData)
 
-      if (!data?.accessToken || !data?.refreshToken || !data?.user) {
-        setErrors(ERROR_MESSAGES.AUTH.LOGIN_FAILED)
+      if (!response.data.isSuccess) {
+        setErrors(response.data.message || ERROR_MESSAGES.AUTH.LOGIN_FAILED)
         return
       }
 
@@ -115,11 +114,11 @@ const SignInPage = () => {
   const isFormDisabled = isSubmitting || loginMutation.isPending
 
   return (
-    <div className={styles.container}>
-      <div className={styles.loginBox}>
-        <h1 className={styles.title}>로그인</h1>
-        <form onSubmit={handleSubmit} className={styles.form}>
-          <div className={styles.inputGroup}>
+    <div className={cx('container')}>
+      <div className={cx('loginBox')}>
+        <h1 className={cx('title')}>로그인</h1>
+        <form onSubmit={handleSubmit} className={cx('form')}>
+          <div className={cx('inputGroup')}>
             <label htmlFor="email">이메일</label>
             <Input
               type="email"
@@ -129,13 +128,13 @@ const SignInPage = () => {
               value={formData.email}
               onChange={handleInputChange}
               placeholder="이메일을 입력하세요."
-              className={styles.input}
+              className={cx('input')}
               disabled={isFormDisabled}
               required
               autoComplete="email"
             />
           </div>
-          <div className={styles.inputGroup}>
+          <div className={cx('inputGroup')}>
             <label htmlFor="password">비밀번호</label>
             <Input
               type="password"
@@ -145,7 +144,7 @@ const SignInPage = () => {
               value={formData.password}
               onChange={handleInputChange}
               placeholder="비밀번호를 입력하세요."
-              className={styles.input}
+              className={cx('input')}
               disabled={isFormDisabled}
               required
               autoComplete="current-password"
@@ -161,8 +160,8 @@ const SignInPage = () => {
               {errors}
             </p>
           </div>
-          <div className={styles.options}>
-            <label className={styles.remember}>
+          <div className={cx('options')}>
+            <label className={cx('remember')}>
               <Checkbox
                 isChecked={isKeepLoggedIn}
                 onChange={handleKeepLoggedInChange}
@@ -170,10 +169,10 @@ const SignInPage = () => {
                 textColor="gray600"
               />
             </label>
-            <div className={styles.links}>
-              <Link href={PATH.FIND_ID}>아이디 찾기</Link>
-              <span className={styles.divider}>|</span>
-              <Link href={PATH.FIND_PASSWORD}>비밀번호 찾기</Link>
+            <div className={cx('find-buttons')}>
+              <Link href={'/'}>아이디 찾기</Link>
+              <span className={cx('divider')}>|</span>
+              <Link href={'/'}>비밀번호 찾기</Link>
             </div>
           </div>
           <Button type="submit" size="large" variant="filled" disabled={isFormDisabled}>

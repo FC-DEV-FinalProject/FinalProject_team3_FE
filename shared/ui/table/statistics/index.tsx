@@ -1,5 +1,7 @@
 import classNames from 'classnames/bind'
 
+import { formatNumber } from '@/shared/utils/format'
+
 import { inKoreanData } from './in-korean'
 import styles from './styles.module.scss'
 
@@ -48,11 +50,11 @@ const StatisticsTable = ({ title, statisticsData }: Props) => {
           {groupedData.map((row, idx) => (
             <tr key={idx}>
               <td>{row[0]}</td>
-              <td>{row[1]}</td>
+              <td>{formatNumber(row[1])}</td>
               {row[2] && (
                 <>
                   <td>{row[2]}</td>
-                  <td>{row[3]}</td>
+                  <td>{formatNumber(row[3])}</td>
                 </>
               )}
             </tr>

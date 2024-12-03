@@ -47,7 +47,9 @@ const AverageMetricsSection = () => {
             FROM <span className={cx('date')}>{startDate}</span>TO
             <span className={cx('date')}>{endDate}</span>
           </div>
-          <AverageMetricsChart data={chartData} />
+          <div className={cx('chart-wrapper')}>
+            <AverageMetricsChart data={chartData} />
+          </div>
         </div>
       </div>
     </section>

@@ -8,7 +8,7 @@ const cx = classNames.bind(styles)
 
 interface Props {
   icon: React.ElementType
-  onClick: React.MouseEventHandler<HTMLButtonElement>
+  onClick: () => void
   children: React.ReactNode
 }
 

@@ -12,13 +12,14 @@ const headerStyles = {
 interface Props {
   hasLinks?: boolean
   hasText?: boolean
+  isLoggedIn?: boolean
 }
 
-const LogoHeader = ({ hasLinks = false, hasText = false }: Props) => {
+const LogoHeader = ({ hasLinks = false, hasText = false, isLoggedIn = false }: Props) => {
   return (
     <Header
       Left={<Logo hasText={hasText} />}
-      Right={hasLinks && <HeaderLinks />}
+      Right={hasLinks && <HeaderLinks isLoggedIn={isLoggedIn} />}
       styles={headerStyles}
     />
   )

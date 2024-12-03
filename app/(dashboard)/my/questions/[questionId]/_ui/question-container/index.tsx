@@ -1,6 +1,11 @@
+'use client'
+
+import { useState } from 'react'
+
 import classNames from 'classnames/bind'
 
 import { Button } from '@/shared/ui/button'
+import { Textarea } from '@/shared/ui/textarea'
 
 import QuestionDetailCard from '../question-detail-card'
 import styles from './styles.module.scss'
@@ -8,8 +13,21 @@ import styles from './styles.module.scss'
 const cx = classNames.bind(styles)
 
 const QuestionContainer = () => {
+  const [isActiveAnswer, setIsActiveAnswer] = useState(false)
   // 임시
-  const hasAnswer = true
+  const hasAnswer = false
+  const isTrader = true
+
+  const handleQuestionAdd = () => {}
+
+  const handleAnswerAdd = () => {
+    setIsActiveAnswer((prevState) => !prevState)
+  }
+
+  // TODO: Trader, Investor에 따라 적절한 UI 표시
+  // Trader이고 답변이 달리지 않았을 때: 답변하기 버튼
+  // Trader이고 답변이 달렸을 때: 답변 삭제하기 버튼
+  // Investor일 때: 추가 질문하기 버튼
 
   return (
     <>
@@ -32,12 +50,26 @@ const QuestionContainer = () => {
             createdAt="2024-11-03T15:00:00"
           />
         ) : (
-          <p className={cx('empty-message')}>아직 답변이 없습니다</p>
+          <>{!isActiveAnswer && <p className={cx('empty-message')}>아직 답변이 없습니다</p>}</>
         )}
 
-        <Button variant="filled" className={cx('button')}>
-          추가 질문하기
-        </Button>
+        {isActiveAnswer ? (
+          <div className={cx('answer-input-wrapper')}>
+            <div className={cx('title-wrapper')}>
+              <h2 className={cx('title')}>답변</h2>
+              <Button size="small">등록하기</Button>
+            </div>
+            <Textarea placeholder="내용을 입력하세요." />
+          </div>
+        ) : (
+          <Button
+            variant="filled"
+            className={cx('button')}
+            onClick={isTrader ? handleAnswerAdd : handleQuestionAdd}
+          >
+            {isTrader ? '답변하기' : '추가 질문하기'}
+          </Button>
+        )}
       </div>
     </>
   )

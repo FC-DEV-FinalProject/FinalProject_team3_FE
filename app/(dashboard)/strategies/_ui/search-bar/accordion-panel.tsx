@@ -8,6 +8,7 @@ import classNames from 'classnames/bind'
 import useSearchingItemStore from './_store/use-searching-item-store'
 import { SearchTermsModel } from './_type/search'
 import { AccordionContext } from './accordion-container'
+import { PANEL_MAPPING } from './panel-mapping'
 import RangeContainer from './range-container'
 import styles from './styles.module.scss'
 
@@ -62,7 +63,9 @@ const AccordionPanel = ({ optionId, panels }: Props) => {
                   key={`${panel}-${idx}`}
                   onClick={() => setPanelItem(optionId, panel)}
                   className={cx({
-                    active: Array.isArray(clickedValue) && clickedValue?.includes(panel),
+                    active:
+                      Array.isArray(clickedValue) &&
+                      clickedValue?.includes(PANEL_MAPPING[optionId]?.[panel] ?? panel),
                   })}
                 >
                   <p>{panel}</p>

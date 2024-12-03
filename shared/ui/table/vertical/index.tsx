@@ -5,6 +5,7 @@ import classNames from 'classnames/bind'
 
 import { DailyAnalysisModel, MonthlyAnalysisModel } from '@/shared/types/strategy-data'
 import { Button } from '@/shared/ui/button'
+import { formatNumber } from '@/shared/utils/format'
 import sliceArray from '@/shared/utils/slice-array'
 
 import styles from './styles.module.scss'
@@ -50,7 +51,7 @@ const VerticalTable = ({
             {slicedTableBody.map((row) => (
               <tr key={Object.values(row)[0]}>
                 {Object.values(row).map((data, idx) => (
-                  <td key={data + idx}>{data}</td>
+                  <td key={data + idx}>{formatNumber(data)}</td>
                 ))}
                 {isEditable && (
                   <td className={cx('button-container')}>

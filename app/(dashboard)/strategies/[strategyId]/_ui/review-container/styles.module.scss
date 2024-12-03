@@ -36,7 +36,7 @@
   }
   .add-button-wrapper {
     width: 120px;
-    p {
+    & p {
       font-size: $text-c1;
       font-weight: $text-semibold;
       color: $color-gray-600;

@@ -44,6 +44,7 @@ const useSignupForm = () => {
   const [errors, setErrors] = useState<SignupFormErrorsModel>({})
   const [formState, setFormState] = useState<SignupFormStateModel>(initialFormState)
   const [isValidated, setIsValidated] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -62,6 +63,18 @@ const useSignupForm = () => {
         isNicknameVerified: false,
       }))
     }
+
+    if (name === 'phone') {
+      setFormState((prev) => ({
+        ...prev,
+        isPhoneVerified: false,
+      }))
+    }
+  }
+
+  const handleBirthdayChange = (value: string, field: 'birthYear' | 'birthMonth' | 'birthDay') => {
+    setErrors((prev) => ({ ...prev, select: null }))
+    setForm((prev) => ({ ...prev, [field]: String(value) }))
   }
 
   const handleMarketingAgree = (checked: boolean) => {
@@ -69,6 +82,8 @@ const useSignupForm = () => {
   }
 
   const handleNicknameCheck = async () => {
+    setFormState((prev) => ({ ...prev, isNicknameVerified: false }))
+
     try {
       const response = await checkNicknameDuplicate(form.nickname)
       if (response.result.isAvailable) {
@@ -107,7 +122,8 @@ const useSignupForm = () => {
     const formErrors = validateSignupForm(
       form,
       formState.isEmailVerified,
-      formState.isNicknameVerified
+      formState.isNicknameVerified,
+      formState.isPhoneVerified
     )
     setIsValidated(true)
 
@@ -115,6 +131,7 @@ const useSignupForm = () => {
       setErrors(formErrors)
       return
     }
+
     const role = getUserTypeCookie()
 
     try {
@@ -129,6 +146,7 @@ const useSignupForm = () => {
         birthYear: form.birthYear,
         birthMonth: form.birthMonth,
         birthDay: form.birthDay,
+        code: form.verificationCode,
         emailDomain: form.emailDomain,
       }
 
@@ -138,6 +156,7 @@ const useSignupForm = () => {
     } catch (err) {
       console.error('회원가입 실패:', err)
       setErrors((prev) => ({ ...prev, submitError: '회원가입에 실패했습니다.' }))
+      setIsModalOpen(true)
     }
   }
 
@@ -150,10 +169,13 @@ const useSignupForm = () => {
     setFormState,
     isValidated,
     handleInputChange,
+    handleBirthdayChange,
     handleMarketingAgree,
     handleFormSubmit,
     handleNicknameCheck,
     handlePhoneCheck,
+    isModalOpen,
+    setIsModalOpen,
   }
 }
 

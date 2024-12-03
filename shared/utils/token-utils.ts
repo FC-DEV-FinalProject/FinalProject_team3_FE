@@ -1,17 +1,14 @@
 import { jwtDecode } from 'jwt-decode'
 
-import { getRefreshToken, setAccessToken, setRefreshToken } from '@/shared/lib/auth-tokens'
-import type { TokenPayloadModel, TokenResponseType } from '@/shared/types/auth'
+import { setAccessToken } from '@/shared/lib/auth-tokens'
+import { TokenPayloadModel } from '@/shared/types/auth'
 
-import axiosInstance from '../api/axios'
+import { refreshAccessToken } from '../api/auth'
 
 let isRefreshing = false
 let refreshSubscribers: ((token: string) => void)[] = []
 
 export const refreshToken = async (): Promise<string | null> => {
-  const refreshToken = getRefreshToken()
-  if (!refreshToken) return null
-
   if (isRefreshing) {
     return new Promise((resolve) => {
       refreshSubscribers.push((token) => resolve(token))
@@ -21,25 +18,16 @@ export const refreshToken = async (): Promise<string | null> => {
   try {
     isRefreshing = true
 
-    const response = await axiosInstance.post<TokenResponseType>(
-      '/api/users/reissue/refreshtoken',
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${refreshToken}`,
-        },
-      }
-    )
+    const response = await refreshAccessToken()
 
-    if (!response.data.data) {
+    if (!response.data.isSuccess) {
       return null
     }
 
-    const { accessToken: newAccessToken, refreshToken: newRefreshToken } = response.data.data
+    const newAccessToken = response.headers['access-token']?.replace('Bearer ', '')
 
-    if (newAccessToken && newRefreshToken) {
+    if (newAccessToken) {
       setAccessToken(newAccessToken)
-      setRefreshToken(newRefreshToken)
       refreshSubscribers.forEach((cb) => cb(newAccessToken))
       return newAccessToken
     }
@@ -63,21 +51,21 @@ export const isTokenExpired = (token: string): boolean => {
   }
 }
 
+export const getEmailFromToken = (token: string | null): string | null => {
+  if (!token) return null
+  try {
+    const decoded = jwtDecode<TokenPayloadModel>(token)
+    return decoded.email
+  } catch {
+    return null
+  }
+}
+
 export const getTimeUntilExpiry = (token: string): number => {
   try {
     const decoded = jwtDecode<TokenPayloadModel>(token)
     return decoded.exp * 1000 - Date.now()
   } catch {
     return 0
-  }
-}
-
-export const getUserFromToken = (token: string | null): TokenPayloadModel['user'] | null => {
-  if (!token) return null
-  try {
-    const decoded = jwtDecode<TokenPayloadModel>(token)
-    return decoded.user
-  } catch {
-    return null
   }
 }

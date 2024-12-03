@@ -1,5 +1,3 @@
-import { strategiesMockData } from '@/mocks/handlers/strategies'
-
 import axiosInstance from '@/shared/api/axios'
 import { StrategiesModel } from '@/shared/types/strategy-data'
 
@@ -25,9 +23,7 @@ const getFavoriteStrategyList = async ({
     return { strategiesData, totalPages }
   } catch (err) {
     console.error(err)
-    // throw new Error('구독한 전략 조회에 실패했습니다.')
-    // 임시 목데이터
-    return { strategiesData: strategiesMockData.filter((data) => data.isSubscribed), totalPages: 1 }
+    throw new Error('구독한 전략 조회에 실패했습니다.')
   }
 }
 

@@ -2,6 +2,7 @@ import { create } from 'zustand'
 
 import { AlgorithmItemType, RangeModel, SearchTermsModel } from '../_type/search'
 import { isRangeModel } from '../_utils/type-validate'
+import { PANEL_MAPPING } from '../panel-mapping'
 
 interface StateModel {
   searchTerms: SearchTermsModel
@@ -12,6 +13,7 @@ interface ActionModel {
   setAlgorithm: (algorithm: AlgorithmItemType) => void
   setPanelItem: (key: keyof SearchTermsModel, item: string) => void
   setRangeValue: (key: keyof SearchTermsModel, type: keyof RangeModel, value: number) => void
+  setSearchWord: (searchWord: string) => void
   resetState: () => void
   validateRangeValues: () => void
 }
@@ -37,7 +39,7 @@ const useSearchingItemStore = create<StateModel & ActionsModel>((set, get) => ({
   searchTerms: {
     ...initialState,
   },
-  errOptions: [],
+  errOptions: null,
 
   actions: {
     setAlgorithm: (algorithm) =>
@@ -47,14 +49,15 @@ const useSearchingItemStore = create<StateModel & ActionsModel>((set, get) => ({
 
     setPanelItem: (key, item) =>
       set((state) => {
+        const mappingItem = PANEL_MAPPING[key]?.[item] || item
         const currentItems = state.searchTerms[key]
         if (Array.isArray(currentItems)) {
-          const updatedItems = currentItems.includes(item)
-            ? currentItems.filter((i) => i !== item)
-            : [...currentItems, item]
+          const updatedItems = currentItems.includes(mappingItem)
+            ? currentItems.filter((i) => i !== mappingItem)
+            : [...currentItems, mappingItem]
           return { searchTerms: { ...state.searchTerms, [key]: [...updatedItems] } }
         }
-        return { searchTerms: { ...state.searchTerms, [key]: [item] } }
+        return { searchTerms: { ...state.searchTerms, [key]: [mappingItem] } }
       }),
 
     setRangeValue: (key, type, value) =>
@@ -62,6 +65,14 @@ const useSearchingItemStore = create<StateModel & ActionsModel>((set, get) => ({
         searchTerms: {
           ...state.searchTerms,
           [key]: { ...(state.searchTerms[key] as RangeModel), [type]: value },
+        },
+      })),
+
+    setSearchWord: (searchWord) =>
+      set((state) => ({
+        searchTerms: {
+          ...state.searchTerms,
+          searchWord,
         },
       })),
 

@@ -9,4 +9,8 @@
   display: flex;
   justify-content: center;
   gap: 20px;
+
+  @include tablet-md {
+    flex-direction: column;
+  }
 }

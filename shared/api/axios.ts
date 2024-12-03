@@ -3,23 +3,12 @@ import { AxiosError, InternalAxiosRequestConfig } from 'axios'
 
 import { getAccessToken } from '@/shared/lib/auth-tokens'
 import { useAuthStore } from '@/shared/stores/use-auth-store'
-import { getUserFromToken, isTokenExpired, refreshToken } from '@/shared/utils/token-utils'
-
-import { isAdmin } from '../types/auth'
+import { isTokenExpired, refreshToken } from '@/shared/utils/token-utils'
 
 export const createAxiosInstance = (options: { withInterceptors?: boolean } = {}) => {
   const instance = axios.create({
     baseURL: process.env.NEXT_PUBLIC_API_HOST,
-  })
-
-  instance.interceptors.request.use((config) => {
-    if (
-      config.url?.includes('/api/users/login') ||
-      config.url?.includes('/api/users/reissue/refreshtoken')
-    ) {
-      config.baseURL = ''
-    }
-    return config
+    withCredentials: true,
   })
 
   if (options.withInterceptors && typeof window !== 'undefined') {
@@ -33,9 +22,7 @@ export const createAxiosInstance = (options: { withInterceptors?: boolean } = {}
         }
 
         try {
-          const user = getUserFromToken(accessToken)
-
-          if (isAdmin(user) && isTokenExpired(accessToken)) {
+          if (isTokenExpired(accessToken)) {
             useAuthStore.getState().setAuthState({
               isAuthenticated: false,
               user: null,
@@ -45,9 +32,9 @@ export const createAxiosInstance = (options: { withInterceptors?: boolean } = {}
             return config
           }
 
-          config.headers.Authorization = `Bearer ${accessToken}`
+          config.headers['access-token'] = `Bearer ${accessToken}`
         } catch (err) {
-          console.error('토큰 디코딩 실패:', err)
+          console.error('토큰 검증 실패:', err)
           useAuthStore.getState().setAuthState({
             isAuthenticated: false,
             user: null,
@@ -77,7 +64,7 @@ export const createAxiosInstance = (options: { withInterceptors?: boolean } = {}
           try {
             const newToken = await refreshToken()
             if (newToken) {
-              originalRequest.headers.Authorization = `Bearer ${newToken}`
+              originalRequest.headers['access-token'] = `Bearer ${newToken}`
               return instance(originalRequest)
             }
           } catch (refreshError) {

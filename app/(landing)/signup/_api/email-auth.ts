@@ -4,7 +4,7 @@ export const requestEmailAuthentication = async (email: string, domain: string) 
   const emailAddress = `${email}@${domain}`
 
   try {
-    const response = await axios.get(`/api/users/authenticate?email=${emailAddress}`)
+    const response = await axios.get(`/api/users/authenticate/signup?email=${emailAddress}`)
     return response.data
   } catch (err) {
     console.error(err)
@@ -19,7 +19,7 @@ export const getEmailAuthenticationResult = async (email: string, domain: string
   }
 
   try {
-    const response = await axios.post(`/api/users/authenticate`, data)
+    const response = await axios.post(`/api/users/authenticate/signup`, data)
     return response.data
   } catch (err) {
     console.error(err)

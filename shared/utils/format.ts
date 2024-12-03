@@ -13,3 +13,17 @@ export const formatDateTime = (dateString: string) => {
 
   return `${year}.${month}.${day} ${hours}:${minutes}`
 }
+
+export const arrayFormatNumbers = (arrayData: number[]): (string | number)[] | null => {
+  if (Array.isArray(arrayData)) {
+    return arrayData.map((data) => formatNumber(data))
+  }
+  return null
+}
+
+export const formatNumber = (data: number | string): string | number => {
+  if (typeof data === 'number') {
+    return data.toLocaleString()
+  }
+  return data
+}

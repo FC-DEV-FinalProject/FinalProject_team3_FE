@@ -10,29 +10,31 @@ export interface TabItemModel {
   id: string
   label: string
   icon?: React.FC<React.SVGProps<SVGSVGElement>>
-  content: React.ReactElement
+  content?: React.ReactElement
 }
 
-interface Props {
+interface Props<T extends string> {
   tabs: TabItemModel[]
-  activeTab: string
-  onTabChange: (id: string) => void
+  activeTab: T
+  onTabChange: (id: T) => void
 }
 
-const Tabs = ({ tabs, activeTab, onTabChange }: Props) => {
+const Tabs = <T extends string>({ tabs, activeTab, onTabChange }: Props<T>) => {
+  const activeTabContent = tabs.find((tab) => tab.id === activeTab)?.content
+
   return (
     <>
       <ul className={cx('tab-list')}>
         {tabs.map(({ id, label, icon: Icon }) => (
           <li key={id}>
-            <TabButton isActive={id === activeTab} onClick={() => onTabChange(id)}>
+            <TabButton isActive={id === activeTab} onClick={() => onTabChange(id as T)}>
               {Icon && <Icon className={cx('icon')} />}
               {label}
             </TabButton>
           </li>
         ))}
       </ul>
-      <div>{tabs.find((tab) => tab.id === activeTab)?.content}</div>
+      {activeTabContent && <div>{activeTabContent}</div>}
     </>
   )
 }

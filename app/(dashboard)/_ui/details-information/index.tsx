@@ -23,17 +23,23 @@ const DetailsInformation = ({ information, type = 'default' }: Props) => {
     { percent: information.profitFactor, label: 'Profit Factor' },
     { percent: information.winRate, label: '승률' },
   ]
-
+  if (!information) return null
   return (
     <>
       <div className={cx('information-top')}>
         <StrategyNameBox
-          iconUrls={[information.tradeTypeIconUrl, ...information.stockTypeInfo.stockTypeIconUrls]}
-          iconNames={[information.tradeTypeName, ...information.stockTypeInfo.stockTypeNames]}
+          // iconUrls={[
+          //   information.tradeTypeIconUrl,
+          //   ...(information.stockTypeInfo?.stockTypeIconUrls || []),
+          // ]}
+          iconNames={[
+            information.tradeTypeName,
+            ...(information.stockTypeInfo?.stockTypeNames || []),
+          ]}
           name={information.strategyName}
         />
         <InvestInformation
-          stock={information.stockTypeInfo.stockTypeNames}
+          stock={information.stockTypeInfo?.stockTypeNames || []}
           trade={information.tradeTypeName}
           cycle={information.operationCycle}
         />

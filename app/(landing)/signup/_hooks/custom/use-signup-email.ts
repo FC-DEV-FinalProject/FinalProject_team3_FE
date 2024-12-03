@@ -79,19 +79,22 @@ const useSignupEmail = ({ form, errors, isValidated, setForm, setErrors, setForm
         form.verificationCode
       )
 
-      if (response.result.isVerified) {
+      if (response.isSuccess) {
         setFormState((prev) => ({ ...prev, isEmailVerified: true }))
-        if (errors.email) {
-          setErrors((prev) => ({ ...prev, email: null }))
+        if (errors.emailConfirm) {
+          setErrors((prev) => ({ ...prev, emailConfirm: null }))
         }
       } else {
-        setErrors((prev) => ({ ...prev, email: SIGNUP_ERROR_MESSAGES.VERIFICATION_CODE_MISMATCH }))
+        setErrors((prev) => ({
+          ...prev,
+          emailConfirm: SIGNUP_ERROR_MESSAGES.VERIFICATION_CODE_MISMATCH,
+        }))
       }
     } catch (err) {
       console.error('인증번호 확인 실패:', err)
       setErrors((prev) => ({
         ...prev,
-        email: SIGNUP_ERROR_MESSAGES.VERIFICATION_CODE_CHECK_FAILED,
+        emailConfirm: SIGNUP_ERROR_MESSAGES.VERIFICATION_CODE_CHECK_FAILED,
       }))
     }
   }

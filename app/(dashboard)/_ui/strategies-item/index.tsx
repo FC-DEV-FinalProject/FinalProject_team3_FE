@@ -4,6 +4,7 @@ import classNames from 'classnames/bind'
 
 import { StrategiesModel } from '@/shared/types/strategy-data'
 import { Button } from '@/shared/ui/button'
+import { formatNumber } from '@/shared/utils/format'
 
 import AreaChart from './area-chart'
 import StrategiesSummary from './strategies-summary'
@@ -34,7 +35,7 @@ const StrategiesItem = ({ strategiesData: data, type = 'default' }: Props) => {
       />
       <AreaChart profitRateChartData={data.profitRateChartData} />
       <div className={cx('mdd')}>
-        <p>{data.mdd}</p>
+        <p>{formatNumber(data.mdd)}</p>
       </div>
       <div className={cx('sm-score')}>
         <p>{data.smScore}</p>
@@ -47,7 +48,7 @@ const StrategiesItem = ({ strategiesData: data, type = 'default' }: Props) => {
       </div>
       {type === 'default' && (
         <div className={cx('subscribe')}>
-          <Subscribe subscriptionStatus={data.isSubscribed} />
+          <Subscribe subscriptionStatus={data.isSubscribed} strategyId={data.strategyId} />
         </div>
       )}
       {type === 'my' && (

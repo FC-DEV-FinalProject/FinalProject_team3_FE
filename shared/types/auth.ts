@@ -1,15 +1,23 @@
-export type UserType = 'TRADER' | 'INVESTOR'
+import { AxiosResponse } from 'axios'
 
+export type UserType = 'TRADER' | 'INVESTOR'
 export type RoleType = UserType | `${UserType}_ADMIN`
 
 export interface UserModel {
-  id: string
+  userId: number
+  userName: string
   email: string
-  name: string
-  nickname: string
-  role: RoleType
-  createdAt?: string
   imageUrl: string
+  nickname: string
+  phone: string
+  infoAgreement: boolean
+  role: RoleType
+}
+
+export interface LoginResponseModel {
+  isSuccess: boolean
+  message: string
+  email: string
 }
 
 export interface LoginFormDataModel {
@@ -22,13 +30,6 @@ export interface TokenDataModel {
   refreshToken: string
 }
 
-export interface AuthResponseModel {
-  accessToken: string
-  refreshToken: string
-  user: UserModel
-  keepLoggedIn?: boolean
-}
-
 export interface ApiResponseModel<T> {
   isSuccess: boolean
   message: string
@@ -36,11 +37,13 @@ export interface ApiResponseModel<T> {
   code?: string
 }
 
-export type LoginResponseType = ApiResponseModel<AuthResponseModel>
+export type LoginResponseType = AxiosResponse<LoginResponseModel>
 export type TokenResponseType = ApiResponseModel<TokenDataModel>
 
 export interface TokenPayloadModel {
-  user: UserModel
+  category: string
+  email: string
+  role: RoleType
   exp: number
   iat: number
 }

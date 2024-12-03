@@ -2,6 +2,7 @@
 
 import { ChangeEvent } from 'react'
 
+import { ModalAlertIcon } from '@/public/icons'
 import classNames from 'classnames/bind'
 
 import { PATH } from '@/shared/constants/path'
@@ -10,6 +11,7 @@ import Checkbox from '@/shared/ui/check-box'
 import { ErrorMessage } from '@/shared/ui/error-message'
 import { Input } from '@/shared/ui/input'
 import { LinkButton } from '@/shared/ui/link-button'
+import Modal from '@/shared/ui/modal'
 import Select from '@/shared/ui/select'
 
 import useSignupEmail from '../_hooks/custom/use-signup-email'
@@ -46,10 +48,13 @@ const InformationPage = () => {
     setFormState,
     isValidated,
     handleInputChange,
+    handleBirthdayChange,
     handleMarketingAgree,
     handleFormSubmit,
     handleNicknameCheck,
     handlePhoneCheck,
+    isModalOpen,
+    setIsModalOpen,
   } = useSignupForm()
 
   const {
@@ -111,6 +116,9 @@ const InformationPage = () => {
                 중복확인
               </Button>
             </div>
+            {formState.isNicknameVerified && (
+              <small className={cx('nickname-verified')}>사용할 수 있는 닉네임입니다.</small>
+            )}
             <small>* 사이트 이용 시 사용할 닉네임을 입력해주세요.</small>
           </div>
         </div>
@@ -159,23 +167,29 @@ const InformationPage = () => {
               <small>* 사이트 이용 시 아이디로 사용됩니다.</small>
             </div>
             {formState.isEmailSent && (
-              <div className={cx('wrapper', 'verification')}>
-                <Input
-                  id="verificationCode"
-                  name="verificationCode"
-                  value={form.verificationCode}
-                  onChange={handleInputChange}
-                  placeholder="인증번호"
-                  className={cx('input')}
-                />
-                <Button
-                  onClick={handleVerificationCodeCheck}
-                  type="button"
-                  className={cx('button')}
-                >
-                  인증번호 확인
-                </Button>
-              </div>
+              <>
+                <div className={cx('wrapper', 'verification')}>
+                  <Input
+                    id="verificationCode"
+                    name="verificationCode"
+                    value={form.verificationCode}
+                    onChange={handleInputChange}
+                    placeholder="인증번호"
+                    className={cx('input')}
+                    errorMessage={errors.emailConfirm}
+                  />
+                  <Button
+                    onClick={handleVerificationCodeCheck}
+                    type="button"
+                    className={cx('button')}
+                  >
+                    인증번호 확인
+                  </Button>
+                </div>
+                {formState.isEmailVerified && (
+                  <small className={cx('nickname-verified')}>이메일 인증에 성공했습니다.</small>
+                )}
+              </>
             )}
           </div>
         </div>
@@ -228,6 +242,9 @@ const InformationPage = () => {
                 중복확인
               </Button>
             </div>
+            {formState.isPhoneVerified && (
+              <small className={cx('nickname-verified')}>사용할 수 있는 휴대전화 번호입니다.</small>
+            )}
             <small>* (-) 없이 숫자만 입력해주세요.</small>
           </div>
         </div>
@@ -238,7 +255,7 @@ const InformationPage = () => {
             <Select
               options={yearOptions}
               value={form.birthYear}
-              onChange={(value) => setForm((prev) => ({ ...prev, birthYear: String(value) }))}
+              onChange={(value) => handleBirthdayChange(String(value), 'birthYear')}
               size="small"
               placeholder="년"
               titleStyle={selectStyle}
@@ -246,7 +263,7 @@ const InformationPage = () => {
             <Select
               options={monthOptions}
               value={form.birthMonth}
-              onChange={(value) => setForm((prev) => ({ ...prev, birthMonth: String(value) }))}
+              onChange={(value) => handleBirthdayChange(String(value), 'birthMonth')}
               size="small"
               placeholder="월"
               titleStyle={selectStyle}
@@ -254,7 +271,7 @@ const InformationPage = () => {
             <Select
               options={dayOptions}
               value={form.birthDay}
-              onChange={(value) => setForm((prev) => ({ ...prev, birthDay: String(value) }))}
+              onChange={(value) => handleBirthdayChange(String(value), 'birthDay')}
               size="small"
               placeholder="일"
               titleStyle={selectStyle}
@@ -287,6 +304,9 @@ const InformationPage = () => {
           다음
         </Button>
       </div>
+      <Modal message="회원가입에 실패했습니다." icon={ModalAlertIcon} isOpen={isModalOpen}>
+        <Button onClick={() => setIsModalOpen(false)}>닫기</Button>
+      </Modal>
     </>
   )
 }

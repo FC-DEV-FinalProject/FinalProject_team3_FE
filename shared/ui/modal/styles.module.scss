@@ -15,7 +15,7 @@
   border: 1px solid $color-gray-200;
   border-radius: 8px;
   z-index: zIndex(modal);
-  padding: 80px 40px;
+  padding: 40px;
   width: 360px;
   display: flex;
   flex-direction: column;
@@ -27,7 +27,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 12px;
 
   svg {
     width: 40px;
@@ -37,9 +36,16 @@
 
 .message {
   @include typo-b1;
-  font-weight: bold;
   text-align: center;
   white-space: pre-line;
   color: $color-gray-800;
   margin-bottom: 30px;
+}
+
+.two-button {
+  display: flex;
+  gap: 10px;
+  & .button {
+    width: 90px;
+  }
 }

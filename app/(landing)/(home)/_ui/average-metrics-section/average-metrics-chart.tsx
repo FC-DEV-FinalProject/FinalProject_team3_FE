@@ -26,7 +26,6 @@ const AverageMetricsChart = ({ data }: Props) => {
   const chartOptions: Highcharts.Options = {
     chart: {
       type: 'areaspline',
-      width: 1000,
       height: 450,
       backgroundColor: '#FFFFFF',
       zooming: {
@@ -176,6 +175,20 @@ const AverageMetricsChart = ({ data }: Props) => {
         pointPlacement: 'on',
       },
     ],
+    responsive: {
+      rules: [
+        {
+          condition: {
+            maxWidth: 1000,
+          },
+          chartOptions: {
+            chart: {
+              width: null,
+            },
+          },
+        },
+      ],
+    },
     credits: { enabled: false },
   }
 

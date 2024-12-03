@@ -30,6 +30,9 @@ interface Props {
 const AccordionContainer = ({ optionId, title, panels }: Props) => {
   const { openIds, panelRef, handleButtonIds } = useAccordionButton()
 
+  if (optionId === 'tradeTypeNames' && panels?.length === 0) return null
+  if (optionId === 'stockTypeNames' && panels?.length === 0) return null
+
   return (
     <AccordionContext.Provider value={{ openIds, panelRef, handleButtonIds }}>
       <div>

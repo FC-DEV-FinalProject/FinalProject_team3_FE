@@ -1,7 +1,7 @@
+import { AnalysisChartOptionsType } from '@/app/(dashboard)/_ui/analysis-container'
 import { useQuery } from '@tanstack/react-query'
 
 import getAnalysisChart from '../../_api/get-analysis-chart'
-import { AnalysisChartOptionsType } from '../../_ui/analysis-container'
 
 interface Props {
   strategyId: number

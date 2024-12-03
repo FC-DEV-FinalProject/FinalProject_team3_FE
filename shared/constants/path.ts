@@ -30,8 +30,4 @@ export const PATH = {
   ADMIN_NOTICES: '/admin/notices',
   ADMIN_STRATEGIES: '/admin/strategies',
   ADMIN_QUESTIONS: '/admin/questions',
-
-  // Etc
-  FIND_ID: '/find-id',
-  FIND_PASSWORD: '/find-password',
 } as const

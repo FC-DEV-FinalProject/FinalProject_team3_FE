@@ -11,12 +11,8 @@ export const signup = async (formData: SignupFormDataModel) => {
     password: formData.password,
     email: `${formData.email}@${formData.emailDomain}`,
     role: formData.role,
+    code: formData.code,
     infoAgreement: formData.infoAgreement,
-    imageMetadata: {
-      imageName: '',
-      extension: '',
-      size: 0,
-    },
   }
 
   try {

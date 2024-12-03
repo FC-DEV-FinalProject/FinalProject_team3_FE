@@ -1,23 +1,13 @@
-export const setAccessToken = (token: string) => {
-  localStorage.setItem('accessToken', token)
-}
+import { STORAGE_KEYS } from '../constants/auth'
 
-export const setRefreshToken = (token: string) => {
-  localStorage.setItem('refreshToken', token)
+export const setAccessToken = (token: string) => {
+  localStorage.setItem(STORAGE_KEYS.ACCESS_TOKEN, token)
 }
 
 export const getAccessToken = () => {
-  return localStorage.getItem('accessToken')
-}
-
-export const getRefreshToken = () => {
-  return localStorage.getItem('refreshToken')
+  return localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN)
 }
 
 export const removeAccessToken = () => {
-  localStorage.removeItem('accessToken')
-}
-
-export const removeRefreshToken = () => {
-  localStorage.removeItem('refreshToken')
+  localStorage.removeItem(STORAGE_KEYS.ACCESS_TOKEN)
 }

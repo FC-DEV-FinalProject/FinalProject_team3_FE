@@ -4,7 +4,6 @@ import { useState } from 'react'
 
 import classNames from 'classnames/bind'
 
-import { useMSWStore } from '@/shared/stores/msw'
 import TotalStar from '@/shared/ui/total-star'
 
 import useGetReviewsData from '../../_hooks/query/use-get-reviews-data'
@@ -20,8 +19,7 @@ interface Props {
 
 const ReviewContainer = ({ strategyId }: Props) => {
   const [currentPage, setCurrentPage] = useState(1)
-  const isReady = useMSWStore((state) => state.isReady)
-  const { data: reviewData } = useGetReviewsData({ isReady, strategyId, page: currentPage })
+  const { data: reviewData } = useGetReviewsData({ strategyId, page: currentPage })
 
   return (
     <div className={cx('container')}>
@@ -33,7 +31,7 @@ const ReviewContainer = ({ strategyId }: Props) => {
           totalElements={reviewData?.reviews.totalElements}
         />
       </div>
-      <AddReview />
+      <AddReview strategyId={strategyId} />
       {reviewData ? (
         <ReviewList
           reviews={reviewData.reviews.content}

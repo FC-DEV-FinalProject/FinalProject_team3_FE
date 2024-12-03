@@ -66,6 +66,14 @@
   align-items: center;
   margin-bottom: 30px;
   margin-top: -25px;
+
+  .find-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: $color-gray-600;
+    @include typo-c1;
+  }
 }
 
 .remember {
@@ -73,22 +81,6 @@
   align-items: center;
   cursor: pointer;
   gap: 8px;
-}
-
-.links {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  a {
-    color: $color-gray-600;
-    @include typo-c1;
-    text-decoration: none;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
 }
 
 .divider {

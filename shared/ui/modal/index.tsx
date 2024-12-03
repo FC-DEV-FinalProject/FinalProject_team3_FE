@@ -8,14 +8,14 @@ import styles from './styles.module.scss'
 const cx = classNames.bind(styles)
 
 interface Props {
-  icon?: React.ReactNode
+  icon?: React.FC<React.SVGProps<SVGSVGElement>>
   message?: string
   children?: React.ReactNode
   isOpen: boolean
   className?: string
 }
 
-const Modal = ({ icon, message, children, isOpen = false, className }: Props) => {
+const Modal = ({ icon: Icon, message, children, isOpen = false, className }: Props) => {
   if (!isOpen) return null
 
   const modalRoot = document.getElementById('modal-root')
@@ -26,7 +26,7 @@ const Modal = ({ icon, message, children, isOpen = false, className }: Props) =>
     <>
       <div className={cx('overlay')}></div>
       <div className={cx('modal', className)}>
-        <div className={cx('icon')}>{icon}</div>
+        <div className={cx('icon')}>{Icon && <Icon className={cx('icon')} />}</div>
         <p className={cx('message')}>{message}</p>
         {children}
       </div>

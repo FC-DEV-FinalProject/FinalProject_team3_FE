@@ -30,6 +30,12 @@
       margin-top: 8px;
       @include typo-c1;
       color: $color-gray-600;
+
+      &.nickname-verified {
+        margin-top: 0;
+        @include typo-b3;
+        color: $color-indigo;
+      }
     }
 
     .wrapper {

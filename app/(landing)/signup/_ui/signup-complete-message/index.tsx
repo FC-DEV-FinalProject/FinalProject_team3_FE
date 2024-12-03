@@ -22,10 +22,10 @@ interface Props {
 const SignupCompleteMessage = ({ nickname, userType }: Props) => {
   return (
     <section className={cx('container')}>
-      <p>{nickname}의 회원가입이 완료되었습니다.</p>
+      <p>{nickname}님의 회원가입이 완료되었습니다.</p>
       <p>
         지금 바로 인베스트메틱
-        <Logo />
+        <Logo width={42} />
         에서 <br />
         {COMPLETE_MESSAGE[userType]}
       </p>

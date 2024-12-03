@@ -3,6 +3,7 @@ import classNames from 'classnames/bind'
 import { PATH } from '@/shared/constants/path'
 import Avatar from '@/shared/ui/avatar'
 import { LinkButton } from '@/shared/ui/link-button'
+import { formatNumber } from '@/shared/utils/format'
 
 import { TitleType } from '.'
 import styles from './styles.module.scss'
@@ -34,7 +35,7 @@ const SideItem = ({ title, data, profileImage, isMyStrategy = false }: Props) =>
             )}
           </>
         ) : (
-          <p>{data}</p>
+          <p>{formatNumber(data)}</p>
         )}
       </div>
     </div>

@@ -52,7 +52,8 @@ export const validatePasswordMatch = (
 export const validateSignupForm = (
   form: SignupFormModel,
   isEmailVerified: boolean,
-  isNicknameVerified: boolean
+  isNicknameVerified: boolean,
+  isPhoneVerified: boolean
 ): Record<string, SignupErrorMessageType> => {
   const errors: Record<string, SignupErrorMessageType> = {}
 
@@ -75,6 +76,7 @@ export const validateSignupForm = (
 
   const phoneError = validateField('PHONE', form.phone)
   if (phoneError) errors.phone = phoneError
+  if (!isPhoneVerified) errors.phone = SIGNUP_ERROR_MESSAGES.PHONE_CHECK_REQUIRED
 
   if (!form.birthYear || !form.birthMonth || !form.birthDay) {
     errors.select = SIGNUP_ERROR_MESSAGES.SELECT_REQUIRED
