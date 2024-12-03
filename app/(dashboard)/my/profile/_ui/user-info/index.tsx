@@ -5,9 +5,10 @@ import { ChangeEvent, useState } from 'react'
 import { CameraIcon } from '@/public/icons'
 import classNames from 'classnames/bind'
 
-import Avatar from '../avatar'
-import { Button } from '../button'
-import { Input } from '../input'
+import Avatar from '@/shared/ui/avatar'
+import { Button } from '@/shared/ui/button'
+import { Input } from '@/shared/ui/input'
+
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)

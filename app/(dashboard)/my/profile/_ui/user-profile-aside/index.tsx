@@ -1,6 +1,7 @@
 import classNames from 'classnames/bind'
 
-import Avatar from '../avatar'
+import Avatar from '@/shared/ui/avatar'
+
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
