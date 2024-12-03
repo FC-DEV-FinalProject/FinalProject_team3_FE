@@ -2,9 +2,9 @@ import { ChangeEvent, useState } from 'react'
 
 import { useRouter } from 'next/navigation'
 
+import { checkNicknameDuplicate, checkPhoneDuplicate } from '@/shared/api/check-duplicate'
 import { PATH } from '@/shared/constants/path'
 
-import { checkNicknameDuplicate, checkPhoneDuplicate } from '../../_api/check-duplicate'
 import { signup } from '../../_api/signup'
 import { SIGNUP_ERROR_MESSAGES } from '../../_constants/signup'
 import { getUserTypeCookie, setNicknameCookie } from '../../_lib/cookies'

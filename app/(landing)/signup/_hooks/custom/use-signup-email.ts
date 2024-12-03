@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction, useState } from 'react'
 
-import { checkEmailDuplicate } from '../../_api/check-duplicate'
+import { checkEmailDuplicate } from '@/shared/api/check-duplicate'
+
 import { getEmailAuthenticationResult, requestEmailAuthentication } from '../../_api/email-auth'
 import { SIGNUP_ERROR_MESSAGES } from '../../_constants/signup'
 import {
