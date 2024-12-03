@@ -1,11 +1,12 @@
 .container {
   margin-bottom: 24px;
   display: grid;
-  grid-template-columns: 1.6fr 1.2fr repeat(3, 0.6fr) 0.4fr;
+  grid-template-columns: 1.5fr 1.2fr 0.8fr repeat(2, 0.6fr) 0.4fr;
   height: 158px;
   width: 100%;
   align-items: center;
   background-color: $color-white;
+  grid-gap: 4px;
   &.my {
     grid-template-columns: 2.5fr 2.4fr 1.5fr 1.1fr 1.3fr 1fr 1fr;
   }
@@ -44,11 +45,13 @@
 
 .summary {
   padding-left: 30px;
+  overflow: hidden;
   * {
     margin: 4px 0;
   }
   .title {
     @include typo-h4;
+    @include ellipsis(1);
   }
   .trader-profile {
     display: flex;
