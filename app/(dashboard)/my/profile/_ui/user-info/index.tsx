@@ -20,10 +20,11 @@ interface Props {
 }
 
 const UserInfo = ({ isEditable = false }: Props) => {
+  const router = useRouter()
   const handleChange = () => {}
   const handleDelete = () => {}
-  const handleConfirm = () => {}
-  const router = useRouter()
+  const handleNicknameConfirm = () => {}
+  const handlePhoneConfirm = () => {}
   const handleBack = () => {
     router.back()
   }
@@ -88,7 +89,7 @@ const UserInfo = ({ isEditable = false }: Props) => {
                     isWhiteDisabled={!isEditable ? true : undefined}
                   />
 
-                  {isEditable && <Button onClick={handleConfirm}>확인</Button>}
+                  {isEditable && <Button onClick={handlePhoneConfirm}>확인</Button>}
                 </div>
               </div>
             </div>
@@ -117,7 +118,7 @@ const UserInfo = ({ isEditable = false }: Props) => {
                     isWhiteDisabled={!isEditable ? true : undefined}
                   />
 
-                  {isEditable && <Button onClick={handleConfirm}>확인</Button>}
+                  {isEditable && <Button onClick={handleNicknameConfirm}>확인</Button>}
                 </div>
               </div>
             </div>

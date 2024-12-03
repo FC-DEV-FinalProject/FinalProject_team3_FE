@@ -8,12 +8,9 @@ import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
 
-interface Props {
-  onClick?: () => void
-}
-
-const UserWithdraw = ({ onClick }: Props) => {
+const UserWithdraw = () => {
   const router = useRouter()
+  const handleWithdraw = () => {}
   const handleBack = () => {
     router.back()
   }
@@ -32,7 +29,7 @@ const UserWithdraw = ({ onClick }: Props) => {
         <Button className={cx('left-button')} onClick={handleBack}>
           뒤로가기
         </Button>
-        <Button className={cx('right-button')} variant="filled" onClick={onClick}>
+        <Button className={cx('right-button')} variant="filled" onClick={handleWithdraw}>
           탈퇴
         </Button>
       </div>
