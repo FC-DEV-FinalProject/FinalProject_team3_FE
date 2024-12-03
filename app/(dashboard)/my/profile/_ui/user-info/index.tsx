@@ -1,5 +1,7 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
+
 import { CameraIcon } from '@/public/icons'
 import classNames from 'classnames/bind'
 
@@ -14,11 +16,18 @@ import styles from './styles.module.scss'
 const cx = classNames.bind(styles)
 
 interface Props {
-  onClick?: () => void
-  isEditable: boolean
+  isEditable?: boolean
 }
 
-export const UserInfo = ({ onClick, isEditable = false }: Props) => {
+const UserInfo = ({ isEditable = false }: Props) => {
+  const handleChange = () => {}
+  const handleDelete = () => {}
+  const handleConfirm = () => {}
+  const router = useRouter()
+  const handleBack = () => {
+    router.back()
+  }
+  const handleSave = () => {}
   return (
     <div className={cx('container')}>
       <p className={cx('text')}>개인 정보</p>
@@ -30,10 +39,10 @@ export const UserInfo = ({ onClick, isEditable = false }: Props) => {
             <div className={cx('avatar-wrapper')}>
               <Avatar size="xxlarge" />
               <div className={cx('camera-wrapper')}>
-                <CameraIcon className={cx('camera-icon')} onClick={onClick} />
+                <CameraIcon className={cx('camera-icon')} onClick={handleChange} />
               </div>
             </div>
-            {isEditable && <Button onClick={onClick}>프로필 사진 삭제</Button>}
+            {isEditable && <Button onClick={handleDelete}>프로필 사진 삭제</Button>}
           </div>
 
           <div className={cx('right-wrapper')}>
@@ -79,7 +88,7 @@ export const UserInfo = ({ onClick, isEditable = false }: Props) => {
                     isWhiteDisabled={!isEditable ? true : undefined}
                   />
 
-                  {isEditable && <Button onClick={onClick}>확인</Button>}
+                  {isEditable && <Button onClick={handleConfirm}>확인</Button>}
                 </div>
               </div>
             </div>
@@ -108,7 +117,7 @@ export const UserInfo = ({ onClick, isEditable = false }: Props) => {
                     isWhiteDisabled={!isEditable ? true : undefined}
                   />
 
-                  {isEditable && <Button onClick={onClick}>확인</Button>}
+                  {isEditable && <Button onClick={handleConfirm}>확인</Button>}
                 </div>
               </div>
             </div>
@@ -155,10 +164,10 @@ export const UserInfo = ({ onClick, isEditable = false }: Props) => {
 
         {isEditable && (
           <div className={cx('button-wrapper')}>
-            <Button className={cx('left-button')} onClick={onClick}>
-              취소
+            <Button className={cx('left-button')} onClick={handleBack}>
+              뒤로가기
             </Button>
-            <Button className={cx('right-button')} variant="filled" onClick={onClick}>
+            <Button className={cx('right-button')} variant="filled" onClick={handleSave}>
               저장하기
             </Button>
           </div>
@@ -167,3 +176,4 @@ export const UserInfo = ({ onClick, isEditable = false }: Props) => {
     </div>
   )
 }
+export default UserInfo

@@ -1,3 +1,5 @@
+import { useRouter } from 'next/navigation'
+
 import classNames from 'classnames/bind'
 
 import { Button } from '@/shared/ui/button'
@@ -10,7 +12,11 @@ interface Props {
   onClick?: () => void
 }
 
-export const Confirmation = ({ onClick }: Props) => {
+const UserWithdraw = ({ onClick }: Props) => {
+  const router = useRouter()
+  const handleBack = () => {
+    router.back()
+  }
   return (
     <div className={cx('container')}>
       <p className={cx('title')}>회원탈퇴</p>
@@ -23,8 +29,8 @@ export const Confirmation = ({ onClick }: Props) => {
         </div>
       </div>
       <div className={cx('button-wrapper')}>
-        <Button className={cx('left-button')} onClick={onClick}>
-          취소
+        <Button className={cx('left-button')} onClick={handleBack}>
+          뒤로가기
         </Button>
         <Button className={cx('right-button')} variant="filled" onClick={onClick}>
           탈퇴
@@ -33,3 +39,4 @@ export const Confirmation = ({ onClick }: Props) => {
     </div>
   )
 }
+export default UserWithdraw
