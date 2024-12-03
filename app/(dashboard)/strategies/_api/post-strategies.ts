@@ -1,10 +1,10 @@
-import axios from 'axios'
+import axiosInstance from '@/shared/api/axios'
 
 import { SearchTermsModel } from '../_ui/search-bar/_type/search'
 
 const postStrategies = async (page: number, size: number, searchTerms: SearchTermsModel) => {
   try {
-    const response = await axios.post(
+    const response = await axiosInstance.post(
       `/api/strategies/search?page=${page}&size=${size}`,
       searchTerms
     )
