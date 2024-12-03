@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 import { PresignedUrlResponseModel } from '../../trade/trade-manage/types'
-import { DomainType } from '../_hooks/use-strategy-icon-post'
+import { DomainType } from '../_hooks/use-category-icon-post'
 
 const getPresignedUrl = async (
   typeName: string,

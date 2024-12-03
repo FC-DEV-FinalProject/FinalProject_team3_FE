@@ -5,7 +5,7 @@ import uploadFileWithPresignedUrl from '../_api/upload-file-with-presigned-url'
 
 export type DomainType = 'trade' | 'stock'
 
-const useStrategyIconPost = (domain: DomainType) => {
+const useCategoryIconPost = (domain: DomainType) => {
   const [imagePreview, setImagePreview] = useState('')
   const [typeName, setTypeName] = useState('')
   const [image, setImage] = useState<File | null>(null)
@@ -76,4 +76,4 @@ const useStrategyIconPost = (domain: DomainType) => {
   }
 }
 
-export default useStrategyIconPost
+export default useCategoryIconPost

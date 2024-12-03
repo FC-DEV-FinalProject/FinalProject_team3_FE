@@ -2,7 +2,7 @@
 
 import { FormEvent } from 'react'
 
-import FileInput from '@/app/admin/strategies/_ui/shared/file-input'
+import FileInput from '@/app/admin/category/_ui/shared/file-input'
 import { RegisterIcon } from '@/public/icons'
 import { useQueryClient } from '@tanstack/react-query'
 import classNames from 'classnames/bind'
@@ -12,7 +12,7 @@ import { Button } from '@/shared/ui/button'
 import { Input } from '@/shared/ui/input'
 import Modal from '@/shared/ui/modal'
 
-import useStrategyIconPost from '../../../../shared/_hooks/use-strategy-icon-post'
+import useStrategyIconPost from '../../../../shared/_hooks/use-category-icon-post'
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
