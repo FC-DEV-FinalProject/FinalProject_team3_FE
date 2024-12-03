@@ -1,13 +1,13 @@
 'use client'
 
-import { ChangeEvent, useState } from 'react'
-
 import { CameraIcon } from '@/public/icons'
 import classNames from 'classnames/bind'
 
+import { PATH } from '@/shared/constants/path'
 import Avatar from '@/shared/ui/avatar'
 import { Button } from '@/shared/ui/button'
 import { Input } from '@/shared/ui/input'
+import { LinkButton } from '@/shared/ui/link-button'
 
 import styles from './styles.module.scss'
 
@@ -15,24 +15,10 @@ const cx = classNames.bind(styles)
 
 interface Props {
   onClick?: () => void
+  isEditable: boolean
 }
 
-export const UserInfo = ({ onClick }: Props) => {
-  const [isEditable, setIsEditable] = useState(false)
-  const [value, setValue] = useState('')
-
-  const handleUserInfoEdit = () => {
-    setIsEditable(true)
-  }
-
-  const handleUserInfoView = () => {
-    setIsEditable(false)
-  }
-
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value)
-  }
-
+export const UserInfo = ({ onClick, isEditable = false }: Props) => {
   return (
     <div className={cx('container')}>
       <p className={cx('text')}>개인 정보</p>
@@ -43,23 +29,25 @@ export const UserInfo = ({ onClick }: Props) => {
           <div className={cx('left-wrapper')}>
             <div className={cx('avatar-wrapper')}>
               <Avatar size="xxlarge" />
-              {isEditable && <CameraIcon className={cx('camera-icon')} onClick={onClick} />}
+              <div className={cx('camera-wrapper')}>
+                <CameraIcon className={cx('camera-icon')} onClick={onClick} />
+              </div>
             </div>
             {isEditable && <Button onClick={onClick}>프로필 사진 삭제</Button>}
           </div>
 
           <div className={cx('right-wrapper')}>
             {!isEditable && (
-              <Button variant="filled" onClick={handleUserInfoEdit} className={cx('edit-button')}>
+              <LinkButton variant="filled" className={cx('edit-button')} href={PATH.EDIT_PROFILE}>
                 개인 정보 수정
-              </Button>
+              </LinkButton>
             )}
             <div className={cx('first-row')}>
               <p className={cx('title')}>이름</p>
               <Input
                 id="name"
                 name="name"
-                value={value}
+                value={'고양이'}
                 inputSize="compact"
                 className={cx('input')}
                 isWhiteDisabled={!isEditable ? true : undefined}
@@ -72,7 +60,7 @@ export const UserInfo = ({ onClick }: Props) => {
                 <p className={cx('title')}>이메일</p>
                 <Input
                   inputSize="compact"
-                  value={value}
+                  value={'hello@example.com'}
                   className={cx('input')}
                   isWhiteDisabled={!isEditable ? true : undefined}
                   disabled={isEditable}
@@ -84,8 +72,8 @@ export const UserInfo = ({ onClick }: Props) => {
                   <Input
                     id="phone"
                     name="phone"
-                    value={value}
-                    onChange={handleInputChange}
+                    value={'01012345678'}
+                    onChange={() => {}}
                     className={cx('input')}
                     inputSize="compact"
                     isWhiteDisabled={!isEditable ? true : undefined}
@@ -101,7 +89,7 @@ export const UserInfo = ({ onClick }: Props) => {
                 <p className={cx('title')}>생년월일</p>
                 <Input
                   inputSize="compact"
-                  value={value}
+                  value={'2004.05.04'}
                   className={cx('input')}
                   isWhiteDisabled={!isEditable ? true : undefined}
                   disabled={isEditable}
@@ -114,8 +102,8 @@ export const UserInfo = ({ onClick }: Props) => {
                     id="nickname"
                     name="nickname"
                     inputSize="compact"
-                    value={value}
-                    onChange={handleInputChange}
+                    value={'고양이귀여워'}
+                    onChange={() => {}}
                     className={cx('input')}
                     isWhiteDisabled={!isEditable ? true : undefined}
                   />
@@ -134,8 +122,7 @@ export const UserInfo = ({ onClick }: Props) => {
                     name="password"
                     type="password"
                     inputSize="compact"
-                    value={value}
-                    onChange={handleInputChange}
+                    onChange={() => {}}
                     placeholder="비밀번호를 입력하세요"
                     className={cx('input')}
                     errorMessage={''}
@@ -148,8 +135,7 @@ export const UserInfo = ({ onClick }: Props) => {
                     id="passwordConfirm"
                     name="passwordConfirm"
                     type="password"
-                    value={value}
-                    onChange={handleInputChange}
+                    onChange={() => {}}
                     placeholder="한 번 더 입력하세요"
                     className={cx('input')}
                     inputSize="compact"
@@ -169,10 +155,10 @@ export const UserInfo = ({ onClick }: Props) => {
 
         {isEditable && (
           <div className={cx('button-wrapper')}>
-            <Button className={cx('left-button')} onClick={handleUserInfoView}>
+            <Button className={cx('left-button')} onClick={onClick}>
               취소
             </Button>
-            <Button variant="filled" onClick={onClick}>
+            <Button className={cx('right-button')} variant="filled" onClick={onClick}>
               저장하기
             </Button>
           </div>

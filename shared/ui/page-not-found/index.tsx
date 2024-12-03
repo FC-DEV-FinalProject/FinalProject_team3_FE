@@ -17,7 +17,7 @@ export const PageNotFound = () => {
         <p className={cx('number')}>404</p>
         <p className={cx('text')}>페이지를 찾을 수 없습니다.</p>
         <div className={cx('button-wrapper')}>
-          <LinkButton href={`${PATH.HOME}`} size="medium" variant="filled">
+          <LinkButton href={PATH.HOME} size="medium" variant="filled">
             홈으로 돌아가기
           </LinkButton>
         </div>

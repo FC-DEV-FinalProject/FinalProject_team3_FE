@@ -47,7 +47,7 @@ export const Small: StoryType = {
 
 export const Medium: StoryType = {
   args: {
-    children: 'meduim',
+    children: 'medium',
     size: 'medium',
   },
 }
