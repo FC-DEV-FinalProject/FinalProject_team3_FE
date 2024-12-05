@@ -1,0 +1,167 @@
+@mixin line-small {
+  width: 70px;
+  height: 17px;
+}
+
+@mixin line-medium {
+  width: 170px;
+  height: 25px;
+}
+
+@mixin line-large {
+  width: 236px;
+  height: 33px;
+}
+
+@mixin box-small {
+  width: 100px;
+  height: 33px;
+}
+
+@mixin box-medium {
+  width: 168px;
+  height: 33px;
+}
+
+@mixin box-large {
+  width: 417px;
+  height: 98px;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  margin-top: 20px;
+  .first-wrapper {
+    display: grid;
+    grid-template-columns: 0.5fr 1.5fr;
+    height: 132px;
+    gap: 10px;
+    margin-bottom: 20px;
+    .left {
+      @include skeleton;
+      @include flex-column;
+      padding: 10px;
+      * {
+        margin-bottom: 15px;
+      }
+      :first-child {
+        @include line-small;
+      }
+      :nth-child(2) {
+        @include line-medium;
+      }
+      :nth-child(3) {
+        @include line-large;
+      }
+    }
+    .right {
+      @include skeleton;
+      display: grid;
+      padding: 15px;
+      grid-template-columns: repeat(3, 1fr);
+      * {
+        margin-top: 10px;
+      }
+      :first-child {
+        @include skeleton;
+        @include flex-column;
+        :first-child {
+          @include box-small;
+        }
+        :nth-child(2) {
+          @include box-medium;
+        }
+      }
+      :nth-child(2) {
+        @include skeleton;
+        @include flex-column;
+        :first-child {
+          @include box-small;
+        }
+        :nth-child(2) {
+          @include box-medium;
+        }
+      }
+      :nth-child(3) {
+        @include skeleton;
+        @include flex-column;
+        :first-child {
+          @include box-small;
+        }
+        :nth-child(2) {
+          @include box-medium;
+        }
+      }
+    }
+  }
+  .second-wrapper {
+    height: 160px;
+    @include skeleton;
+    padding: 20px 20px 40px;
+    margin-bottom: 20px;
+    p {
+      margin-bottom: 10px;
+    }
+    div {
+      width: 100%;
+      height: 72px;
+    }
+  }
+  .third-wrapper {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    height: 108px;
+    margin-bottom: 20px;
+    div {
+      @include skeleton;
+      @include flex-column;
+      align-items: center;
+      padding: 10px;
+      div {
+        @include box-small;
+        margin: 5px 0;
+      }
+    }
+  }
+  .fourth-wrapper {
+    @include skeleton;
+    padding: 20px;
+    p {
+      margin-bottom: 10px;
+      @include typo-h4;
+      color: $color-gray-600;
+    }
+    .chart {
+      height: 367px;
+      margin-bottom: 30px;
+    }
+    .tab {
+      display: flex;
+      background-color: $color-gray-200;
+      margin-bottom: 30px;
+      div {
+        @include box-small;
+        margin-right: 10px;
+      }
+    }
+    .analysis {
+      background-color: $color-gray-200;
+      padding: 10px;
+      div {
+        display: flex;
+        justify-content: space-between;
+        @include skeleton;
+        div {
+          height: 131px;
+          width: 90%;
+          margin: 10px;
+        }
+      }
+    }
+  }
+}

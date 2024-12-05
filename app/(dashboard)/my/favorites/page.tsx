@@ -1,5 +1,3 @@
-import { Suspense } from 'react'
-
 import classNames from 'classnames/bind'
 
 import Title from '@/shared/ui/title'
@@ -13,9 +11,7 @@ const MyFavoritesPage = () => {
   return (
     <div className={cx('container')}>
       <Title label="구독한 전략" />
-      <Suspense fallback={<div>Loading...</div>}>
-        <FavoriteStrategyList />
-      </Suspense>
+      <FavoriteStrategyList />
     </div>
   )
 }

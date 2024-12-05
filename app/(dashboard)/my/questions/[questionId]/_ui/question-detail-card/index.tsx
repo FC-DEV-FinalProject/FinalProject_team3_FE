@@ -1,5 +1,7 @@
 'use client'
 
+import React from 'react'
+
 import classNames from 'classnames/bind'
 
 import { QuestionStatusType } from '@/shared/types/questions'
@@ -58,7 +60,14 @@ const QuestionDetailCard = ({
           )}
         </div>
       </div>
-      <div className={cx('card-contents')}>{contents}</div>
+      <div className={cx('card-contents')}>
+        {contents.split('\n').map((line, idx) => (
+          <React.Fragment key={line + idx}>
+            {line}
+            <br />
+          </React.Fragment>
+        ))}
+      </div>
     </div>
   )
 }

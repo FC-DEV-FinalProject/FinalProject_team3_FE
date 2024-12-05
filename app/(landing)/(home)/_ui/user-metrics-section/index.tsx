@@ -15,7 +15,7 @@ const UserMetricsSection = () => {
   const { data: metrics, isLoading } = useGetUserMetrics()
 
   if (isLoading) {
-    return <Spinner />
+    return <Spinner className={cx('spinner')} />
   }
 
   if (!metrics) {

@@ -38,7 +38,7 @@ const SubscribeCheckModal = ({ isModalOpen, isSubscribing, onCloseModal, onChang
             구독한 전략은 나의 관심전략 <br />
             페이지에서 확인 가능합니다.
           </span>
-          <Button onClick={onCloseModal}>닫기</Button>
+          <Button onClick={onChange}>닫기</Button>
         </>
       )}
     </Modal>

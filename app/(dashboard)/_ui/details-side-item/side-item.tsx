@@ -1,7 +1,10 @@
-import { useRef, useState } from 'react'
+'use client'
+
+import { usePathname, useRouter } from 'next/navigation'
 
 import classNames from 'classnames/bind'
 
+import { PATH } from '@/shared/constants/path'
 import useModal from '@/shared/hooks/custom/use-modal'
 import { useAuthStore } from '@/shared/stores/use-auth-store'
 import Avatar from '@/shared/ui/avatar'
@@ -11,7 +14,6 @@ import QuestionGuideModal from '@/shared/ui/modal/question-guide-modal'
 import { formatNumber } from '@/shared/utils/format'
 
 import { TitleType } from '.'
-import usePostQuestion from '../../strategies/[strategyId]/_hooks/query/use-post-question'
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
@@ -33,7 +35,6 @@ const SideItem = ({
   isMyStrategy = false,
   strategyName,
 }: Props) => {
-  const [isEmpty, setIsEmpty] = useState(false)
   const {
     isModalOpen: isAddQuestionModalOpen,
     openModal: questionOpenModal,
@@ -45,33 +46,13 @@ const SideItem = ({
     closeModal: guideCloseModal,
   } = useModal()
   const user = useAuthStore((state) => state.user)
-  const titleRef = useRef<HTMLInputElement | null>(null)
-  const contentRef = useRef<HTMLTextAreaElement | null>(null)
-  const { mutate } = usePostQuestion()
+  const router = useRouter()
+  const path = usePathname()
 
-  const handleAddQuestion = () => {
-    if (titleRef.current && contentRef.current) {
-      const title = titleRef.current.value.trim()
-      const content = contentRef.current.value.trim()
-      if (title !== '' && content !== '') {
-        const question = {
-          strategyId,
-          title: titleRef.current.value,
-          content: contentRef.current.value,
-        }
-        mutate(question, {
-          onSuccess: (result) => {
-            if (result?.isSuccess) {
-              questionCloseModal()
-              guideOpenModal()
-            }
-          },
-        })
-      } else {
-        setIsEmpty(true)
-      }
-    }
+  const handleRouter = () => {
+    router.push(`${PATH.MY_STRATEGIES}/manage/${strategyId}`)
   }
+
   const isTrader = user?.role.includes('TRADER')
 
   return (
@@ -89,6 +70,11 @@ const SideItem = ({
                 문의하기
               </Button>
             )}
+            {isMyStrategy && !path.includes('my') && (
+              <Button onClick={handleRouter} size="small" style={{ height: '30px' }}>
+                내 전략 관리하기
+              </Button>
+            )}
           </>
         ) : (
           <p>{formatNumber(data)}</p>
@@ -96,13 +82,11 @@ const SideItem = ({
       </div>
       {strategyName && (
         <AddQuestionModal
+          strategyId={strategyId}
           strategyName={strategyName}
           isModalOpen={isAddQuestionModalOpen}
-          titleRef={titleRef}
-          contentRef={contentRef}
           onCloseModal={questionCloseModal}
-          onChange={handleAddQuestion}
-          isEmpty={isEmpty}
+          guideOpenModal={guideOpenModal}
         />
       )}
       <QuestionGuideModal isModalOpen={isQuestionGuideModalOpen} onCloseModal={guideCloseModal} />

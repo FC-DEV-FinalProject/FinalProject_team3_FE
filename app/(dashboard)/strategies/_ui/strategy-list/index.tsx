@@ -2,7 +2,6 @@
 
 import { useEffect } from 'react'
 
-import ListHeader from '@/app/(dashboard)/_ui/list-header'
 import StrategiesItem from '@/app/(dashboard)/_ui/strategies-item'
 import classNames from 'classnames/bind'
 
@@ -38,7 +37,6 @@ const StrategyList = () => {
 
   return (
     <>
-      <ListHeader />
       {strategiesData?.map((strategy) => (
         <StrategiesItem key={strategy.strategyId} strategiesData={strategy} />
       ))}

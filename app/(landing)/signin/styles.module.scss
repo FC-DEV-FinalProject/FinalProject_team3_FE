@@ -73,6 +73,10 @@
     gap: 8px;
     color: $color-gray-600;
     @include typo-c1;
+
+    button {
+      background-color: transparent;
+    }
   }
 }
 

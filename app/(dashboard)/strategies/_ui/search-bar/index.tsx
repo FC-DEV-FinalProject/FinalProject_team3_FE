@@ -41,6 +41,12 @@ const SearchBarContainer = () => {
     }
   }
 
+  const handleEnterSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      onSearch()
+    }
+  }
+
   const onReset = async () => {
     await resetState()
     if (searchRef.current) {
@@ -84,6 +90,7 @@ const SearchBarContainer = () => {
           ref={searchRef}
           placeholder="전략명을 검색하세요."
           onChange={handleSearchWord}
+          onKeyDown={(e) => handleEnterSearch(e)}
           onSearchIconClick={onSearch}
         />
       </div>

@@ -1,0 +1,45 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.explanation {
+  color: $color-gray-800;
+  @include typo-c1;
+  text-align: center;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--gray-700);
+  }
+}
+
+.error {
+  color: $color-orange-700;
+  font-size: 0.8rem;
+}
+
+.success {
+  color: $color-indigo;
+  font-size: 0.8rem;
+}
+
+.buttons {
+  display: flex;
+  gap: 36px;
+  margin-top: 1rem;
+  justify-content: center;
+
+  button {
+    flex: 0.2;
+  }
+}

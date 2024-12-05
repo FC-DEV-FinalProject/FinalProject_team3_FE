@@ -1,7 +1,8 @@
 'use client'
 
-import React from 'react'
+import { useEffect, useRef, useState } from 'react'
 
+import usePostQuestion from '@/app/(dashboard)/strategies/[strategyId]/_hooks/query/use-post-question'
 import { RegisterIcon } from '@/public/icons'
 import classNames from 'classnames/bind'
 
@@ -16,27 +17,63 @@ const cx = classNames.bind(styles)
 
 interface Props {
   isModalOpen: boolean
-  isEmpty: boolean
   strategyName: string
   title?: string
   content?: string
-  titleRef?: React.RefObject<HTMLInputElement>
-  contentRef?: React.RefObject<HTMLTextAreaElement>
+  strategyId: number
   onCloseModal: () => void
-  onChange?: () => void
+  guideOpenModal?: () => void
 }
 
 const AddQuestionModal = ({
   isModalOpen,
-  isEmpty = false,
   strategyName,
   title,
   content,
-  titleRef,
-  contentRef,
+  strategyId,
   onCloseModal,
-  onChange,
+  guideOpenModal,
 }: Props) => {
+  const [isEmpty, setIsEmpty] = useState(false)
+  const titleRef = useRef<HTMLInputElement>(null)
+  const contentRef = useRef<HTMLTextAreaElement>(null)
+
+  const { mutate } = usePostQuestion()
+
+  const handleAddQuestion = () => {
+    if (titleRef.current && contentRef.current) {
+      const title = titleRef.current.value.trim()
+      const content = contentRef.current.value.trimEnd()
+      if (title !== '' && content !== '') {
+        const question = {
+          strategyId,
+          title: titleRef.current.value,
+          content: contentRef.current.value,
+        }
+        mutate(question, {
+          onSuccess: (result) => {
+            if (result?.isSuccess) {
+              onCloseModal()
+              if (guideOpenModal) {
+                guideOpenModal()
+              }
+            }
+          },
+        })
+      } else {
+        setIsEmpty(true)
+      }
+    }
+  }
+
+  /* eslint-disable react-hooks/exhaustive-deps */
+  useEffect(() => {
+    if (isModalOpen && titleRef?.current && contentRef?.current) {
+      titleRef.current.value = title || ''
+      contentRef.current.value = content ? `\n\n----- 이전 문의내역 -----\n${content}` : ''
+    }
+  }, [isModalOpen])
+
   return (
     <Modal
       isOpen={isModalOpen}
@@ -48,27 +85,17 @@ const AddQuestionModal = ({
       <div className={cx('question-title')}>
         <p>제목</p>
         <div>
-          <Input
-            ref={titleRef}
-            value={title && title}
-            inputSize="full"
-            placeholder="제목을 입력하세요"
-          />
+          <Input ref={titleRef} inputSize="full" placeholder="제목을 입력하세요" />
         </div>
       </div>
       <div className={cx('question-content')}>
         <p>내용</p>
-        <Textarea
-          ref={contentRef}
-          value={content && content}
-          placeholder="내용을 입력하세요."
-          className={cx('content')}
-        />
+        <Textarea ref={contentRef} placeholder="내용을 입력하세요." className={cx('content')} />
       </div>
       {isEmpty && <ErrorMessage errorMessage="제목 또는 내용을 모두 입력해주세요." />}
       <div className={cx('two-button', 'question')}>
         <Button onClick={onCloseModal}>취소</Button>
-        <Button onClick={onChange} variant="filled" className={cx('button')}>
+        <Button onClick={handleAddQuestion} variant="filled" className={cx('button')}>
           문의
         </Button>
       </div>

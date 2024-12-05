@@ -3,7 +3,6 @@
 import { useCallback, useState } from 'react'
 
 import dynamic from 'next/dynamic'
-import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 import { AxiosError } from 'axios'
@@ -11,12 +10,15 @@ import classNames from 'classnames/bind'
 
 import { ERROR_MESSAGES } from '@/shared/constants/error-messages'
 import { PATH } from '@/shared/constants/path'
+import useModal from '@/shared/hooks/custom/use-modal'
 import { useLoginMutation } from '@/shared/hooks/query/auth-queries'
 import { useAuthStore } from '@/shared/stores/use-auth-store'
 import type { LoginFormDataModel } from '@/shared/types/auth'
 import { Button } from '@/shared/ui/button'
 import Checkbox from '@/shared/ui/check-box'
 import { Input } from '@/shared/ui/input'
+import FindEmailModal from '@/shared/ui/modal/find-email-modal'
+import FindPasswordModal from '@/shared/ui/modal/find-password-modal'
 import { validate } from '@/shared/utils/validation'
 
 import styles from './styles.module.scss'
@@ -30,6 +32,17 @@ const SignInPage = () => {
   const setKeepLoggedIn = useAuthStore((state) => state.setKeepLoggedIn)
   const isKeepLoggedIn = useAuthStore((state) => state.isKeepLoggedIn)
 
+  const {
+    isModalOpen: isFindEmailOpen,
+    openModal: handleFindEmailOpen,
+    closeModal: handleFindEmailClose,
+  } = useModal()
+  const {
+    isModalOpen: isFindPasswordOpen,
+    openModal: handleFindPasswordOpen,
+    closeModal: handleFindPasswordClose,
+  } = useModal()
+
   const [formData, setFormData] = useState<LoginFormDataModel>({
     email: '',
     password: '',
@@ -37,7 +50,12 @@ const SignInPage = () => {
   const [errors, setErrors] = useState<string | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const validateForm = () => {
+  const validateForm = (e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault()
+      e.stopPropagation()
+    }
+
     const emailError = validate('EMAIL', formData.email)
     if (emailError) {
       setErrors(emailError)
@@ -55,13 +73,10 @@ const SignInPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (!validateForm()) return
+
     setIsSubmitting(true)
     setErrors(null)
-
-    if (!validateForm()) {
-      setIsSubmitting(false)
-      return
-    }
 
     try {
       const response = await loginMutation.mutateAsync(formData)
@@ -111,6 +126,12 @@ const SignInPage = () => {
     },
     [setKeepLoggedIn]
   )
+
+  const handleFindButtonClick = (e: React.MouseEvent, handler: () => void) => {
+    e.preventDefault()
+    e.stopPropagation()
+    handler()
+  }
 
   const isFormDisabled = isSubmitting || loginMutation.isPending
 
@@ -171,9 +192,21 @@ const SignInPage = () => {
               />
             </label>
             <div className={cx('find-buttons')}>
-              <Link href={'/'}>아이디 찾기</Link>
+              <button
+                onClick={(e) => handleFindButtonClick(e, handleFindEmailOpen)}
+                className={cx('find-button')}
+                type="button"
+              >
+                아이디 찾기
+              </button>
               <span className={cx('divider')}>|</span>
-              <Link href={'/'}>비밀번호 찾기</Link>
+              <button
+                onClick={(e) => handleFindButtonClick(e, handleFindPasswordOpen)}
+                className={cx('find-button')}
+                type="button"
+              >
+                비밀번호 찾기
+              </button>
             </div>
           </div>
           <Button type="submit" size="large" variant="filled" disabled={isFormDisabled}>
@@ -189,6 +222,9 @@ const SignInPage = () => {
           </Button>
         </form>
       </div>
+
+      <FindEmailModal isOpen={isFindEmailOpen} onClose={handleFindEmailClose} />
+      <FindPasswordModal isOpen={isFindPasswordOpen} onClose={handleFindPasswordClose} />
     </div>
   )
 }

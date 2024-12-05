@@ -2,6 +2,8 @@
 
 import { Suspense, useState } from 'react'
 
+import { useRouter, useSearchParams } from 'next/navigation'
+
 import { QuestionSearchConditionType } from '@/shared/types/questions'
 import Tabs from '@/shared/ui/tabs'
 
@@ -15,7 +17,17 @@ interface Props {
 }
 
 const QuestionsTab = ({ searchOptions }: Props) => {
+  const router = useRouter()
+  const searchParams = useSearchParams()
   const [activeTab, setActiveTab] = useState('all')
+
+  const handleTabChange = (tabId: string) => {
+    setActiveTab(tabId)
+
+    const params = new URLSearchParams(searchParams)
+    params.set('page', '1')
+    router.push(`?${params.toString()}`)
+  }
 
   const TABS = [
     {
@@ -65,7 +77,7 @@ const QuestionsTab = ({ searchOptions }: Props) => {
     },
   ]
 
-  return <Tabs activeTab={activeTab} onTabChange={setActiveTab} tabs={TABS} />
+  return <Tabs activeTab={activeTab} onTabChange={handleTabChange} tabs={TABS} />
 }
 
 export default QuestionsTab

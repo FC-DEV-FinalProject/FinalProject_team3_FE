@@ -11,7 +11,6 @@ import { isAuthRequiredPath } from '@/shared/utils/auth-path'
 import { getTimeUntilExpiry } from '@/shared/utils/token-utils'
 
 export const useAuth = () => {
-  const { user } = useAuthStore()
   const { mutate: logout } = useLogoutMutation()
   const pathname = usePathname()
 

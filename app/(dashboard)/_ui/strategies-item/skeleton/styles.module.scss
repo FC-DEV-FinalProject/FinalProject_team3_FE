@@ -1,0 +1,48 @@
+.container {
+  @include skeleton;
+  margin-bottom: 24px;
+  display: grid;
+  grid-template-columns: 1.5fr 1.2fr 0.8fr repeat(2, 0.6fr) 0.4fr;
+  height: 158px;
+  width: 100%;
+  align-items: center;
+  grid-gap: 4px;
+  div {
+    width: 100%;
+  }
+  .first {
+    background-color: $color-gray-200;
+    justify-content: flex-start;
+    padding-left: 20px;
+    & * {
+      height: 18px;
+      margin-bottom: 10px;
+    }
+    :first-child {
+      width: 50px;
+    }
+    :nth-child(2) {
+      width: 250px;
+    }
+    :nth-child(3),
+    :nth-child(4) {
+      width: 120px;
+    }
+  }
+  .second {
+    background-color: $color-gray-200;
+    place-items: center center;
+    :first-child {
+      width: 140px;
+      height: 115px;
+    }
+  }
+  .last {
+    background-color: $color-gray-200;
+    place-items: center center;
+    :first-child {
+      width: 100px;
+      height: 18px;
+    }
+  }
+}

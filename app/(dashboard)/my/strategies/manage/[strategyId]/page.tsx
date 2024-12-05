@@ -21,13 +21,15 @@ const cx = classNames.bind(styles)
 
 export type InformationType = { title: TitleType; data: string | number } | InformationModel[]
 
-const StrategyManagePage = ({ params }: { params: { strategyId: number } }) => {
+const StrategyManagePage = ({ params }: { params: { strategyId: string } }) => {
+  const strategyNumber = parseInt(params.strategyId)
   const { data: detailsInfoData } = useGetDetailsInformationData({
-    strategyId: params.strategyId,
+    strategyId: strategyNumber,
   })
   const { data: subscribeData } = useGetDetailsInformationData({
-    strategyId: params.strategyId,
+    strategyId: strategyNumber,
   })
+
   const { detailsSideData, detailsInformationData } = detailsInfoData || {}
   const { detailsInformationData: subscribeInfo } = subscribeData || {}
   const hasDetailsSideData = detailsSideData?.map((data) => {
@@ -47,11 +49,11 @@ const StrategyManagePage = ({ params }: { params: { strategyId: number } }) => {
         {detailsInformationData && (
           <DetailsInformation
             information={detailsInformationData}
-            strategyId={params.strategyId}
+            strategyId={strategyNumber}
             type="my"
           />
         )}
-        <AnalysisContainer type="my" strategyId={params.strategyId} />
+        <AnalysisContainer type="my" strategyId={strategyNumber} />
         <SideContainer hasButton={true}>
           {subscribeInfo && (
             <SubscriberItem subscribers={subscribeInfo?.subscriptionCount} isMyStrategy={true} />
@@ -59,7 +61,7 @@ const StrategyManagePage = ({ params }: { params: { strategyId: number } }) => {
           {hasDetailsSideData?.[0] &&
             detailsSideData?.map((data, idx) => (
               <div key={`${data}_${idx}`}>
-                <DetailsSideItem information={data} strategyId={params.strategyId} />
+                <DetailsSideItem information={data} strategyId={strategyNumber} />
               </div>
             ))}
         </SideContainer>
@@ -67,4 +69,5 @@ const StrategyManagePage = ({ params }: { params: { strategyId: number } }) => {
     </div>
   )
 }
+
 export default StrategyManagePage
