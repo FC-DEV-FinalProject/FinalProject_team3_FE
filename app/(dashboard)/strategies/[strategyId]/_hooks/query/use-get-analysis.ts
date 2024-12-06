@@ -5,7 +5,7 @@ import getAnalysis from '../../_api/get-analysis'
 
 const useGetAnalysis = (strategyId: number, type: AnalysisTabType, page: number, size: number) => {
   return useQuery({
-    queryKey: ['analysis', strategyId, type],
+    queryKey: ['analysis', strategyId, type, page],
     queryFn: () => getAnalysis(strategyId, type, page, size),
   })
 }

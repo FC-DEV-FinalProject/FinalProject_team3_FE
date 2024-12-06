@@ -91,9 +91,10 @@
 .no-data {
   display: flex;
   justify-content: center;
-  margin: 60px 0 40px;
+  margin-top: 80px;
   color: $color-gray-600;
-  @include typo-b2;
+  height: 200px;
+  @include typo-b1;
 }
 
 .button-container {

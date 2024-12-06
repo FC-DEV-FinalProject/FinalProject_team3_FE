@@ -1,0 +1,20 @@
+.title {
+  margin: $header-height 0 26px 12.6px;
+}
+
+.container {
+  position: relative;
+  padding: 35px 30px;
+  border-radius: 8px;
+  margin-bottom: 42px;
+  background-color: $color-white;
+}
+
+.header {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+.color-primary-500 {
+  color: $color-orange-500;
+}

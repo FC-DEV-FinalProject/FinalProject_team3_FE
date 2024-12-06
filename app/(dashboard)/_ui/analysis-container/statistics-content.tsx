@@ -18,15 +18,17 @@ interface Props {
 }
 
 const StatisticsContent = ({ statisticsData }: Props) => {
-  if (statisticsData === null || statisticsData === undefined) return null
-
-  const statisticsDataToArray = Object.entries(statisticsData)
-
   return (
     <div className={cx('table-wrapper')}>
-      {statisticsDataToArray.map(([title, data]) => (
-        <StatisticsTable key={title} title={title} statisticsData={data} />
-      ))}
+      {statisticsData ? (
+        Object.entries(statisticsData).map(([title, data]) => (
+          <StatisticsTable key={title} title={title} statisticsData={data} />
+        ))
+      ) : (
+        <div className={cx('no-data')}>
+          <p>업데이트 된 통계 데이터가 없습니다.</p>
+        </div>
+      )}
     </div>
   )
 }

@@ -36,8 +36,6 @@ const AdminUsersPage = () => {
 
   if (isLoading || !data) return null
 
-  console.log('data', data)
-
   return (
     <>
       <Title label="회원 관리" className={cx('title')} />
@@ -72,11 +70,11 @@ const AdminUsersPage = () => {
         />
         <VerticalTable
           tableHead={['No.', '프로필', '이름', '닉네임', '이메일', '전화번호', '회원분류', '탈퇴']}
-          tableBody={data?.content ? setTableBody(data.content) : []}
+          tableBody={setTableBody(data?.content)}
           countPerPage={10}
           currentPage={1}
         />
-        <Pagination currentPage={1} maxPage={data?.totalPages} onPageChange={() => {}} />
+        <Pagination currentPage={data?.page} maxPage={data?.totalPages} onPageChange={() => {}} />
       </section>
     </>
   )

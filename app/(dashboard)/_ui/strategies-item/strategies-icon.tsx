@@ -13,11 +13,6 @@ import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
 
-interface ImageSizeModel {
-  width: number
-  height: number
-}
-
 interface Props {
   iconUrls?: string[]
   iconNames?: string[]
@@ -25,7 +20,7 @@ interface Props {
 }
 
 const StrategiesIcon = ({ iconUrls, iconNames, isDetailsPage = false }: Props) => {
-  const [imageSizes, setImageSizes] = useState<{ [key: string]: ImageSizeModel }>({})
+  const [imageSizes, setImageSizes] = useState<{ [key: string]: number }>({})
   const [validImages, setValidImages] = useState<{ [key: string]: boolean }>({})
 
   useEffect(() => {
@@ -33,8 +28,8 @@ const StrategiesIcon = ({ iconUrls, iconNames, isDetailsPage = false }: Props) =
     iconUrls?.forEach((url) => {
       const image = new window.Image()
       image.src = url
-      image.onload = () => updateImageSize(url, image.width, image.height)
-      image.onerror = () => updateImageSize(url, 20, 20)
+      image.onload = () => updateImageSize(url, image.width)
+      image.onerror = () => updateImageSize(url, 22)
       images.push(image)
     })
 
@@ -46,14 +41,14 @@ const StrategiesIcon = ({ iconUrls, iconNames, isDetailsPage = false }: Props) =
     }
   }, [iconUrls])
 
-  const updateImageSize = (url: string, width: number, height: number) => {
+  const updateImageSize = (url: string, width: number) => {
     setImageSizes((prev) => ({
       ...prev,
-      [url]: { width, height },
+      [url]: width,
     }))
   }
 
-  const getImageSize = (url: string) => imageSizes[url] || { width: 20, height: 20 }
+  const getImageSize = (url: string) => imageSizes[url] || 22
 
   const handleImageErr = (url: string) => {
     setValidImages((prev) => ({ ...prev, [url]: false }))
@@ -71,16 +66,13 @@ const StrategiesIcon = ({ iconUrls, iconNames, isDetailsPage = false }: Props) =
       {iconUrls?.map((url, idx) => {
         const name = iconNames?.[idx]
         if (!url || !name || validImages[url] === false) return null
-        const { width, height } = getImageSize(url)
+        const width = getImageSize(url)
 
         return (
           <div key={url} className={cx('icon-wrapper')}>
             <div
               className={cx('icon')}
-              style={{
-                width: `${width}px`,
-                height: `${height}px`,
-              }}
+              style={{ width: `${width / 2}px` }}
               data-tooltip-id={name}
               data-tooltip-content={name}
               data-tooltip-class-name="tooltip"

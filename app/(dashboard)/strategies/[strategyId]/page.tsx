@@ -15,7 +15,7 @@ import SideSkeleton from '../../_ui/details-side-item/side-skeleton'
 import useGetSubscribe from '../_hooks/query/use-get-subscribe'
 import SideContainer from '../_ui/side-container'
 import useGetDetailsInformationData from './_hooks/query/use-get-details-information-data'
-import DetailsLoading from './loading'
+import DetailsLoading from './_ui/details-skeleton'
 
 const DetailsInformation = React.lazy(() => import('../../_ui/details-information'))
 const AnalysisContainer = React.lazy(() => import('@/app/(dashboard)/_ui/analysis-container'))
@@ -23,7 +23,7 @@ const ReviewContainer = React.lazy(() => import('./_ui/review-container'))
 const SubscriberItem = React.lazy(() => import('@/app/(dashboard)/_ui/subscriber-item'))
 const DetailsSideItem = React.lazy(() => import('../../_ui/details-side-item'))
 
-const DynamicSkeleton = dynamic(() => import('./loading'), {
+const DynamicSkeleton = dynamic(() => import('./_ui/details-skeleton'), {
   loading: () => <DetailsLoading />,
   ssr: false,
 })

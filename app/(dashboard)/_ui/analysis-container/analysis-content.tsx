@@ -110,11 +110,9 @@ const AnalysisContent = ({
     }
   }
 
-  if (analysisData?.content === null || analysisData?.content === undefined) return null
-
   return (
     <div className={cx('table-wrapper', 'analysis')}>
-      {!isEditable && (
+      {!isEditable && analysisData && (
         <Button
           onClick={handleDownload}
           size="small"
@@ -149,19 +147,26 @@ const AnalysisContent = ({
           </Button>
         </div>
       )}
-
-      <VerticalTable
-        tableHead={tableHeader}
-        tableBody={analysisData?.content}
-        currentPage={currentPage}
-        countPerPage={ANALYSIS_PAGE_COUNT}
-        isEditable={isEditable}
-      />
-      <Pagination
-        currentPage={currentPage}
-        maxPage={analysisData?.totalPages}
-        onPageChange={onPageChange}
-      />
+      {analysisData ? (
+        <>
+          <VerticalTable
+            tableHead={tableHeader}
+            tableBody={analysisData.content}
+            currentPage={1}
+            countPerPage={ANALYSIS_PAGE_COUNT}
+            isEditable={isEditable}
+          />
+          <Pagination
+            currentPage={currentPage}
+            maxPage={analysisData.totalPages}
+            onPageChange={onPageChange}
+          />
+        </>
+      ) : (
+        <div className={cx('no-data')}>
+          <p>업데이트 된 분석 데이터가 없습니다.</p>
+        </div>
+      )}
 
       {uploadType && (
         <AnalysisUploadModal
