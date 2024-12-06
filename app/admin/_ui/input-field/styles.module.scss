@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.label {
+  @include typo-b1;
+}
+
+.input {
+  color: $color-gray-800;
+  width: 640px;
+}

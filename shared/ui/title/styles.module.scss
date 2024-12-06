@@ -1,0 +1,16 @@
+.container {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 18.5px;
+}
+
+.title {
+  @include typo-h4;
+  color: $color-gray-700;
+}
+
+.sub-title {
+  @include typo-c1;
+  color: $color-gray-500;
+}

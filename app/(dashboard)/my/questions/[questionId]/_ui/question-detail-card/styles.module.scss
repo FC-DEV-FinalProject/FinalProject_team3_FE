@@ -1,0 +1,55 @@
+@import '../../../_ui/question-card/card-mixins.scss';
+
+.card-container {
+  @include card-base;
+  width: 100%;
+  padding: 35px 40px;
+}
+
+.top-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .strategy-name {
+    @include card-subtitle;
+  }
+}
+
+.title {
+  @include card-title;
+  margin-bottom: 18px;
+
+  &.answer {
+    @include typo-b1;
+  }
+}
+
+.bottom-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid $color-gray-300;
+
+  .delete-button {
+    @include typo-c1;
+    background-color: transparent;
+  }
+}
+
+.avatar-wrapper {
+  @include avatar-group;
+
+  .created-at {
+    margin-left: -8px;
+    color: $color-gray-400;
+  }
+}
+
+.card-contents {
+  color: $color-gray-600;
+  @include typo-b3;
+  line-height: 140%;
+}

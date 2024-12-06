@@ -1,0 +1,10 @@
+.pagination {
+  margin-bottom: 24px;
+}
+
+.no-strategy {
+  margin-top: 180px;
+  text-align: center;
+  @include typo-b1;
+  color: $color-gray-600;
+}

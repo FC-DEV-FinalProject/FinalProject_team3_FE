@@ -1,0 +1,99 @@
+.form-container {
+  width: 912px;
+  margin: 100px auto 0;
+
+  .button {
+    height: 48px;
+    @include typo-b3;
+  }
+
+  .input {
+    border: 1px solid $color-gray-300;
+    border-radius: 4px;
+  }
+
+  .input-group,
+  .select-group {
+    display: flex;
+    margin-bottom: 32px;
+
+    label {
+      width: 160px;
+      height: 48px;
+      line-height: 48px;
+      @include typo-b1;
+      color: $color-gray-800;
+    }
+
+    small {
+      display: block;
+      margin-top: 8px;
+      @include typo-c1;
+      color: $color-gray-600;
+
+      &.nickname-verified {
+        margin-top: 0;
+        @include typo-b3;
+        color: $color-indigo;
+      }
+    }
+
+    .wrapper {
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+
+      &.verification {
+        margin-top: 8px;
+      }
+    }
+
+    .symbol {
+      margin: 0 -12px;
+      color: $color-gray-400;
+    }
+  }
+
+  .select-group {
+    flex-direction: column;
+
+    .select-wrapper {
+      display: flex;
+      gap: 12px;
+      margin-left: 160px;
+      margin-top: -50px;
+    }
+
+    .select-error {
+      margin-left: 160px;
+      margin-top: 8px;
+    }
+  }
+
+  .terms-wrapper {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      @include typo-b1;
+      color: $color-gray-800;
+    }
+
+    .checkbox-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 60px;
+      margin: 24px 0 110px;
+      border-radius: 6px;
+      background-color: $color-white;
+    }
+  }
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  margin-bottom: 70px;
+}

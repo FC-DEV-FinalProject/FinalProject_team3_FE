@@ -1,0 +1,13 @@
+.section-container {
+  margin: 0 100px 80px;
+
+  @include mobile {
+    margin: 0 0 80px;
+  }
+
+  h3 {
+    margin: 16px 0;
+    @include typo-h4;
+    font-weight: $text-bold;
+  }
+}

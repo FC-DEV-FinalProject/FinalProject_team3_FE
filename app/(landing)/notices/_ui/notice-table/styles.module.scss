@@ -1,0 +1,50 @@
+.table-wrapper {
+  padding: 40px 0;
+  margin-bottom: 80px;
+  border-radius: 8px;
+  background-color: $color-white;
+}
+
+.table {
+  min-height: 450px;
+  color: $color-gray-600;
+
+  table {
+    thead td {
+      height: 40px;
+    }
+
+    td {
+      height: 60px;
+      @include typo-b3;
+
+      &:nth-child(1) {
+        width: 10%;
+        text-align: center;
+      }
+
+      &:nth-child(2) {
+        width: 80%;
+        padding-left: 40px;
+
+        @include mobile {
+          padding-left: 0;
+        }
+      }
+
+      &:nth-child(3) {
+        width: 10%;
+      }
+    }
+  }
+}
+
+.count {
+  padding-left: 20px;
+  margin-bottom: 20px;
+  @include typo-b3;
+
+  .highlight {
+    color: $color-orange-500;
+  }
+}

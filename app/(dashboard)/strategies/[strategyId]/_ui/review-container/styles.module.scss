@@ -1,0 +1,116 @@
+.container {
+  width: 100%;
+  padding: 25px;
+  margin: 20px 0;
+  background-color: $color-white;
+  border-radius: 5px;
+  .title-wrapper {
+    display: flex;
+    align-items: end;
+    .review-title {
+      @include typo-h4;
+      color: $color-gray-600;
+      margin-right: 4px;
+    }
+  }
+  .no-review {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color: $color-gray-600;
+    margin: 40px 0;
+    @include typo-b2;
+  }
+}
+
+.add-review-wrapper {
+  width: 100%;
+  height: 107px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin: 30px 0 40px;
+  .textarea-wrapper {
+    width: 100%;
+    height: 100%;
+  }
+  .add-button-wrapper {
+    width: 120px;
+    & p {
+      font-size: $text-c1;
+      font-weight: $text-semibold;
+      color: $color-gray-600;
+      margin-left: 4px;
+    }
+    .review-button {
+      margin: 20px 0 0 4px;
+    }
+    &.edit {
+      padding: 20px 0;
+    }
+  }
+  &.edit {
+    margin: 10px 0;
+  }
+}
+
+.review-list {
+  margin-bottom: 40px;
+}
+
+.review-item {
+  width: 100%;
+  margin-bottom: 5px;
+  border-bottom: 1px solid $color-gray-400;
+  .information-wrapper {
+    display: flex;
+    justify-content: space-between;
+    .reviewer {
+      display: flex;
+      align-items: center;
+      p {
+        @include typo-b2;
+        margin: 0 10px 0 5px;
+      }
+      span {
+        color: $color-gray-500;
+        font-weight: $text-normal;
+        margin-right: 5px;
+      }
+    }
+  }
+  .content {
+    margin: 10px 0;
+    font-size: 18px;
+    font-weight: $text-medium;
+  }
+}
+
+.button-wrapper {
+  button {
+    font-weight: $text-bold;
+    font-size: $text-c1;
+    color: $color-gray-500;
+    background-color: transparent;
+    margin-left: 20px;
+  }
+  &.edit {
+    margin-top: 20px;
+    padding-left: 10px;
+  }
+}
+
+.message {
+  @include typo-b1;
+  text-align: center;
+  color: $color-gray-800;
+  margin-bottom: 30px;
+}
+
+.two-button {
+  display: flex;
+  gap: 10px;
+  & .button {
+    width: 90px;
+  }
+}

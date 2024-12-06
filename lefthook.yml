@@ -1,0 +1,16 @@
+pre-commit:
+  parallel: true
+  commands:
+    eslint:
+      glob: '*.{js,ts,jsx,tsx}'
+      run: npx eslint {staged_files} --fix
+    prettier:
+      glob: '*.{js,ts,jsx,tsx,json,yaml,md}'
+      run: npm run prettier {staged_files}
+    type-check:
+      run: npm run type-check
+
+pre-push:
+  commands:
+    audit-check:
+      skip: true

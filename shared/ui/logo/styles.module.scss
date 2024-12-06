@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  & > svg:first-child {
+    width: 62px;
+    flex-shrink: 0;
+  }
+}
+
+.text {
+  width: 142px;
+  color: $color-gray-800;
+  line-height: normal;
+}

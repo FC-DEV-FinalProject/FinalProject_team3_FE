@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  justify-content: center;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+}
+
+.text-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.number {
+  color: $color-orange-500;
+  font-size: 120px;
+  margin-bottom: 50px;
+  font-weight: bold;
+}
+
+.text {
+  color: $color-gray-800;
+  margin-bottom: 120px;
+  @include typo-b1;
+}
+
+.img-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 508px;
+  height: 338px;
+}

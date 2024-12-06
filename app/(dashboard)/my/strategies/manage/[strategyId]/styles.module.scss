@@ -1,0 +1,20 @@
+.container {
+  position: relative;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+
+  .edit-button {
+    width: $strategy-sidebar-width;
+    height: 40px;
+  }
+}
+
+.strategy-container {
+  width: calc(100% - $strategy-sidebar-width);
+  max-width: $max-width;
+  padding-right: 10px;
+  margin-top: -10px;
+}

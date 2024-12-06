@@ -1,0 +1,9 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  height: 100vh;
+  @include typo-b1;
+  color: $color-gray-700;
+}

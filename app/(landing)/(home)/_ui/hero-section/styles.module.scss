@@ -1,0 +1,27 @@
+.section {
+  text-align: center;
+}
+
+.title {
+  @include typo-h1;
+  padding-top: 100px;
+  color: $color-gray-800;
+}
+
+.logo {
+  display: inline-block;
+  width: 65px;
+  height: auto;
+
+  @include tablet-md {
+    width: 42px;
+  }
+
+  @include mobile {
+    width: 34px;
+  }
+}
+
+.button {
+  margin-top: 77px;
+}

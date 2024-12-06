@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  padding: 0;
+  color: $color-yellow;
+  .click-star {
+    margin: -1px;
+    background-color: transparent;
+    color: #e3e3e3;
+    &.onColor {
+      color: $color-yellow;
+    }
+  }
+}

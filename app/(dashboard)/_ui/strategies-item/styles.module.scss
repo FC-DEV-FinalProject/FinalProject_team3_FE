@@ -1,0 +1,118 @@
+.container {
+  margin-bottom: 24px;
+  display: grid;
+  grid-template-columns: 1.5fr 1.2fr 0.8fr repeat(2, 0.6fr) 0.4fr;
+  height: 158px;
+  width: 100%;
+  align-items: center;
+  background-color: $color-white;
+  grid-gap: 4px;
+  &.my {
+    grid-template-columns: 2.5fr 2.4fr 1.5fr 1.1fr 1.3fr 1fr 1fr;
+  }
+  .mdd,
+  .sm-score,
+  .profit,
+  .subscribe,
+  .public,
+  .manage-buttons {
+    place-items: center center;
+  }
+  .manage-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    .manage-button {
+      width: 74px;
+      height: 30px;
+      padding: 7px 16px;
+    }
+  }
+  .mdd,
+  .sm-score {
+    @include typo-b2;
+  }
+  .profit {
+    & span {
+      @include typo-c1;
+    }
+    p {
+      @include typo-b2;
+      color: $color-orange-500;
+    }
+  }
+}
+
+.summary {
+  padding-left: 30px;
+  overflow: hidden;
+  :not(:first-child) {
+    margin: 4px 0;
+  }
+  .title {
+    @include typo-h4;
+    @include ellipsis(1);
+    display: flex;
+    justify-content: flex-start;
+  }
+  .trader-profile {
+    display: flex;
+    align-items: center;
+    & p {
+      margin-left: 10px;
+      @include typo-b2;
+    }
+  }
+  .total-subscribe-star {
+    display: flex;
+    align-items: center;
+    height: 20px;
+    gap: 6px;
+    padding-top: 10px;
+    & p {
+      @include typo-c1;
+    }
+  }
+}
+
+.subscribe-icon {
+  button {
+    background: transparent;
+    svg {
+      width: 36px;
+    }
+  }
+}
+
+.chart {
+  width: 100%;
+  overflow: hidden;
+}
+
+.icon-container {
+  display: flex;
+  align-items: center;
+  column-gap: 4px;
+  .icon-wrapper {
+    .icon {
+      position: relative;
+      height: 21px;
+    }
+    .tooltip {
+      background-color: $color-gray-700;
+      border-radius: 20px;
+      padding: 8px 20px 6px;
+      @include typo-c1;
+      .arrow {
+        width: 14px;
+        height: 14px;
+        z-index: zIndex(hidden);
+      }
+    }
+  }
+  &.details {
+    flex-wrap: wrap;
+    max-height: 50px;
+    row-gap: 1px;
+  }
+}

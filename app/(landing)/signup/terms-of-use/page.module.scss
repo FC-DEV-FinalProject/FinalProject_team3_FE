@@ -1,0 +1,21 @@
+.container {
+  max-width: 940px;
+  margin: 0 auto;
+}
+
+.all-check-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 0;
+  margin: 48px 0 32px;
+  border-radius: 6px;
+  background-color: $color-white;
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  margin-bottom: 70px;
+}

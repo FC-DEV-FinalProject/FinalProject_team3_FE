@@ -1,0 +1,12 @@
+.label-container {
+  padding: 7px 16px;
+  border: 1px solid $color-indigo;
+  border-radius: 4px;
+  color: $color-indigo;
+  @include typo-c1;
+
+  &.orange {
+    border-color: $color-orange-600;
+    color: $color-orange-600;
+  }
+}

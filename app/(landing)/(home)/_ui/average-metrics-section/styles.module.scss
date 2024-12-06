@@ -1,0 +1,37 @@
+.container {
+  width: 100%;
+  max-width: 1260px;
+  margin: 48px auto 0;
+  padding: 48px 0 60px;
+  border-radius: 10px;
+  background-color: $color-white;
+}
+
+.contents-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.date-wrapper {
+  align-self: flex-end;
+  padding-right: 24px;
+  margin-bottom: 20px;
+  @include typo-c1;
+
+  .date {
+    padding: 2px 8px;
+    margin: 0 6px;
+    border-radius: 20px;
+    color: $color-gray-500;
+    background-color: $color-gray-200;
+  }
+}
+
+.chart-wrapper {
+  width: 100%;
+}

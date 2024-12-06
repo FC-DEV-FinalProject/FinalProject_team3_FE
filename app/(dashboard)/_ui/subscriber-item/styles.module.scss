@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 83px;
+  padding: 0 30px;
+  border-radius: 5px;
+  background-color: $color-white;
+  margin-bottom: 18px;
+  span {
+    font-size: 18px;
+    font-weight: $text-semibold;
+    color: $color-gray-800;
+    margin-left: 4px;
+  }
+}

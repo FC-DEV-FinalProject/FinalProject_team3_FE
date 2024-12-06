@@ -1,0 +1,5 @@
+export { default as ImageLogo } from './logo.svg'
+export { default as TextLogo } from './text-logo.svg'
+export { default as PageNotFoundImg } from './page-not-found-img.svg'
+export { default as TraderImg } from './trader.svg'
+export { default as InvestorImg } from './investor.svg'

@@ -1,0 +1,22 @@
+.container {
+  width: 100%;
+  padding: 20px;
+  table {
+    width: 100%;
+    margin-top: 10px;
+    font-size: $text-c1;
+    td:nth-child(2n + 1) {
+      font-weight: $text-semibold;
+      color: $color-gray-600;
+      background-color: $color-gray-100;
+    }
+    td {
+      padding: 0 20px;
+      width: 120px;
+      height: 32px;
+      text-align: start;
+      vertical-align: middle;
+      border: 1px solid $color-white;
+    }
+  }
+}

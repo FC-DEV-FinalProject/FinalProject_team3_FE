@@ -1,0 +1,40 @@
+@mixin card-base {
+  padding: 24px 40px 16px;
+  border-radius: 8px;
+  background-color: $color-white;
+}
+
+@mixin card-subtitle {
+  @include typo-b2;
+  color: $color-orange-600;
+}
+
+@mixin card-created-at {
+  @include typo-b3;
+  color: $color-gray-400;
+}
+
+@mixin card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin card-title {
+  margin: 12px 0 8px;
+  @include typo-h4;
+}
+
+@mixin card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin avatar-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: $color-gray-600;
+  @include typo-b3;
+}

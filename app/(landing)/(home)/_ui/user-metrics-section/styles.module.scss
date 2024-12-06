@@ -1,0 +1,23 @@
+.card-wrapper {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 36px;
+
+  @include tablet-md {
+    & > div {
+      padding: 10px;
+    }
+  }
+
+  @include mobile {
+    flex-wrap: wrap;
+    & > div {
+      width: calc(50% - 10px);
+    }
+  }
+}
+
+.spinner {
+  margin: 200px 0;
+}

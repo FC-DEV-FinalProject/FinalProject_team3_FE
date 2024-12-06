@@ -1,0 +1,185 @@
+@mixin item-align {
+  display: flex;
+  justify-content: space-between;
+}
+
+.searchInput-wrapper {
+  background-color: $color-white;
+  padding: 20px;
+  border: 5px;
+  margin-bottom: 10px;
+}
+
+.search-button-wrapper {
+  @include item-align;
+  margin-top: 20px;
+  .button {
+    height: 40px;
+    &.initialize {
+      width: 90px;
+      padding: 0;
+    }
+    &.searching {
+      width: 140px;
+    }
+  }
+}
+
+.tab-container {
+  @include item-align;
+  margin-bottom: 20px;
+  .button {
+    border: 0;
+    width: 118px;
+    height: 48px;
+    &.main-on {
+      background-color: $color-orange-500;
+      color: $color-white;
+    }
+    &.main-off {
+      background-color: transparent;
+      color: $color-gray-700;
+    }
+  }
+}
+
+.algorithm-button {
+  width: 100%;
+  padding: 10.8px 20px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  background-color: transparent;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
+  @include typo-b3;
+  color: $color-gray-600;
+  &:hover {
+    background-color: $color-orange-100;
+  }
+  &.active {
+    background-color: $color-orange-600;
+    color: $color-white;
+  }
+}
+
+.accordion-button,
+.panel-wrapper {
+  padding: 2px 0;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  overflow: hidden;
+  button {
+    @include item-align;
+    width: 100%;
+    padding: 4px 20px;
+    align-items: center;
+    background-color: transparent;
+  }
+}
+
+.accordion-button {
+  border: 1px solid $color-gray-200;
+  background-color: $color-gray-100;
+  button {
+    p {
+      @include typo-c1;
+      color: $color-gray-800;
+      span {
+        color: $color-orange-500;
+        margin-left: 4px;
+      }
+    }
+    svg {
+      width: 26px;
+      path {
+        fill: #171717;
+      }
+    }
+  }
+  &:hover {
+    border: 1px solid $color-orange-300;
+  }
+  &.active {
+    border: 1px solid $color-orange-500;
+    box-shadow: 0px 0px 2px rgba(255, 119, 82, 1);
+  }
+}
+
+.panel-wrapper {
+  display: none;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
+  button {
+    p {
+      @include typo-c1;
+      color: $color-gray-600;
+    }
+    svg,
+    svg circle {
+      width: 24px;
+      .checked {
+        fill: $color-orange-600;
+      }
+    }
+    &.active {
+      svg,
+      svg circle {
+        fill: $color-orange-600;
+      }
+    }
+    &:hover {
+      background-color: $color-orange-100;
+    }
+  }
+  &.open {
+    display: block;
+    animation: accordionDown 0.3s cubic-bezier(0.2, 0.2, 0.2, 0.6);
+  }
+  &.close {
+    display: block;
+    animation: accordionUp 0.3s cubic-bezier(0.2, 0.2, 0.2, 0.6);
+  }
+  .range-container {
+    padding: 4px 20px;
+    p {
+      @include typo-c1;
+      color: $color-orange-800;
+      margin-top: 2px;
+    }
+    .range-wrapper {
+      @include item-align;
+      @include typo-c1;
+      align-items: center;
+      .range {
+        width: 80px;
+        height: 24px;
+        border-radius: 2px;
+        border: 1px solid $color-gray-300;
+        padding: 0 4px;
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+          display: none;
+        }
+      }
+      span {
+        color: $color-gray-600;
+      }
+    }
+  }
+}
+
+@keyframes accordionDown {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--panel-height);
+  }
+}
+
+@keyframes accordionUp {
+  from {
+    height: var(--panel-height);
+  }
+  to {
+    height: 0;
+  }
+}

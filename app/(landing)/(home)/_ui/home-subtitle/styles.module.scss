@@ -1,0 +1,7 @@
+.subtitle {
+  margin-top: 120px;
+  @include typo-h4;
+  color: $color-gray-600;
+  font-weight: $text-bold;
+  text-align: center;
+}

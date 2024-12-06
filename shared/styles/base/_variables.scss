@@ -1,0 +1,78 @@
+/* Colors */
+// Grayscale
+$color-black: #0a0a0a;
+$color-gray-800: #1d1d1d;
+$color-gray-700: #363636;
+$color-gray-600: #4d4d4d;
+$color-gray-500: #797979;
+$color-gray-400: #a7a7a7;
+$color-gray-300: #cccccc;
+$color-gray-200: #ececec;
+$color-gray-100: #fafafa;
+$color-white: #ffffff;
+
+// Primary
+$color-orange-800: #f53500;
+$color-orange-700: #ff4f1f;
+$color-orange-600: #ff5f33;
+$color-orange-500: #ff7752;
+$color-orange-400: #ff8f70;
+$color-orange-300: #ffaf99;
+$color-orange-200: #ffbfad;
+$color-orange-100: #ffdfd6;
+
+// Feedback
+$color-indigo: #6877ff;
+$color-yellow: #ffe070;
+
+/* Typography */
+$font-family-base:
+  var(--font-pretendard),
+  -apple-system,
+  BlinkMacSystemFont,
+  system-ui,
+  Roboto,
+  'Helvetica Neue',
+  sans-serif;
+
+// Size
+$text-h1: 54px;
+$text-h2: 36px;
+$text-h3: 30px;
+$text-h4: 24px;
+$text-b1: 20px;
+$text-b2: 16px;
+$text-b3: 14px;
+$text-c1: 12px;
+$text-c2: 10px;
+
+// Weight
+$text-bold: 700;
+$text-semibold: 600;
+$text-medium: 500;
+$text-normal: 400;
+
+/* Breakpoints */
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+/* Z-index */
+$z-index: (
+  modal: 1000,
+  navbar: 200,
+  header: 100,
+  select: 10,
+  base: 1,
+  hidden: -1,
+  overlay: 900,
+);
+
+/* Width */
+$max-width: 1440px;
+$navigation-width: 90px;
+$strategy-sidebar-width: 280px;
+
+// height
+$header-height: 80px;

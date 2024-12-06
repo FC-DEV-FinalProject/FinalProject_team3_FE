@@ -1,0 +1,64 @@
+@import './base/variables';
+@import './base/reset';
+
+body {
+  font-family: $font-family-base;
+  font-weight: $text-medium;
+  font-size: $text-b2;
+  letter-spacing: -0.02em;
+  line-height: 132%;
+  color: $color-black;
+  background-color: $color-gray-100;
+  overflow-x: hidden;
+}
+
+input,
+textarea {
+  &::placeholder {
+    opacity: 1; /* Firefox */
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.landing-main {
+  position: relative;
+  width: 100%;
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 0 20px;
+
+  &::before {
+    content: '';
+    z-index: zIndex(hidden);
+    position: absolute;
+    top: -160px;
+    right: -130px;
+    width: 600px;
+    height: 660px;
+    border-radius: 300px;
+    background: linear-gradient(
+      142deg,
+      rgba(255, 119, 82, 0.15) 4.71%,
+      rgba(246, 238, 155, 0.15) 95.29%
+    );
+    filter: blur(150px);
+  }
+}
+
+.dashboard-main {
+  width: calc(100% - $navigation-width);
+  max-width: $max-width;
+  padding: 0 28px;
+  margin-left: $navigation-width;
+}

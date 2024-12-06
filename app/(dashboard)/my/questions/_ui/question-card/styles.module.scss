@@ -1,0 +1,38 @@
+@import './card-mixins.scss';
+
+.card-container {
+  @include card-base;
+}
+
+.top-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .strategy-name {
+    @include card-subtitle;
+  }
+
+  .created-at {
+    @include card-created-at;
+  }
+}
+
+.title {
+  @include card-title;
+}
+
+.contents {
+  margin-bottom: 18px;
+  color: $color-gray-600;
+  @include typo-b2;
+  @include ellipsis(1);
+}
+
+.bottom-wrapper {
+  @include card-bottom;
+}
+
+.avatar-wrapper {
+  @include avatar-group;
+}

@@ -1,0 +1,121 @@
+.aside {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  width: 240px;
+  border-right: 1px solid $color-gray-200;
+  background-color: $color-gray-100;
+  transition: width 0.2s ease;
+  z-index: zIndex(navbar);
+
+  cursor: pointer;
+
+  &:not(:hover) {
+    width: $navigation-width;
+    overflow: hidden;
+
+    .text {
+      opacity: 0;
+      transform: translateX(10px);
+    }
+  }
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 0 0 24px;
+
+  svg {
+    width: 40px;
+    flex-shrink: 0;
+  }
+
+  .text {
+    width: 142px;
+  }
+}
+
+.main-navigation {
+  flex: 1;
+  padding: 16px;
+  margin-top: 48px;
+}
+
+.user-navigation {
+  padding: 24px 0;
+  margin: 0 16px;
+  border-top: 1px solid $color-gray-200;
+}
+
+.navigation-item {
+  margin: 0 4px 8px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.button,
+.link {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 4px;
+  text-align: left;
+  font-weight: $text-semibold;
+  white-space: nowrap;
+  background: none;
+  cursor: pointer;
+
+  .icon {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    fill: $color-gray-500;
+  }
+
+  .text {
+    color: $color-gray-500;
+    line-height: normal;
+  }
+
+  &.active {
+    background-color: $color-orange-100;
+
+    svg.icon {
+      fill: $color-orange-500;
+    }
+
+    .text {
+      color: $color-orange-500;
+    }
+  }
+
+  &:hover:not(.active) {
+    background-color: $color-gray-200;
+  }
+}
+
+.user {
+  display: flex;
+  flex-direction: column;
+
+  .nickname {
+    color: $color-gray-800;
+  }
+
+  .email {
+    font-size: $text-c2;
+  }
+}

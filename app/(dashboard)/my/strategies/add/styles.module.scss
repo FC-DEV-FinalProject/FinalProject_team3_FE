@@ -1,0 +1,144 @@
+.form {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px;
+  position: relative;
+}
+
+.form-row {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  gap: 24px;
+
+  label {
+    flex: 0 0 120px;
+    margin-top: 8px;
+    font-weight: 500;
+  }
+
+  &.half {
+    margin-bottom: 0;
+  }
+}
+
+.horizontal-wrapper {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+
+  .form-row {
+    flex: 1;
+  }
+}
+
+.form-field {
+  flex: 1;
+}
+
+.error {
+  margin-bottom: 16px;
+  padding: 12px;
+  border-radius: 4px;
+  background-color: $color-white;
+  color: $color-orange-600;
+  font-size: 14px;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+.input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid $color-gray-300;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 1.5;
+  transition: border-color 0.2s;
+
+  &.error {
+    border-color: $color-orange-600;
+  }
+}
+
+.stock-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.stock-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border: 1px solid $color-gray-300;
+  border-radius: 4px;
+  background-color: $color-white;
+  font-size: 14px;
+  transition: all 0.2s;
+  cursor: pointer;
+  width: 100%;
+
+  &:hover {
+    border-color: $color-indigo;
+  }
+
+  &.selected {
+    border-color: $color-indigo;
+  }
+
+  .marker {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+}
+
+.file-upload {
+  position: relative;
+
+  .file-input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+
+  .file-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: 1px solid $color-gray-300;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: $color-gray-500;
+    font-size: 14px;
+
+    .file-icon {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+  gap: 24px;
+}

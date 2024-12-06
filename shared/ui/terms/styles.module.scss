@@ -1,0 +1,48 @@
+.container {
+  font-weight: $text-normal;
+  font-size: $text-b3;
+
+  h3 {
+    font-weight: $text-semibold;
+    margin-bottom: 24px;
+  }
+
+  div {
+    margin-bottom: 12px;
+  }
+
+  ol {
+    padding-left: 16px;
+  }
+
+  li {
+    list-style-type: decimal;
+  }
+
+  div > strong {
+    display: inline-block;
+    padding-right: 8px;
+    font-weight: $text-semibold;
+  }
+}
+
+.bullet-list {
+  li {
+    list-style-type: disc;
+    margin-left: 16px;
+  }
+
+  span {
+    display: block;
+  }
+}
+
+.no-bullet-list {
+  li {
+    list-style-type: none;
+  }
+
+  span {
+    display: block;
+  }
+}

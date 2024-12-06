@@ -1,0 +1,41 @@
+.container {
+  width: 100%;
+  background-color: $color-white;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+  .title {
+    @include typo-b2;
+    margin-bottom: 15px;
+  }
+
+  .content {
+    width: 100%;
+    @include ellipsis(4);
+    &.expand {
+      display: contents;
+    }
+    p {
+      @include typo-c1;
+      line-height: 18px;
+      color: $color-gray-600;
+    }
+  }
+
+  .button-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+    button {
+      @include typo-c1;
+      display: flex;
+      align-items: center;
+      color: $color-gray-500;
+      background-color: transparent;
+      svg {
+        margin: -3px 0 0 7px;
+      }
+    }
+  }
+}

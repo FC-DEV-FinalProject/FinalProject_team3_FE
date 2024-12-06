@@ -1,0 +1,92 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginBox {
+  max-width: 400px;
+}
+
+.title {
+  @include typo-h2;
+  margin-bottom: 70px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+
+  label {
+    @include typo-b2;
+  }
+}
+
+.input {
+  border-radius: 2px;
+  @include typo-b3;
+  &::placeholder {
+    color: $color-gray-400;
+  }
+
+  &:required {
+    border-color: $color-gray-500;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.error-container {
+  min-height: 24px;
+  margin-top: -18px;
+
+  .error-message {
+    @include typo-c1;
+    color: $color-orange-700;
+    opacity: 0;
+
+    &.visible {
+      opacity: 1;
+    }
+  }
+}
+
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  margin-top: -25px;
+
+  .find-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: $color-gray-600;
+    @include typo-c1;
+
+    button {
+      background-color: transparent;
+    }
+  }
+}
+
+.remember {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 8px;
+}
+
+.divider {
+  color: #ddd;
+}

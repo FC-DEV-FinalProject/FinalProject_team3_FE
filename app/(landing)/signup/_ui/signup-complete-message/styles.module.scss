@@ -1,0 +1,9 @@
+.container {
+  margin: 130px 0;
+  @include typo-h2;
+  text-align: center;
+
+  svg {
+    margin: 0 4px;
+  }
+}

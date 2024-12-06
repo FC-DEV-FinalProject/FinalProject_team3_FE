@@ -1,0 +1,154 @@
+.card-container {
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+  height: 170px;
+  padding: 20px 28px 18px;
+  border-radius: 5px;
+  background-color: $color-white;
+
+  &.large {
+    position: relative;
+    flex-direction: column;
+    height: 360px;
+
+    .content-wrapper {
+      .title {
+        max-width: 100%;
+      }
+    }
+
+    .score-wrapper {
+      position: absolute;
+      bottom: 19px;
+    }
+
+    .profit-wrapper {
+      gap: 36px;
+
+      .profit {
+        align-self: end;
+      }
+    }
+
+    .chart {
+      margin: 0;
+    }
+  }
+}
+
+.contents-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  .ranking {
+    @include typo-b1;
+    font-weight: $text-bold;
+  }
+
+  .profile {
+    display: flex;
+    align-items: center;
+
+    .nickname {
+      margin-left: 0.5rem;
+      color: $color-gray-500;
+      line-height: normal;
+      @include typo-c1;
+    }
+  }
+
+  .title {
+    max-width: 128px;
+    @include typo-b2;
+    @include ellipsis(2);
+    line-height: normal;
+  }
+}
+
+.content-details-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  @include typo-c1;
+  font-weight: $text-semibold;
+
+  .subscription {
+    margin-top: 2px;
+    color: $color-gray-800;
+  }
+
+  .rating-wrapper {
+    display: flex;
+    align-items: center;
+
+    svg {
+      color: $color-yellow;
+    }
+
+    span {
+      margin-top: 2px;
+      color: $color-gray-400;
+    }
+  }
+}
+
+.profit-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  .profit {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 2px;
+
+    &.vertical {
+      flex-direction: column;
+      gap: 2px;
+    }
+  }
+
+  .chart {
+    margin-top: 12px;
+  }
+
+  .label {
+    color: $color-gray-700;
+    @include typo-b3;
+  }
+
+  .value {
+    color: $color-orange-800;
+  }
+
+  &.large {
+    height: 340px;
+  }
+}
+
+.score-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 2px;
+  line-height: normal;
+
+  .label {
+    color: $color-gray-700;
+    @include typo-b3;
+  }
+
+  .score {
+    color: $color-orange-800;
+  }
+}

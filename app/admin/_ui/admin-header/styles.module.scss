@@ -1,0 +1,9 @@
+.container {
+  z-index: zIndex(header);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 0;
+  @include typo-b3;
+}

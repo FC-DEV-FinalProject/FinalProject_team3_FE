@@ -1,0 +1,117 @@
+$small-width: 90px;
+$small-height: 30px;
+$large-width: 160px;
+$large-height: 40px;
+
+$color-selected-text: #171717;
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown {
+  &-small {
+    width: $small-width;
+    height: fit-content;
+  }
+
+  &-large {
+    width: $large-width;
+    height: fit-content;
+  }
+}
+
+.container {
+  border: 1px solid $color-gray-400;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  flex-shrink: 0;
+  align-items: center;
+  @include typo-c1;
+
+  svg {
+    color: $color-gray-200;
+    margin-left: auto;
+    width: 24px;
+  }
+}
+
+.trigger {
+  color: $color-gray-800;
+  background-color: $color-gray-100;
+
+  svg {
+    path {
+      fill: $color-gray-800;
+    }
+  }
+
+  &:hover {
+    border-color: $color-orange-500;
+  }
+
+  &.open {
+    border-color: $color-orange-500;
+    box-shadow: 0px 0px 2px 0px $color-orange-500;
+  }
+}
+
+.small {
+  width: $small-width;
+  height: $small-height;
+  padding: 3px 6px 3px 10px;
+}
+
+.large {
+  width: $large-width;
+  height: $large-height;
+  padding-left: 10.5px;
+  padding-right: 14.5px;
+}
+
+.options {
+  position: absolute;
+  bottom: 0;
+  transform: translateY(calc(100% + 4px));
+  z-index: zIndex(select);
+  list-style: none;
+  height: fit-content;
+  margin: 0;
+  padding: 0;
+  border-radius: 4px;
+  background-color: $color-white;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.25);
+  overflow-y: auto;
+
+  &.small {
+    width: $small-width;
+    max-height: 180px;
+  }
+
+  &.large {
+    width: $large-width;
+    max-height: 200px;
+  }
+}
+
+.option {
+  width: 100%;
+  color: $color-gray-500;
+  cursor: pointer;
+  border: none;
+  border-radius: 0;
+  user-select: none;
+
+  &.selected {
+    color: $color-selected-text;
+  }
+
+  &:hover {
+    background-color: $color-orange-100;
+  }
+
+  .selected-icon {
+    color: $color-gray-800;
+  }
+}

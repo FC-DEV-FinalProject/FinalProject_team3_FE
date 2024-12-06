@@ -1,0 +1,52 @@
+.button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid $color-gray-800;
+  color: $color-gray-800;
+  line-height: 132%;
+
+  &.small {
+    padding: 12px 24px;
+    border-radius: 19.5px;
+    border-width: 1.5px;
+    font-size: $text-c1;
+    font-weight: $text-medium;
+    letter-spacing: -0.24px;
+  }
+
+  &.medium {
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: $text-b2;
+    font-weight: $text-semibold;
+    letter-spacing: -0.36px;
+  }
+
+  &.large {
+    width: 400px;
+    padding: 18px 36px;
+    border-radius: 60px;
+    border-width: 1.2px;
+    font-size: $text-b1;
+    font-weight: $text-semibold;
+  }
+
+  &.outline {
+    background: transparent;
+
+    &.disabled {
+      background: $color-gray-200;
+    }
+  }
+
+  &.filled {
+    background: $color-gray-800;
+    color: $color-white;
+  }
+  &.disabled {
+    background: $color-gray-600;
+    cursor: not-allowed;
+  }
+}

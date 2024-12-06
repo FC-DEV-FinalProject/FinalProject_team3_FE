@@ -1,0 +1,49 @@
+.traders-list-card {
+  display: flex;
+  flex-direction: column;
+  background-color: $color-white;
+  border-radius: 8px;
+  width: 300px;
+  padding: 28px 28px;
+}
+
+.contents {
+  margin-bottom: 17px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.trader-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.trader-nickname {
+  @include typo-b2;
+  font-weight: $text-semibold;
+}
+
+.avatar {
+  justify-content: flex-end;
+}
+
+.count-info {
+  @include typo-b3;
+  color: $color-gray-500;
+  margin-top: 36px;
+}
+
+.link-button-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.link-button {
+  align-self: center;
+  text-align: center;
+  border-color: $color-gray-800;
+  width: 100%;
+  max-height: 45px;
+}
