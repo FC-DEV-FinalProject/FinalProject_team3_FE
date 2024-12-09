@@ -4,12 +4,23 @@ import { APIResponseBaseModel } from '@/shared/types/response'
 export interface AdminQuestionsResponeseModel extends APIResponseBaseModel<boolean> {
   result: {
     content: Array<{
+      strategy: {
+        id: number
+        name: string
+      }
+      investor: {
+        id: number
+        userName: string
+        profileImageUrl: string
+      }
+      trader: {
+        id: number
+        userName: string
+        profileImageUrl: string
+      }
       questionId: number
       title: string
       questionContent: string
-      strategyName: string
-      profileImageUrl: string
-      nickname: string
       stateCondition: QuestionStateConditionType
       createdAt: string
     }>

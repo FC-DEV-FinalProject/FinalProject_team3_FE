@@ -1,5 +1,6 @@
 import { Button } from '@/shared/ui/button'
 
+import AdminQuestionDeleteButton from '../_ui/admin-question-delete-button'
 import AdminQuestionStateBox from '../_ui/admin-question-state-box'
 import { AdminQuestionsResponeseModel } from '../types'
 
@@ -8,14 +9,11 @@ const setAdminQuestionTableBody = (data: AdminQuestionsResponeseModel['result'][
     return [
       idx + 1,
       data.title,
-      data.strategyName,
-      data.questionId, // 질문 받은 사람으로 수정
-      data.nickname,
-      <AdminQuestionStateBox
-        questionState={data.stateCondition}
-        key={data.createdAt + data.nickname}
-      />,
-      <Button.ButtonGroup gap="24px" key={data.createdAt + data.nickname}>
+      data.strategy.name,
+      data.trader.userName,
+      data.investor.userName,
+      <AdminQuestionStateBox questionState={data.stateCondition} key={data.questionId} />,
+      <Button.ButtonGroup gap="24px" key={data.questionId}>
         <Button
           size="small"
           style={{
@@ -27,18 +25,7 @@ const setAdminQuestionTableBody = (data: AdminQuestionsResponeseModel['result'][
         >
           상세보기
         </Button>
-        <Button
-          variant="filled"
-          size="small"
-          style={{
-            width: 'fit-content',
-            height: '30px',
-            padding: '7px 16px',
-            borderRadius: '16px',
-          }}
-        >
-          삭제
-        </Button>
+        <AdminQuestionDeleteButton questionId={data.questionId} strategyId={data.strategy.id} />
       </Button.ButtonGroup>,
     ]
   })
