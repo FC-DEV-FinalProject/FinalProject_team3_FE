@@ -18,23 +18,25 @@ const cx = classNames.bind(styles)
 interface Props {
   isModalOpen: boolean
   onCloseModal: () => void
+  onConfirm: () => void
 }
 
-const SigninCheckModal = ({ isModalOpen, onCloseModal }: Props) => {
+const SigninCheckModal = ({ isModalOpen, onCloseModal, onConfirm }: Props) => {
   const router = useRouter()
-
-  const handleRouter = () => {
-    router.push(PATH.SIGN_IN)
+  const handleModalClose = () => {
+    router.replace(PATH.STRATEGIES)
+    onCloseModal()
   }
-
   return (
     <Modal isOpen={isModalOpen} icon={ModalAlertIcon}>
       <span className={cx('message')}>
-        로그인이 필요합니다. <br /> 로그인 하시겠습니까?
+        로그인이 필요합니다.
+        <br />
+        로그인 하시겠습니까?
       </span>
       <div className={cx('two-button')}>
-        <Button onClick={onCloseModal}>아니오</Button>
-        <Button onClick={handleRouter} variant="filled" className={cx('button')}>
+        <Button onClick={handleModalClose}>아니오</Button>
+        <Button onClick={onConfirm} variant="filled" className={cx('button')}>
           예
         </Button>
       </div>

@@ -38,6 +38,16 @@ $svg-xxlarge: 110px;
       width: $svg-medium;
       height: $svg-medium;
     }
+
+    @include tablet-md {
+      width: $avatar-small;
+      height: $avatar-small;
+
+      svg {
+        width: $svg-small;
+        height: $svg-small;
+      }
+    }
   }
 
   &.large {

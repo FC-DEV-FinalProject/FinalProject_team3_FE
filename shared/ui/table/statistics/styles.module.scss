@@ -4,7 +4,7 @@
   table {
     width: 100%;
     margin-top: 10px;
-    font-size: $text-c1;
+    font-size: $text-b3;
     td:nth-child(2n + 1) {
       font-weight: $text-semibold;
       color: $color-gray-600;
@@ -13,10 +13,20 @@
     td {
       padding: 0 20px;
       width: 120px;
-      height: 32px;
+      height: 36px;
       text-align: start;
       vertical-align: middle;
       border: 1px solid $color-white;
+    }
+  }
+  @include tablet-md {
+    padding: 10px;
+    table {
+      font-size: $text-c1;
+      td {
+        height: 32px;
+        padding: 0 4px;
+      }
     }
   }
 }

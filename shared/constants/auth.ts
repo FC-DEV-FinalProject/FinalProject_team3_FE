@@ -8,12 +8,12 @@ export const STORAGE_KEYS = {
 } as const
 
 export const AUTH_TIME = {
-  TOKEN_CHECK_INTERVAL: 120 * 1000,
+  TOKEN_CHECK_INTERVAL: 60 * 1000,
   ADMIN_EXPIRY_WARNING: 600 * 1000,
   SAFETY_MARGIN: 5 * 1000,
 } as const
 
-export const AUTH_REQUIRED_PATTERNS = ['/my/', '/admin', '/traders', '/strategies/'] as const
+export const AUTH_REQUIRED_PATTERNS = ['/my/', '/admin', '/traders/', '/strategies/[0-9]+'] as const
 
 export const NON_AUTH_PAGES = [
   PATH.SIGN_IN,

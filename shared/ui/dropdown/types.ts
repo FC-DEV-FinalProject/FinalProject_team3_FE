@@ -7,7 +7,7 @@ export interface DropdownOptionModel {
 
 export type DropdownValueType = string | string[] | null
 
-export type DropdownSizeType = 'small' | 'large'
+export type DropdownSizeType = 'small' | 'medium' | 'large'
 
 export interface DropdownProps {
   size?: DropdownSizeType

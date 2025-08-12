@@ -1,3 +1,12 @@
 .pagination {
   margin-bottom: 24px;
 }
+
+.no-data {
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+  color: $color-gray-600;
+  height: 200px;
+  @include typo-b1;
+}

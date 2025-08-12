@@ -1,5 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
+import { QUERY_KEY } from '@/shared/constants/query-key'
+
 import deleteQuestion, { DeleteQuestionProps } from '../../_api/delete-question'
 
 const useDeleteQuestion = () => {
@@ -9,11 +11,11 @@ const useDeleteQuestion = () => {
       deleteQuestion({ questionId, strategyId }),
     onSuccess: (_, { questionId }) => {
       queryClient.invalidateQueries({
-        queryKey: ['questionDetails', questionId],
+        queryKey: [QUERY_KEY.QUESTION_DETAILS, questionId],
       })
 
       queryClient.invalidateQueries({
-        queryKey: ['questionList'],
+        queryKey: [QUERY_KEY.QUESTION_LIST],
       })
     },
   })

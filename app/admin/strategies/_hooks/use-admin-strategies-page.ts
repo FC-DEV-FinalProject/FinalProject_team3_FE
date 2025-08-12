@@ -5,21 +5,24 @@ import { AdminStrategiesTapType } from '../types'
 
 const useAdminQuestionsPage = () => {
   const [activeTab, setActiveTab] = useState<AdminStrategiesTapType>('ALL')
+  const [inputValue, setInputValue] = useState('')
   const [keyword, setKeyword] = useState('')
-  const initialSearchParams = {
-    searchWord: '',
+  const [currentPage, setCurrentPage] = useState(1)
+
+  const searchParams = {
+    searchWord: keyword,
+    page: currentPage,
   }
-  const [searchParams, setSearchParams] = useState(initialSearchParams)
 
   const initializeSearchParams = () => {
+    setInputValue('')
     setKeyword('')
-    setSearchParams(initialSearchParams)
+    setCurrentPage(1)
   }
 
   const searchWithKeyword = () => {
-    setSearchParams({
-      searchWord: keyword,
-    })
+    setKeyword(inputValue)
+    setCurrentPage(1)
   }
 
   const onTabChange = (id: string) => {
@@ -31,8 +34,10 @@ const useAdminQuestionsPage = () => {
     tabs,
     activeTab,
     setActiveTab,
-    keyword,
-    setKeyword,
+    inputValue,
+    setInputValue,
+    currentPage,
+    setCurrentPage,
     searchParams,
     searchWithKeyword,
     onTabChange,

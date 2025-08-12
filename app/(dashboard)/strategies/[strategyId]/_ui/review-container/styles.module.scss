@@ -76,13 +76,20 @@
         color: $color-gray-500;
         font-weight: $text-normal;
         margin-right: 5px;
+        @include typo-b3;
       }
     }
   }
   .content {
     margin: 10px 0;
-    font-size: 18px;
-    font-weight: $text-medium;
+    word-wrap: break-word;
+    word-break: break-word;
+    white-space: pre-wrap;
+    @include typo-b2;
+    font-weight: $text-normal;
+    @include tablet-sm {
+      font-size: $text-b3;
+    }
   }
 }
 
@@ -97,20 +104,5 @@
   &.edit {
     margin-top: 20px;
     padding-left: 10px;
-  }
-}
-
-.message {
-  @include typo-b1;
-  text-align: center;
-  color: $color-gray-800;
-  margin-bottom: 30px;
-}
-
-.two-button {
-  display: flex;
-  gap: 10px;
-  & .button {
-    width: 90px;
   }
 }

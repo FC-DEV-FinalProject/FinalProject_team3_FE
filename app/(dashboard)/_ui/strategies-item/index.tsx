@@ -4,11 +4,10 @@ import classNames from 'classnames/bind'
 
 import { PATH } from '@/shared/constants/path'
 import useModal from '@/shared/hooks/custom/use-modal'
-import { useAuthStore } from '@/shared/stores/use-auth-store'
 import { StrategiesModel } from '@/shared/types/strategy-data'
 import { Button } from '@/shared/ui/button'
 import { LinkButton } from '@/shared/ui/link-button'
-import SigninCheckModal from '@/shared/ui/modal/signin-check-modal'
+import StrategyDeleteModal from '@/shared/ui/modal/strategy-delete-modal'
 import { formatNumber } from '@/shared/utils/format'
 
 import AreaChart from './area-chart'
@@ -25,15 +24,14 @@ interface Props {
 
 const StrategiesItem = ({ strategiesData: data, type = 'default' }: Props) => {
   const router = useRouter()
-  const user = useAuthStore((state) => state.user)
-  const { isModalOpen, openModal, closeModal } = useModal()
+  const {
+    isModalOpen: isDeleteModalOpen,
+    openModal: openDeleteModal,
+    closeModal: closeDeleteModal,
+  } = useModal()
 
   const handleRouter = () => {
-    if (!user) {
-      openModal()
-    } else {
-      router.push(`${PATH.STRATEGIES}/${data.strategyId}`)
-    }
+    router.push(`${PATH.STRATEGIES}/${data.strategyId}`)
   }
 
   return (
@@ -56,7 +54,7 @@ const StrategiesItem = ({ strategiesData: data, type = 'default' }: Props) => {
           <p>{formatNumber(data.mdd)}</p>
         </div>
         <div className={cx('sm-score')}>
-          <p>{data.smScore}</p>
+          <p>{data.smScore.toFixed(1)}</p>
         </div>
         <div className={cx('profit')}>
           <span>누적 수익률</span>
@@ -86,17 +84,30 @@ const StrategiesItem = ({ strategiesData: data, type = 'default' }: Props) => {
                 variant="filled"
                 href={`/my/strategies/manage/${data.strategyId}`}
                 className={cx('manage-button')}
+                onClick={(e) => e.stopPropagation()}
               >
                 관리
               </LinkButton>
-              <Button size="small" variant="outline" className={cx('manage-button')}>
+              <Button
+                size="small"
+                variant="outline"
+                className={cx('manage-button')}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  openDeleteModal()
+                }}
+              >
                 삭제
               </Button>
             </div>
           </>
         )}
       </button>
-      <SigninCheckModal isModalOpen={isModalOpen} onCloseModal={closeModal} />
+      <StrategyDeleteModal
+        isModalOpen={isDeleteModalOpen}
+        onCloseModal={closeDeleteModal}
+        strategyId={data.strategyId}
+      />
     </>
   )
 }

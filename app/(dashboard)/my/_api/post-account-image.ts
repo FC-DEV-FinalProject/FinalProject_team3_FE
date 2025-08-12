@@ -44,6 +44,5 @@ export const deleteAccountImages = async ({
     `/api/my-strategies/${strategyId}/delete-account-images`,
     imageIds
   )
-  console.log(response.data)
   return response.data
 }

@@ -6,10 +6,10 @@ import { SIGN_UP_COOKIE, SignUpCookieValueType } from '../_constants/cookies'
 
 const COOKIE_EXPIRATION_MINUTES = 30
 
-const isBrowser = typeof window !== 'undefined'
+const isBrowser = () => typeof window !== 'undefined'
 
 const setSignupCookie = (key: SignUpCookieValueType, value: string) => {
-  if (!isBrowser) return
+  if (!isBrowser()) return
 
   const expirationDate = new Date()
   expirationDate.setMinutes(expirationDate.getMinutes() + COOKIE_EXPIRATION_MINUTES)
@@ -18,7 +18,8 @@ const setSignupCookie = (key: SignUpCookieValueType, value: string) => {
 }
 
 const getSignupCookie = (key: SignUpCookieValueType) => {
-  if (!isBrowser) return
+  if (!isBrowser()) return
+
   const value = `; ${document.cookie}`
   const parts = value.split(`; ${key}=`)
 
@@ -26,7 +27,7 @@ const getSignupCookie = (key: SignUpCookieValueType) => {
 }
 
 export const removeAllSignupCookies = () => {
-  if (!isBrowser) return false
+  if (!isBrowser()) return
 
   try {
     const signupCookies = Object.values(SIGN_UP_COOKIE)

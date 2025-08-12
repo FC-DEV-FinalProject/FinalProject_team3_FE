@@ -3,11 +3,16 @@
   justify-content: space-between;
 }
 
-.searchInput-wrapper {
+.search-input-wrapper {
   background-color: $color-white;
   padding: 20px;
   border: 5px;
   margin-bottom: 10px;
+  .input {
+    @include tablet-md {
+      width: 180px;
+    }
+  }
 }
 
 .search-button-wrapper {
@@ -18,9 +23,19 @@
     &.initialize {
       width: 90px;
       padding: 0;
+      @include tablet-md {
+        width: 70px;
+      }
     }
     &.searching {
       width: 140px;
+      @include tablet-md {
+        width: 100px;
+        padding: 0;
+      }
+    }
+    @include tablet-md {
+      font-size: $text-b3;
     }
   }
 }
@@ -39,6 +54,12 @@
     &.main-off {
       background-color: transparent;
       color: $color-gray-700;
+    }
+    @include tablet-md {
+      width: 100px;
+      height: 40px;
+      font-size: $text-b3;
+      padding: 0;
     }
   }
 }
@@ -86,6 +107,13 @@
       span {
         color: $color-orange-500;
         margin-left: 4px;
+      }
+      svg {
+        width: 26px;
+        margin: -3px 0 -8px 5px;
+        path {
+          fill: $color-orange-600;
+        }
       }
     }
     svg {
@@ -162,6 +190,9 @@
       span {
         color: $color-gray-600;
       }
+    }
+    @include tablet-md {
+      padding: 4px;
     }
   }
 }

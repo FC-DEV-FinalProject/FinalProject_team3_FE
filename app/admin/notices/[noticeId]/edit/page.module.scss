@@ -1,0 +1,49 @@
+.container {
+  padding: 86px 0 80px;
+  border-radius: 8px;
+  margin-bottom: 42px;
+  background-color: $color-white;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-field {
+  width: 795px;
+  margin-bottom: 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.file-input {
+  width: 100%;
+}
+
+.textarea {
+  height: 420px;
+
+  &::placeholder {
+    vertical-align: middle;
+  }
+}
+
+.button {
+  width: 74px;
+  height: 30px;
+  border: 1px solid $color-gray-300;
+}
+
+.notice-files-container {
+  width: 640px;
+  margin-left: auto;
+  margin-top: -28px;
+
+  .notice-file-list {
+    @include typo-b3;
+    font-weight: 500;
+  }
+}

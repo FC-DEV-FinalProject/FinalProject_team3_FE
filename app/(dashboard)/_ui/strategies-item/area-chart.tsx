@@ -20,7 +20,9 @@ interface Props {
 }
 
 const AreaChart = ({ profitRateChartData: data }: Props) => {
-  if (!data) return <div></div>
+  if (!data?.dates || !data?.profitRates || data?.dates.length < 3 || data?.profitRates.length < 3)
+    return <span className={cx('no-data')}>준비중..</span>
+
   const chartOptions: Highcharts.Options = {
     chart: {
       type: 'areaspline',

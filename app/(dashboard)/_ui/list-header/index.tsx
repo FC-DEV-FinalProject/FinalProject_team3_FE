@@ -18,7 +18,13 @@ const ListHeader = ({ type = 'default' }: Props) => {
     <div className={cx('container', type)}>
       {LIST_HEADER[type].map((category) => (
         <div key={category} className={cx('category')}>
-          {category}
+          {category === 'SM SCORE' ? (
+            <>
+              <span>SM</span> <span>SCORE</span>
+            </>
+          ) : (
+            category
+          )}
         </div>
       ))}
     </div>

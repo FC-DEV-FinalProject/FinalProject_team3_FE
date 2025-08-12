@@ -10,6 +10,7 @@ export interface ProfileModel {
   infoAgreement: boolean
   role: string
   birthDate: string
+  joinDate: string
 }
 
 interface ProfileResponseModel {

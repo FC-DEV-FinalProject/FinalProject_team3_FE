@@ -5,8 +5,8 @@ import dynamic from 'next/dynamic'
 import classNames from 'classnames/bind'
 import Highcharts, { SeriesOptionsType } from 'highcharts'
 
+import { CHART_SELECT_OPTIONS } from './constants'
 import styles from './styles.module.scss'
-import { YAXIS_OPTIONS } from './yaxis-options'
 
 const HighchartsReact = dynamic(() => import('highcharts-react-official'), {
   ssr: false,
@@ -14,7 +14,7 @@ const HighchartsReact = dynamic(() => import('highcharts-react-official'), {
 
 const cx = classNames.bind(styles)
 
-type YAxisType = keyof typeof YAXIS_OPTIONS
+type YAxisType = keyof typeof CHART_SELECT_OPTIONS
 
 interface AnalysisChartDataModel {
   dates: string[]
@@ -30,23 +30,23 @@ interface Props {
 const AnalysisChart = ({ analysisChartData: data }: Props) => {
   const getOptionName = (sequence: number) => {
     const key = Object.keys(data.data)[sequence] as YAxisType | undefined
-    return key ? YAXIS_OPTIONS[key] : ''
+    return key ? CHART_SELECT_OPTIONS[key] : ''
   }
+
   if (!data) return <div></div>
+
   const chartOptions: Highcharts.Options = {
     chart: {
       type: 'areaspline',
       height: 367,
       backgroundColor: 'transparent',
-      margin: [10, 60, 10, 60],
+      margin: [10, 75, 10, 75],
       zoomType: 'x',
     } as Highcharts.ChartOptions,
     title: { text: undefined },
     xAxis: {
       visible: false,
       categories: data.dates,
-      min: data.dates.length > 30 ? data.dates.length - 30 : 0,
-      max: data.dates.length - 1,
     },
     yAxis: [
       {
@@ -86,7 +86,7 @@ const AnalysisChart = ({ analysisChartData: data }: Props) => {
       align: 'left',
       verticalAlign: 'top',
       layout: 'vertical',
-      x: 40,
+      x: 70,
       y: -10,
       itemStyle: {
         color: '#4D4D4D',

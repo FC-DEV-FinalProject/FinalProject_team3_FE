@@ -16,10 +16,19 @@
     background-color: $color-white;
     border: 1px solid $color-gray-200;
     border-radius: 4px;
+    padding: 0 2px;
     @include typo-b2;
-
+    @include tablet-md {
+      font-size: $text-b3;
+    }
     &:not(:first-child) {
       margin-left: 5px;
+    }
+    & span:nth-child(2) {
+      margin-left: 2px;
+      @include tablet-md {
+        display: none;
+      }
     }
   }
 }

@@ -16,7 +16,7 @@ import { useAuthStore } from '@/shared/stores/use-auth-store'
 import type { LoginFormDataModel } from '@/shared/types/auth'
 import { Button } from '@/shared/ui/button'
 import Checkbox from '@/shared/ui/check-box'
-import { Input } from '@/shared/ui/input'
+import Input from '@/shared/ui/input'
 import FindEmailModal from '@/shared/ui/modal/find-email-modal'
 import FindPasswordModal from '@/shared/ui/modal/find-password-modal'
 import { validate } from '@/shared/utils/validation'
@@ -82,7 +82,6 @@ const SignInPage = () => {
       const response = await loginMutation.mutateAsync(formData)
 
       if (!response.data.isSuccess) {
-        setErrors(response.data.message || ERROR_MESSAGES.AUTH.LOGIN_FAILED)
         return
       }
 
@@ -102,10 +101,10 @@ const SignInPage = () => {
       router.replace(PATH.STRATEGIES)
     } catch (err) {
       if (err instanceof AxiosError) {
-        if (err.response) {
-          setErrors(err.response.data.message)
+        if (!err.response?.data.isSuccess) {
+          setErrors(err.response?.data.message)
         } else {
-          setErrors(ERROR_MESSAGES.NETWORK.ERROR)
+          setErrors(ERROR_MESSAGES.AUTH.LOGIN_FAILED)
         }
       } else {
         setErrors(ERROR_MESSAGES.AUTH.LOGIN_FAILED)

@@ -9,8 +9,8 @@ import classNames from 'classnames/bind'
 import Modal from '.'
 import { Button } from '../button'
 import { ErrorMessage } from '../error-message'
-import { Input } from '../input'
-import { Textarea } from '../textarea'
+import Input from '../input'
+import Textarea from '../textarea'
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)

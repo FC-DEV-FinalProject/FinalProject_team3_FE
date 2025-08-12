@@ -1,4 +1,5 @@
 import axiosInstance from '@/shared/api/axios'
+import { APIResponseBaseModel } from '@/shared/types/response'
 
 export interface NoticeUserModel {
   userId: number
@@ -13,9 +14,7 @@ export interface NoticeModel {
   createdAt: string
 }
 
-interface NoticesResponseModel {
-  isSuccess: boolean
-  message: string
+interface NoticesResponseModel extends APIResponseBaseModel<boolean> {
   result: {
     content: NoticeModel[]
     page: number
@@ -32,13 +31,14 @@ interface Props {
   size?: number
 }
 
-const getNotices = async ({ page = 1, size = 9 }: Props = {}): Promise<
-  NoticesResponseModel['result']
-> => {
+const getNotices = async ({ page = 1, size = 9 }: Props = {}) => {
   try {
-    const response = await axiosInstance.get<NoticesResponseModel>(
-      `/api/notices?page=${page}&size=${size}`
-    )
+    const response = await axiosInstance<NoticesResponseModel>(`/api/notices`, {
+      params: {
+        page,
+        size,
+      },
+    })
     return response.data.result
   } catch (err) {
     console.error(err)

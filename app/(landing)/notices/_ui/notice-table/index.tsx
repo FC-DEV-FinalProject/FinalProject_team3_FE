@@ -8,6 +8,7 @@ import { PATH } from '@/shared/constants/path'
 import { usePagination } from '@/shared/hooks/custom/use-pagination'
 import Pagination from '@/shared/ui/pagination'
 import VerticalTable from '@/shared/ui/table/vertical'
+import { calculateTableNumber } from '@/shared/utils/table'
 
 import useGetNotices from '../../_hooks/use-notice'
 import styles from './styles.module.scss'
@@ -38,7 +39,7 @@ const NoticeTable = () => {
   }
 
   const notices = data.content.map((values, idx) => ({
-    no: (page - 1) * COUNT_PER_PAGE + (idx + 1),
+    no: calculateTableNumber({ page, idx, countPerPage: COUNT_PER_PAGE }),
     title: <Link href={`${PATH.NOTICES}/${values.noticeId}/detail`}>{values.title}</Link>,
     createdAt: values.createdAt,
   }))

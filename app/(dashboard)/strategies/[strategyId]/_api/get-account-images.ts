@@ -1,18 +1,9 @@
-import { ImageDataModel } from '@/app/(dashboard)/_ui/analysis-container/account-content'
-
 import axiosInstance from '@/shared/api/axios'
+import { AccountImageDataModel } from '@/shared/types/strategy-data'
 
-interface ResponseModel {
-  content: ImageDataModel
-  first: boolean
-  last: boolean
-  page: number
-  size: number
-  totalElements: number
-  totalPages: number
-}
-
-const getAccountImages = async (strategyId: number): Promise<ResponseModel | null | undefined> => {
+const getAccountImages = async (
+  strategyId: number
+): Promise<AccountImageDataModel | null | undefined> => {
   try {
     const response = await axiosInstance.get(`/api/strategies/${strategyId}/account-images`)
     return response.data.result

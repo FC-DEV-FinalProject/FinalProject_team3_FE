@@ -59,6 +59,11 @@ export const isAdmin = (user: UserModel | null): boolean => {
   return user.role.includes('ADMIN')
 }
 
+export const isSuperAdmin = (user: UserModel | null): boolean => {
+  if (!user) return false
+  return user.role.includes('SUPER_ADMIN')
+}
+
 export const isTrader = (user: UserModel | null): boolean => {
   if (!user) return false
   return user.role.includes('TRADER')

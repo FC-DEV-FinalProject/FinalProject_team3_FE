@@ -23,9 +23,12 @@ export const usePagination = ({ basePath, pageSize }: Props): UsePaginationRetur
 
   useEffect(() => {
     if (!searchParams.size) {
-      router.push(`${basePath}?page=1&size=${size ?? pageSize}`)
+      const params = new URLSearchParams(searchParams)
+      params.set('page', String(page))
+      params.set('size', String(size))
+      router.replace(`${basePath}?${params.toString()}`)
     }
-  }, [searchParams, router, basePath, pageSize, size])
+  }, [searchParams, router, basePath, pageSize, size, page])
 
   const handlePageChange = (page: number) => {
     router.push(`${basePath}?page=${page}&size=${pageSize}`)

@@ -14,15 +14,31 @@ const cx = classNames.bind(styles)
 interface Props extends ComponentPropsWithoutRef<'input'> {
   accept?: string
   preview?: string
+  multiple?: boolean
+  className?: string
 }
 
-const FileInput = ({ preview, accept = '*', value, onChange, ...props }: Props) => {
+const FileInput = ({
+  preview,
+  accept = '*',
+  onChange,
+  multiple = false,
+  className,
+  ...props
+}: Props) => {
   return (
-    <div className={cx('container')}>
+    <div className={cx('container', className)}>
       {preview && (
         <Image width={24} height={24} src={preview} alt="Preview" className={cx('preview')} />
       )}
-      <input type="file" accept={accept} onChange={onChange} className={cx('input')} {...props} />
+      <input
+        type="file"
+        accept={accept}
+        multiple={multiple}
+        onChange={onChange}
+        className={cx('input')}
+        {...props}
+      />
       <FileIcon className={cx('icon')} />
     </div>
   )

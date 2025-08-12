@@ -1,11 +1,15 @@
-// import { TABLE_DATA } from '@/app/admin/notices/tabledata'
+'use client'
+
 import { ReactNode } from 'react'
 
 import { NoticeListContentModel } from '@/app/(landing)/notices/_ui/notice-table'
 import classNames from 'classnames/bind'
 
-import { DailyAnalysisModel, MonthlyAnalysisModel } from '@/shared/types/strategy-data'
-import { Button } from '@/shared/ui/button'
+import {
+  DailyAnalysisModel,
+  MonthlyAnalysisModel,
+  MyDailyAnalysisModel,
+} from '@/shared/types/strategy-data'
 import { formatNumber } from '@/shared/utils/format'
 import sliceArray from '@/shared/utils/slice-array'
 
@@ -13,8 +17,9 @@ import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
 
-type TableBodyDataType =
+export type TableBodyDataType =
   | DailyAnalysisModel
+  | MyDailyAnalysisModel
   | MonthlyAnalysisModel
   | NoticeListContentModel
   | Array<ReactNode | string | number>
@@ -24,8 +29,10 @@ export interface VerticalTableProps {
   tableBody: TableBodyDataType[]
   countPerPage: number
   currentPage: number
-  isEditable?: boolean
   className?: string
+  renderActions?: (row: TableBodyDataType) => ReactNode | null
+  hideFirstColumn?: boolean
+  colWidths?: number[]
 }
 
 const VerticalTable = ({
@@ -33,21 +40,33 @@ const VerticalTable = ({
   tableBody,
   countPerPage,
   currentPage,
-  isEditable = false,
   className,
+  renderActions,
+  hideFirstColumn = false,
+  colWidths = [],
 }: VerticalTableProps) => {
   const hasData = tableBody.length > 0
   const slicedTableBody = sliceArray(tableBody, countPerPage, currentPage)
 
+  const widths = colWidths.length > 0 ? colWidths : new Array(tableHead.length).fill(1)
+
+  const totalWidth = widths.reduce((sum, width) => sum + width, 0)
+
   return (
     <div className={cx('container', className)}>
       <table>
+        <colgroup>
+          {widths.map((width, index) => (
+            <col key={index} style={{ width: `${(width / totalWidth) * 100}%` }} />
+          ))}
+          {renderActions && <col style={{ width: '150px' }} />}
+        </colgroup>
         <thead>
           <tr>
             {tableHead.map((head) => (
               <td key={head}>{head}</td>
             ))}
-            {isEditable && <td></td>}
+            {renderActions && <td></td>}
           </tr>
         </thead>
         {hasData && (
@@ -55,20 +74,11 @@ const VerticalTable = ({
             {slicedTableBody.map((row) => (
               <tr key={Object.values(row)[0]}>
                 {Object.values(row)
-                  .slice(isEditable ? 1 : 0)
+                  .slice(hideFirstColumn ? 1 : 0)
                   .map((data, idx) => (
-                    <td key={data + idx}>{formatNumber(data)}</td>
+                    <td key={`${data}-${idx}`}>{formatNumber(data)}</td>
                   ))}
-                {isEditable && (
-                  <td className={cx('button-container')}>
-                    <Button size="small" variant="outline" className={cx('edit-button')}>
-                      수정
-                    </Button>
-                    <Button size="small" variant="filled" className={cx('delete-button')}>
-                      삭제
-                    </Button>
-                  </td>
-                )}
+                {renderActions && <td className={cx('button-container')}>{renderActions(row)}</td>}
               </tr>
             ))}
           </tbody>
@@ -83,18 +93,52 @@ const VerticalTable = ({
   )
 }
 
-const Skeleton = ({ tableHead, countPerPage, isEditable = false }: Partial<VerticalTableProps>) => {
+const Skeleton = ({
+  tableHead,
+  countPerPage,
+  renderActions,
+  colWidths = [],
+}: Partial<VerticalTableProps>) => {
+  if (!tableHead || !countPerPage) return null
+
+  const widths = colWidths.length > 0 ? colWidths : new Array(tableHead.length).fill(1)
+
+  const totalWidth = widths.reduce((sum, width) => sum + width, 0)
+
   return (
     <div className={cx('container')}>
       <table>
+        <colgroup>
+          {widths.map((width, index) => (
+            <col key={index} style={{ width: `${(width / totalWidth) * 100}%` }} />
+          ))}
+          {renderActions && <col style={{ width: '150px' }} />}
+        </colgroup>
         <thead>
           <tr>
-            {tableHead?.map((head) => <td key={head}>{head}</td>)}
-            {isEditable && <td></td>}
+            {tableHead.map((head) => (
+              <td key={head}>{head}</td>
+            ))}
+            {renderActions && <td></td>}
           </tr>
         </thead>
+        <tbody>
+          {[...Array(countPerPage)].map((_, rowIdx) => (
+            <tr key={rowIdx}>
+              {tableHead.map((_, colIdx) => (
+                <td key={colIdx} className={cx('skeleton-cell')}>
+                  <div className={cx('skeleton-content')} />
+                </td>
+              ))}
+              {renderActions && (
+                <td className={cx('button-container')}>
+                  <div className={cx('skeleton-button')} />
+                </td>
+              )}
+            </tr>
+          ))}
+        </tbody>
       </table>
-      <div className={cx('no-data')} style={{ height: `calc(40px * ${countPerPage}` }} />
     </div>
   )
 }

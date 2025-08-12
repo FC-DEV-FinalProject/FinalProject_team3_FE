@@ -21,20 +21,25 @@ const headerStyles = {
 
 interface Props {
   label: string
+  href?: string
 }
 
-const BackHeader = ({ label }: Props) => {
-  return <Header Left={<Left label={label} />} styles={headerStyles} />
+const BackHeader = ({ label, href }: Props) => {
+  return <Header Left={<Left label={label} href={href} />} styles={headerStyles} />
 }
 
-const Left = ({ label }: Props) => {
+const Left = ({ label, href }: Props) => {
   const router = useRouter()
-  const onClick = () => {
-    router.back()
+  const handleClick = () => {
+    if (href) {
+      router.push(href)
+    } else {
+      router.back()
+    }
   }
 
   return (
-    <button onClick={onClick} className={cx('container')}>
+    <button onClick={handleClick} className={cx('container')}>
       <BackIcon />
       <span>{label}</span>
     </button>

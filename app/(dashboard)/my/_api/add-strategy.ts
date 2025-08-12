@@ -49,14 +49,15 @@ export interface StrategyModel {
   stockTypeIds: number[]
   minimumInvestmentAmount: MinimumInvestmentAmountType
   description: string
-  proposalFile?: ProposalFileInfoModel
+  proposalFile: ProposalFileInfoModel | null
 }
 
 export interface StrategyResponseModel {
   isSuccess: boolean
   message: string
   result: {
-    presignedUrl: string
+    strategyId: number
+    presignedUrl?: string
   }
   code: number
 }

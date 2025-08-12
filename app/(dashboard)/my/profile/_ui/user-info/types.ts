@@ -11,11 +11,13 @@ export interface ProfileFormModel {
   passwordConfirm: string
   phone: string
   birthDate: string
+  joinDate: string
 }
 
 export interface ProfileFormStateModel {
   isNicknameVerified: boolean
   isPhoneVerified: boolean
+  isPasswordVerified: boolean
 }
 
 export interface ProfileFormErrorsModel {
@@ -23,4 +25,21 @@ export interface ProfileFormErrorsModel {
   password?: ProfileErrorMessageType | null
   passwordConfirm?: ProfileErrorMessageType | null
   phone?: ProfileErrorMessageType | null
+}
+
+export interface UserProfileModel {
+  nickName: string
+  phoneNum: string
+  password?: string
+  email: string
+  imageChange: boolean
+}
+
+export interface ProfileModel {
+  userName: string
+  nickname: string
+  email: string
+  phone: string
+  birthDate: string
+  profileImage?: string | null
 }

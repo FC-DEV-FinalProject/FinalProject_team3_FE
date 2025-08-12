@@ -14,7 +14,7 @@ interface StatisticsDataModel {
 }
 
 interface Props {
-  statisticsData: StatisticsDataModel
+  statisticsData?: StatisticsDataModel
 }
 
 const StatisticsContent = ({ statisticsData }: Props) => {

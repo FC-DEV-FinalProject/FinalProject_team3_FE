@@ -35,10 +35,8 @@ const AccordionContainer = ({ optionId, title, panels }: Props) => {
 
   return (
     <AccordionContext.Provider value={{ openIds, panelRef, handleButtonIds }}>
-      <div>
-        <AccordionButton optionId={optionId} title={title} size={panels?.length} />
-        <AccordionPanel optionId={optionId} panels={panels} />
-      </div>
+      <AccordionButton optionId={optionId} title={title} size={panels?.length} />
+      <AccordionPanel optionId={optionId} panels={panels} />
     </AccordionContext.Provider>
   )
 }

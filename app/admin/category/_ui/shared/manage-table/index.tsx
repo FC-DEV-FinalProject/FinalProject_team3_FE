@@ -7,7 +7,6 @@ import VerticalTable from '@/shared/ui/table/vertical'
 
 import { COUNT_PER_PAGE } from './constant'
 import styles from './styles.module.scss'
-import addIndexToData from './utils/add-index-to-data'
 
 const cx = classNames.bind(styles)
 
@@ -15,7 +14,6 @@ interface Props {
   active?: boolean
   domain: '종목' | '매매 유형'
   data: (ReactNode | string | number)[][]
-  //TODO: domain이 종록일 때만 쓰는 속성들 컨트롤 하는 법 고민해보기
   size?: number
   currentPage?: number
   setCurrentPage?: Dispatch<SetStateAction<number>>
@@ -38,9 +36,9 @@ const ManageTable = ({
       <span className={cx('title')}>{active ? '활성화' : '비활성화'}</span>
       <VerticalTable
         tableHead={['No.', domain === '종목' ? '종목명' : '매매 유형', '분류', '상태']}
-        tableBody={addIndexToData(data)}
+        tableBody={data}
         countPerPage={size}
-        currentPage={1} // 공통 컴포넌트와의 호환성 문제...
+        currentPage={1}
       />
       {hasData && domain === '종목' && (
         <Pagination

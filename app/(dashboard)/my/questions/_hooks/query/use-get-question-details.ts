@@ -1,5 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 
+import { QUERY_KEY } from '@/shared/constants/query-key'
+
 import getQuestionDetails from '../../_api/get-question-details'
 
 interface Props {
@@ -8,7 +10,7 @@ interface Props {
 
 const useGetQuestionDetails = ({ questionId }: Props) => {
   return useQuery({
-    queryKey: ['questionDetails', questionId],
+    queryKey: [QUERY_KEY.QUESTION_DETAILS, questionId],
     queryFn: () => getQuestionDetails({ questionId }),
   })
 }

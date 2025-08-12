@@ -19,7 +19,11 @@
   gap: 30px;
 }
 
-.textarea {
+.file-input {
+  width: 100%;
+}
+
+.content {
   height: 420px;
 
   &::placeholder {
@@ -31,4 +35,12 @@
   width: 74px;
   height: 30px;
   border: 1px solid $color-gray-300;
+}
+
+.notice-file-list {
+  @include typo-b3;
+  width: 640px;
+  margin-left: auto;
+  margin-top: -28px;
+  font-weight: 500;
 }

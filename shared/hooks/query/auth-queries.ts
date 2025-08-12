@@ -1,5 +1,6 @@
 import { useRouter } from 'next/navigation'
 
+import useSearchingItemStore from '@/app/(dashboard)/strategies/_ui/search-bar/_store/use-searching-item-store'
 import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
 
@@ -39,10 +40,10 @@ export const useLoginMutation = () => {
           isAuthenticated: true,
           user,
         })
-      } catch (error) {
-        console.error('Login process failed:', error)
+      } catch (err) {
+        console.error('Login process failed:', err)
         removeAccessToken()
-        throw error
+        throw err
       }
     },
   })
@@ -59,15 +60,17 @@ export const useLogoutMutation = () => {
         isAuthenticated: false,
         user: null,
       })
+      useSearchingItemStore.getState().actions.resetState()
       router.replace(PATH.SIGN_IN)
     },
-    onError: (error) => {
-      console.error('Logout failed:', error)
+    onError: (err) => {
+      console.error('Logout failed:', err)
       removeAccessToken()
       useAuthStore.getState().setAuthState({
         isAuthenticated: false,
         user: null,
       })
+      useSearchingItemStore.getState().actions.resetState()
       router.replace(PATH.SIGN_IN)
     },
   })
@@ -102,19 +105,19 @@ export const useRefreshTokenMutation = () => {
           isAuthenticated: true,
           user,
         })
-      } catch (error) {
-        console.error('Token refresh process failed:', error)
+      } catch (err) {
+        console.error('Token refresh process failed:', err)
         removeAccessToken()
         useAuthStore.getState().setAuthState({
           isAuthenticated: false,
           user: null,
         })
         router.replace(PATH.SIGN_IN)
-        throw error
+        throw err
       }
     },
-    onError: (error) => {
-      console.error('Token refresh mutation failed:', error)
+    onError: (err) => {
+      console.error('Token refresh mutation failed:', err)
       removeAccessToken()
       useAuthStore.getState().setAuthState({
         isAuthenticated: false,

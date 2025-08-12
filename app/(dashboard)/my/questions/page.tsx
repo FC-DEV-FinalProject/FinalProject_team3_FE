@@ -6,7 +6,7 @@ import classNames from 'classnames/bind'
 
 import { QuestionSearchConditionType } from '@/shared/types/questions'
 import { DropdownValueType } from '@/shared/ui/dropdown/types'
-import { SearchInput } from '@/shared/ui/search-input'
+import SearchInput from '@/shared/ui/search-input'
 import Select from '@/shared/ui/select'
 import Title from '@/shared/ui/title'
 
@@ -64,7 +64,7 @@ const MyQuestionsPage = () => {
         <Title label="문의 내역" />
         <div className={cx('search-wrapper')}>
           <Select
-            size="small"
+            size="medium"
             value={selectedOption}
             placeholder="검색 조건"
             onChange={setSelectedOption}

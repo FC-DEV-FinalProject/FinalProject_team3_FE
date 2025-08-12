@@ -13,6 +13,7 @@ import classNames from 'classnames/bind'
 import { PATH } from '@/shared/constants/path'
 import { UserType } from '@/shared/types/auth'
 
+import useSignupStore from '../../_store/use-signup-store'
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
@@ -25,6 +26,7 @@ interface Props {
 
 const UserTypeCard = ({ userType, title, highlight }: Props) => {
   const router = useRouter()
+  const { setUserType } = useSignupStore((state) => state.actions)
   const userTypeCookie = getUserTypeCookie()
 
   const handleTypeSelect = () => {
@@ -33,6 +35,7 @@ const UserTypeCard = ({ userType, title, highlight }: Props) => {
     }
 
     setUserTypeCookie(userType)
+    setUserType(userType)
     router.push(PATH.SIGN_UP_TERMS_OF_USE)
   }
 

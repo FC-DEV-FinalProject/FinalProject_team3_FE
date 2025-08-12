@@ -12,6 +12,7 @@ export interface AdminUserInfoModel {
   userId: number
   userName: string
   email: string
+  joinDate: string
   imageUrl: string | null
   nickname: string
   phone: string

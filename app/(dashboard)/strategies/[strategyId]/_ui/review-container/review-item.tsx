@@ -6,11 +6,11 @@ import classNames from 'classnames/bind'
 
 import useModal from '@/shared/hooks/custom/use-modal'
 import Avatar from '@/shared/ui/avatar'
+import ReviewGuideModal from '@/shared/ui/modal/review-guide-modal'
 
 import useDeleteReview from '../../_hooks/query/use-delete-review'
 import StarRating from '../star-rating/index'
 import AddReview from './add-review'
-import ReviewGuideModal from './review-guide-modal'
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
@@ -24,7 +24,7 @@ interface Props {
   createdAt: string
   starRating: number
   isReviewer: boolean
-  isAdmin: boolean
+  isAdmin?: boolean
 }
 
 const ReviewItem = ({
@@ -72,7 +72,7 @@ const ReviewItem = ({
               <button onClick={openModal}>삭제</button>
             </>
           )}
-          {!isReviewer && isAdmin && <button>삭제</button>}
+          {!isReviewer && isAdmin && <button onClick={openModal}>삭제</button>}
         </div>
       </div>
       {isEditable ? (
@@ -85,7 +85,7 @@ const ReviewItem = ({
           onCancel={() => setIsEditable(false)}
         />
       ) : (
-        <div className={cx('content')}>{content}</div>
+        <pre className={cx('content')}>{content}</pre>
       )}
       <ReviewGuideModal
         isModalOpen={isModalOpen}

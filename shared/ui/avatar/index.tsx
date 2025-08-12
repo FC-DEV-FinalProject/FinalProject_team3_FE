@@ -23,7 +23,7 @@ const Avatar = ({ src, size = 'small', avatarStyle }: Props) => {
   const [isValidImage, setIsValidImage] = useState(true)
 
   return (
-    <div className={cx('avatar', size, avatarStyle)}>
+    <div className={cx('avatar', size)} style={avatarStyle}>
       {src && isValidImage ? (
         <Image src={src} alt="프로필" fill onError={() => setIsValidImage(false)} />
       ) : (

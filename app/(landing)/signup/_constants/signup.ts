@@ -4,6 +4,8 @@ export const SIGNUP_ERROR_MESSAGES = {
   NICKNAME_LENGTH: '닉네임은 2글자 이상 10글자 이하로 입력해주세요.',
   NICKNAME_CHECK_REQUIRED: '닉네임 중복확인이 필요합니다.',
   NICKNAME_DUPLICATED: '이미 사용 중인 닉네임입니다.',
+  NICKNAME_NOT_ALLOWED:
+    '닉네임은 2~10자 이내로 설정해야 하며, 특수문자는 . _ - 만 사용할 수 있습니다.',
   NICKNAME_CHECK_FAILED: '닉네임 중복 확인에 실패했습니다.',
   NAME_MIN_LENGTH: '이름을 2자 이상 입력해주세요.',
   PASSWORD_REQUIRED: '비밀번호를 입력해주세요.',

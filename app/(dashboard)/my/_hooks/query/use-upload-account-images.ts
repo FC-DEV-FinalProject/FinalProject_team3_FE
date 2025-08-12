@@ -1,5 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
+import { QUERY_KEY } from '@/shared/constants/query-key'
+
 import { uploadAccountImages } from '../../_api/post-account-image'
 
 interface UseUploadAccountImagesProps {
@@ -40,7 +42,7 @@ export const useUploadAccountImages = ({
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['myAccountImages', strategyId],
+        queryKey: [QUERY_KEY.MY_ACCOUNT_IMAGES, strategyId],
         exact: true,
       })
 

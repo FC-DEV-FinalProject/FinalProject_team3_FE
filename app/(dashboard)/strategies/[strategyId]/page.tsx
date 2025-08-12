@@ -55,10 +55,6 @@ const StrategyDetailPage = ({ params }: { params: { strategyId: string } }) => {
     })
   }
 
-  const hasDetailsSideData = detailsSideData?.map((data) => {
-    if (!Array.isArray(data)) return data.data !== undefined
-  })
-
   return (
     <>
       <BackHeader label={'목록으로 돌아가기'} />
@@ -68,7 +64,10 @@ const StrategyDetailPage = ({ params }: { params: { strategyId: string } }) => {
           <>
             <DetailsInformation information={information} strategyId={strategyNumber} />
             <AnalysisContainer strategyId={strategyNumber} />
-            <ReviewContainer strategyId={strategyNumber} />
+            <ReviewContainer
+              strategyId={strategyNumber}
+              isMyStrategy={user?.nickname === information.nickname}
+            />
           </>
         )}
       </Suspense>
@@ -81,18 +80,18 @@ const StrategyDetailPage = ({ params }: { params: { strategyId: string } }) => {
                 isSubscribed={information?.isSubscribed}
                 subscribers={information?.subscriptionCount}
                 onClick={openModal}
+                strategyId={strategyNumber}
               />
-              {hasDetailsSideData?.[0] &&
-                detailsSideData?.map((data, idx) => (
-                  <div key={`${data}_${idx}`}>
-                    <DetailsSideItem
-                      strategyId={strategyNumber}
-                      information={data}
-                      isMyStrategy={user?.nickname === information.nickname}
-                      strategyName={information.strategyName}
-                    />
-                  </div>
-                ))}
+              {detailsSideData?.map((data, idx) => (
+                <div key={`${data}_${idx}`}>
+                  <DetailsSideItem
+                    strategyId={strategyNumber}
+                    information={data}
+                    isMyStrategy={user?.nickname === information.nickname}
+                    strategyName={information.strategyName}
+                  />
+                </div>
+              ))}
             </>
           )}
         </Suspense>

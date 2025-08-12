@@ -1,30 +1,27 @@
 import axiosInstance from '@/shared/api/axios'
+import { APIResponseBaseModel } from '@/shared/types/response'
 
-interface NoticeResponseModel {
-  isSuccess: true
-  message: '공지사항 상세 조회'
+export interface NoticeDetailResponseModel extends APIResponseBaseModel<boolean> {
   result: {
-    title: '제목'
-    content: '내용'
-    createdAt: '2024-12-06 11:24:59'
+    title: string
+    content: string
+    createdAt: string
     files: [
       {
-        fileName: '2.jpg'
-        noticeFileId: 3
+        fileName: string
+        noticeFileId: number
       },
     ]
   }
 }
 
-export const getNoticeDetail = async (noticeId: number): Promise<NoticeResponseModel['result']> => {
+export const getNoticeDetail = async (noticeId: number) => {
   try {
-    const response = await axiosInstance.get<NoticeResponseModel>(`/api/notice/${noticeId}`)
+    const response = await axiosInstance.get<NoticeDetailResponseModel>(`/api/notices/${noticeId}`)
 
-    if (response.data.isSuccess) {
-      return response.data.result
-    } else {
-      throw new Error(response.data.message || '요청 실패')
-    }
+    if (!response.data.isSuccess) throw new Error(response.data.message || '요청 실패')
+
+    return response.data.result
   } catch (err) {
     console.error(err)
     throw new Error('공지사항 조회 실패.')

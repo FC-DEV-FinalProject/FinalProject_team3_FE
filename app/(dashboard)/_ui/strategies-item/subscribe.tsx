@@ -27,9 +27,7 @@ const Subscribe = ({ strategyId, subscriptionStatus, traderName }: Props) => {
   const { mutate } = useGetSubscribe()
 
   useEffect(() => {
-    if (subscriptionStatus) {
-      setIsSubscribed(true)
-    }
+    setIsSubscribed(subscriptionStatus)
   }, [subscriptionStatus])
 
   const handleSubscribe = (e: React.MouseEvent) => {

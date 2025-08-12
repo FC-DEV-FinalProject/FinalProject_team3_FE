@@ -40,6 +40,10 @@
   &.big {
     width: 800px;
   }
+  &.max {
+    width: 100%;
+    max-width: 1000px;
+  }
 }
 
 .icon {

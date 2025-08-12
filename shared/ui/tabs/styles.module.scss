@@ -38,4 +38,7 @@
       background-color: $color-orange-500;
     }
   }
+  @include tablet-md {
+    font-size: $text-b2;
+  }
 }

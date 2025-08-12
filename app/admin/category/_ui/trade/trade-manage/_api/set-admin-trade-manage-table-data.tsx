@@ -1,10 +1,22 @@
 import Image from 'next/image'
 
-import StockActiveStateToggleButton from '../../../stock/stock-manage/_ui/stock-active-state-toggle-button'
+import { Button } from '@/shared/ui/button'
+import { calculateTableNumber } from '@/shared/utils/table'
+
+import InactiveTradeDeleteButton from '../_ui/inactive-trade-delete-button'
+import TradeActiveStateToggleButton from '../_ui/trade-active-state-toggle-button'
 import { TradeResponseModel } from '../types'
 
-const setAdminTradeManageTableData = (data: TradeResponseModel['result']) =>
-  data?.map((data) => [
+interface Props {
+  data: TradeResponseModel['result']
+  isActive: boolean
+  page: number
+  countPerPage: number
+}
+
+const setAdminTradeManageTableData = ({ data, isActive, page, countPerPage }: Props) =>
+  data?.map((data, idx) => [
+    calculateTableNumber({ page, idx, countPerPage }),
     data.tradeName,
     <Image
       src={data.tradeTypeIconUrl}
@@ -13,7 +25,14 @@ const setAdminTradeManageTableData = (data: TradeResponseModel['result']) =>
       height={24}
       key={data.tradeTypeId}
     />,
-    <StockActiveStateToggleButton stockTypeId={data.tradeTypeId} active key={data.tradeTypeId} />,
+    <Button.ButtonGroup key={data.tradeTypeId}>
+      <TradeActiveStateToggleButton
+        active={isActive}
+        tradeTypeId={data.tradeTypeId}
+        key={data.tradeTypeId}
+      />
+      {!isActive && <InactiveTradeDeleteButton tradeTypeId={data.tradeTypeId} />}
+    </Button.ButtonGroup>,
   ]) ?? []
 
 export default setAdminTradeManageTableData

@@ -7,10 +7,24 @@
   border-radius: 5px;
   background-color: $color-white;
   margin-bottom: 18px;
+
+  &.edit {
+    background-color: $color-gray-200;
+  }
+
   span {
     font-size: 18px;
     font-weight: $text-semibold;
     color: $color-gray-800;
     margin-left: 4px;
+  }
+  .trader-button {
+    padding: 10px 20px;
+  }
+  @include tablet-md {
+    padding: 0 20px;
+    span {
+      font-size: $text-b2;
+    }
   }
 }

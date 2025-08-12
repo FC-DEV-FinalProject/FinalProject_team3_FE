@@ -1,7 +1,8 @@
 import { ChangeEvent, useState } from 'react'
 
+import uploadFileWithPresignedUrl from '@/shared/api/upload-file-with-presigned-url'
+
 import getPresignedUrl from '../_api/get-presigned-url'
-import uploadFileWithPresignedUrl from '../_api/upload-file-with-presigned-url'
 
 export type DomainType = 'trade' | 'stock'
 
@@ -27,7 +28,6 @@ const useCategoryIconPost = (domain: DomainType) => {
 
       setImage(iconImage)
 
-      // preview
       const reader = new FileReader()
       reader.onload = (e) => {
         setImagePreview(e.target?.result as string)

@@ -24,6 +24,7 @@ Question.args = {
   nickname: '투자초보',
   profileImage: '',
   createdAt: '2024-11-03T15:00:00',
+  status: '답변 대기',
   isAuthor: false,
   onDelete: () => alert('삭제 버튼 클릭'),
 }

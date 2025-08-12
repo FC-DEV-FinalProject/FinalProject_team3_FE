@@ -14,9 +14,17 @@ interface Props {
   strategyId: number
   information: StrategyDetailsInformationModel
   type?: 'default' | 'my'
+  isEditable?: boolean
+  error?: Error
 }
 
-const DetailsInformation = ({ strategyId, information, type = 'default' }: Props) => {
+const DetailsInformation = ({
+  strategyId,
+  information,
+  type = 'default',
+  error,
+  isEditable = false,
+}: Props) => {
   const percentageToArray = [
     { percent: information.cumulativeProfitRate, label: '누적 수익률' },
     { percent: information.maxDrawdownRate, label: '최대 자본 인하율' },
@@ -29,6 +37,7 @@ const DetailsInformation = ({ strategyId, information, type = 'default' }: Props
     <>
       <div className={cx('information-top')}>
         <StrategyNameBox
+          error={error}
           iconUrls={[
             information.tradeTypeIconUrl,
             ...(information.stockTypeInfo?.stockTypeIconUrls ?? []),
@@ -39,14 +48,17 @@ const DetailsInformation = ({ strategyId, information, type = 'default' }: Props
           ]}
           name={information.strategyName}
           strategyId={strategyId}
+          isEditable={isEditable}
+          hasProposal={information.hasProposal}
         />
         <InvestInformation
           stock={information.stockTypeInfo?.stockTypeNames || []}
           trade={information.tradeTypeName}
           cycle={information.operationCycle}
+          isEditable={isEditable}
         />
       </div>
-      <StrategyIntroduction content={information.strategyDescription} />
+      <StrategyIntroduction content={information.strategyDescription} isEditable={isEditable} />
       {type === 'default' && (
         <div className={cx('percentage-container')}>
           {percentageToArray.map((data) => (

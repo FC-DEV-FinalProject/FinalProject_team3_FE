@@ -25,22 +25,20 @@ export const processExcelFile = (file: File): Promise<RowDataModel[]> => {
         })
 
         const header = jsonData[0]
-        if (!header || header[0] !== '일자' || header[1] !== '입출금' || header[2] !== '일일손익') {
-          throw new Error('올바른 형식의 엑셀 파일이 아닙니다.')
-        }
+        validateHeaders(header)
 
         const rows: RowDataModel[] = jsonData
           .slice(1)
           .filter((row) => row.length >= 3)
           .map((row) => ({
-            date: parseExcelDate(row[0] as number),
-            transaction: Number(row[1]),
-            dailyProfitLoss: Number(row[2]),
+            date: parseExcelDate(row[0] ?? ''),
+            transaction: Number(row[1] ?? 0),
+            dailyProfitLoss: Number(row[2] ?? 0),
           }))
 
         resolve(rows)
-      } catch (error) {
-        reject(error)
+      } catch (err) {
+        reject(err)
       }
     }
 
@@ -49,7 +47,17 @@ export const processExcelFile = (file: File): Promise<RowDataModel[]> => {
   })
 }
 
-const parseExcelDate = (excelDate: number): string => {
+const parseExcelDate = (excelDate: number | string | null): string => {
+  if (excelDate === null) return ''
+
+  const dateStr = String(excelDate).replace(/[^0-9]/g, '')
+  if (dateStr.length === 8) {
+    const year = dateStr.substring(0, 4)
+    const month = dateStr.substring(4, 6)
+    const day = dateStr.substring(6, 8)
+    return `${year}-${month}-${day}`
+  }
+
   if (typeof excelDate === 'number') {
     const date = XLSX.SSF.parse_date_code(excelDate)
     const year = date.y
@@ -57,5 +65,18 @@ const parseExcelDate = (excelDate: number): string => {
     const day = String(date.d).padStart(2, '0')
     return `${year}-${month}-${day}`
   }
+
   return String(excelDate)
+}
+
+const validateHeaders = (header: (string | number | null)[]) => {
+  const requiredHeaders = ['일자', '입출금', '일손익']
+
+  const missingHeaders = requiredHeaders.filter(
+    (requiredHeader) => !header.some((h) => h?.toString().includes(requiredHeader))
+  )
+
+  if (missingHeaders.length > 0) {
+    throw new Error(`다음 헤더를 포함해야 합니다: ${missingHeaders.join(', ')}`)
+  }
 }

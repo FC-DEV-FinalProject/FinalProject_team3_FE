@@ -11,6 +11,7 @@ interface Props extends TopStrategyCardCommonProps {
 }
 
 const TopSmScoreCard = ({
+  id,
   size = 'small',
   ranking,
   nickname,
@@ -20,7 +21,7 @@ const TopSmScoreCard = ({
   score,
 }: Props) => {
   return (
-    <TopStrategyCard size={size}>
+    <TopStrategyCard size={size} id={id}>
       <TopStrategyCard.ContentsWrapper>
         <TopStrategyCard.Content ranking={ranking} nickname={nickname} title={title} />
         <TopStrategyCard.SmScore score={score} />

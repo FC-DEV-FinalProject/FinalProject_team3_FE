@@ -1,0 +1,21 @@
+$color-waiting: $color-orange-600;
+$color-completed: $color-indigo;
+
+.container {
+  width: fit-content;
+  text-align: center;
+  padding: 7px 16px;
+  border-radius: 4px;
+  border: 1px solid;
+  @include typo-c1;
+
+  &.waiting {
+    color: $color-waiting;
+    border-color: $color-waiting;
+  }
+
+  &.completed {
+    color: $color-completed;
+    border-color: $color-completed;
+  }
+}

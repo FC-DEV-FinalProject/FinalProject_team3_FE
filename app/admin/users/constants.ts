@@ -15,12 +15,12 @@ export const tabs: Array<TabItemModel> = [
   { label: '관리자', id: 'ADMIN' },
 ]
 
-export const InvestorOptions: DropdownOptionModel[] = [
+export const investorOptions: DropdownOptionModel[] = [
   { label: '일반', value: 'INVESTOR' },
   { label: '관리자', value: 'INVESTOR_ADMIN' },
 ]
 
-export const TraderOptions: DropdownOptionModel[] = [
+export const traderOptions: DropdownOptionModel[] = [
   { label: '트레이더', value: 'TRADER' },
   { label: '관리자', value: 'TRADER_ADMIN' },
 ]

@@ -8,13 +8,13 @@ import Select from '@/shared/ui/select'
 
 import useGetAnalysisChart from '../../strategies/[strategyId]/_hooks/query/use-get-analysis-chart'
 import AnalysisChart from './analysis-chart'
+import { CHART_SELECT_OPTIONS } from './constants'
 import styles from './styles.module.scss'
 import TabsWithTable from './tabs-width-table'
-import { YAXIS_OPTIONS } from './yaxis-options'
 
 const cx = classNames.bind(styles)
 
-export type AnalysisChartOptionsType = keyof typeof YAXIS_OPTIONS
+export type AnalysisChartOptionsType = keyof typeof CHART_SELECT_OPTIONS
 
 interface Props {
   strategyId: number
@@ -27,12 +27,9 @@ const AnalysisContainer = ({ strategyId, type = 'default' }: Props) => {
     useState<AnalysisChartOptionsType>('CUMULATIVE_PROFIT_LOSS')
   const { data: chartData } = useGetAnalysisChart({ strategyId, firstOption, secondOption })
 
-  const optionsToArray = Object.entries(YAXIS_OPTIONS)
-  const options: { value: string; label: string }[] = []
-
-  for (const [key, value] of optionsToArray) {
-    options.push({ value: key, label: value })
-  }
+  const options = Object.entries(CHART_SELECT_OPTIONS).map((option) => {
+    return { value: option[0], label: option[1] }
+  })
 
   return (
     <div className={cx('container')}>

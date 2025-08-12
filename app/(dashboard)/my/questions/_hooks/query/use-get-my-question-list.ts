@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 
+import { QUERY_KEY } from '@/shared/constants/query-key'
 import { UserType } from '@/shared/types/auth'
 import { QuestionSearchOptionsModel } from '@/shared/types/questions'
 
@@ -14,7 +15,7 @@ interface Props {
 
 const useGetMyQuestionList = ({ page, size, userType, options }: Props) => {
   return useQuery({
-    queryKey: ['questionList', page, size, options],
+    queryKey: [QUERY_KEY.QUESTION_LIST, page, size, options],
     queryFn: () => {
       const { keyword, searchCondition, stateCondition } = options
       return getMyQuestionList({

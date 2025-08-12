@@ -2,6 +2,7 @@
   padding: 20px;
   border-radius: 5px;
   background-color: $color-white;
+
   .analysis-header {
     display: flex;
     justify-content: space-between;
@@ -29,21 +30,29 @@
 .table-wrapper {
   margin-top: 20px;
   position: relative;
+
   .edit-button-container {
     display: flex;
     justify-content: space-between;
     margin-bottom: 30px;
+
     .edit-button,
     .delete-button {
       padding: 7px 18px;
     }
+
     .delete-button:disabled {
       background-color: transparent;
     }
   }
+
   &.analysis {
     margin-top: 40px;
   }
+  &.my-analysis {
+    margin-top: 20px;
+  }
+
   .excel-button {
     height: 30px;
     position: absolute;
@@ -57,15 +66,18 @@
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(1, 1fr);
   column-gap: 20px;
+
   &.line {
     grid-template-rows: repeat(2, 1fr);
     row-gap: 10px;
   }
+
   .image-data {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
     .image {
       position: relative;
       width: 100%;
@@ -74,11 +86,13 @@
       cursor: pointer;
       overflow: hidden;
     }
+
     span {
       text-align: center;
       @include typo-c1;
     }
   }
+
   .title-wrapper {
     display: flex;
     justify-content: center;
@@ -100,13 +114,23 @@
 .button-container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   height: 30px;
-  margin-top: -20px;
-  margin-bottom: 10px;
+  gap: 8px;
+  padding: 0 10px;
 
-  button.upload-button {
-    height: 100%;
+  button.upload-button,
+  button.delete-all-button {
     padding: 7px 18px;
     margin-right: 10px;
+  }
+
+  button.delete-button,
+  button.edit-button {
+    min-width: 60px;
+    height: 24px;
+    padding: 7px 16px;
+    border-radius: 16px;
+    border: 1px solid $color-gray-300;
   }
 }

@@ -2,10 +2,14 @@
 
 import { useRef, useState } from 'react'
 
+import { useRouter, useSearchParams } from 'next/navigation'
+
 import classNames from 'classnames/bind'
 
+import { STRATEGIES_PAGE_COUNT } from '@/shared/constants/count-per-page'
+import { PATH } from '@/shared/constants/path'
 import { Button } from '@/shared/ui/button'
-import { SearchInput } from '@/shared/ui/search-input'
+import SearchInput from '@/shared/ui/search-input'
 
 import useGetStrategiesSearch from '../../_hooks/query/use-get-strategies-search'
 import usePostStrategies from '../../_hooks/query/use-post-strategies'
@@ -27,23 +31,19 @@ interface AccordionMenuDataModel {
 const SearchBarContainer = () => {
   const [isMainTab, setIsMainTab] = useState(true)
   const searchTerms = useSearchingItemStore((state) => state.searchTerms)
-  const errOptions = useSearchingItemStore((state) => state.errOptions)
-  const { setSearchWord, setAlgorithm, resetState, validateRangeValues } = useSearchingItemStore(
+  const { setSearchWord, setAlgorithm, resetState } = useSearchingItemStore(
     (state) => state.actions
   )
   const searchRef = useRef<HTMLInputElement>(null)
   const { data } = useGetStrategiesSearch()
-  const { refetch } = usePostStrategies({ page: 1, size: 8, searchTerms })
+  const params = useSearchParams()
+  const router = useRouter()
+  const page = parseInt(params.get('page') || '1')
+  const { refetch } = usePostStrategies({ page, size: 8, searchTerms })
 
   const handleSearchWord = () => {
     if (searchRef.current) {
       setSearchWord(searchRef.current.value)
-    }
-  }
-
-  const handleEnterSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      onSearch()
     }
   }
 
@@ -56,9 +56,13 @@ const SearchBarContainer = () => {
   }
 
   const onSearch = async () => {
-    await validateRangeValues()
-    if (errOptions === null || errOptions.length === 0) {
-      refetch()
+    const { validateRangeValues } = useSearchingItemStore.getState().actions
+    const errOptions = validateRangeValues()
+    if (errOptions?.length === 0) {
+      if (page !== 1) {
+        await router.replace(`${PATH.STRATEGIES}?page=1&size=${STRATEGIES_PAGE_COUNT}`)
+      }
+      await refetch()
     }
   }
 
@@ -85,16 +89,17 @@ const SearchBarContainer = () => {
 
   return (
     <>
-      <div className={cx('searchInput-wrapper')}>
+      <div className={cx('search-input-wrapper')}>
         <SearchInput
           ref={searchRef}
+          className={cx('input')}
           placeholder="전략명을 검색하세요."
           onChange={handleSearchWord}
-          onKeyDown={(e) => handleEnterSearch(e)}
           onSearchIconClick={onSearch}
+          maxLength={16}
         />
       </div>
-      <div className={cx('searchInput-wrapper')}>
+      <div className={cx('search-input-wrapper')}>
         <SearchBarTab isMainTab={isMainTab} onChangeTab={setIsMainTab} />
         {isMainTab
           ? ACCORDION_MENU.map((menu) => (

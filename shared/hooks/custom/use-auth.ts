@@ -2,7 +2,7 @@ import { useCallback, useEffect } from 'react'
 
 import { usePathname } from 'next/navigation'
 
-import { AUTH_TIME } from '@/shared/constants/auth'
+import { AUTH_TIME, STORAGE_KEYS } from '@/shared/constants/auth'
 import { useLogoutMutation } from '@/shared/hooks/query/auth-queries'
 import { getAccessToken } from '@/shared/lib/auth-tokens'
 import { useAuthStore } from '@/shared/stores/use-auth-store'
@@ -31,7 +31,7 @@ export const useAuth = () => {
       }
 
       if (isAdmin(user)) {
-        if (localStorage.getItem('access_token')) {
+        if (!sessionStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN)) {
           logout()
           return null
         }
@@ -42,8 +42,8 @@ export const useAuth = () => {
         timeUntilExpiry,
         isNearExpiry: timeUntilExpiry < AUTH_TIME.ADMIN_EXPIRY_WARNING,
       }
-    } catch (error) {
-      console.error('Token status check failed:', error)
+    } catch (err) {
+      console.error('Token status check failed:', err)
       logout()
       return null
     }

@@ -22,6 +22,7 @@ export interface TopCardContentDetailsProps {
 }
 
 export interface TopStrategyCardCommonProps {
+  id: number
   ranking: number
   nickname: string
   title: string

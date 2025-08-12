@@ -1,5 +1,5 @@
 .page-container {
-  padding: 0 15px;
+  padding: 0 15px 20px;
 }
 
 .title {
@@ -8,4 +8,15 @@
 
 .card-wrapper {
   margin-bottom: 54px;
+}
+
+.spinner {
+  margin-top: 200px;
+}
+
+.empty-message {
+  margin-top: 180px;
+  text-align: center;
+  @include typo-b1;
+  color: $color-gray-600;
 }

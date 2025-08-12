@@ -28,7 +28,7 @@ const Modal = ({
 
   const modalRoot = document.getElementById('modal-root')
 
-  if (!isOpen || !modalRoot) return null
+  if (!modalRoot) return null
 
   return createPortal(
     <>

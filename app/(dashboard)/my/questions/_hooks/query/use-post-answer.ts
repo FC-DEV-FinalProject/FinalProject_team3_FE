@@ -1,5 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
+import { QUERY_KEY } from '@/shared/constants/query-key'
+
 import postAnswer from '../../_api/post-answer'
 
 const usePostAnswer = (questionId: number) => {
@@ -8,11 +10,11 @@ const usePostAnswer = (questionId: number) => {
     mutationFn: (content: string) => postAnswer(questionId, content),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['questionDetails', questionId],
+        queryKey: [QUERY_KEY.QUESTION_DETAILS, questionId],
       })
 
       queryClient.invalidateQueries({
-        queryKey: ['questionList'],
+        queryKey: [QUERY_KEY.QUESTION_LIST],
       })
     },
   })

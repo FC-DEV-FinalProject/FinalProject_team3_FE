@@ -16,8 +16,9 @@ const Footer = () => {
         <FooterLogo />
         <div className={cx('info-wrapper')}>
           <div className={cx('info')}>
-            <strong>(주)인베스트메틱</strong>
+            <strong>(주) 시스메틱</strong>
             <ul className={cx('contents')}>
+              <li>대표이사: 박혜정</li>
               <li>사업자 등록 번호 ㅣ 711-86-00050</li>
               <li>통신판매업신고 ㅣ 제2020-서울 영등포-2864호</li>
               <li>특허출원번호 ㅣ 10-2016-00262203</li>
@@ -26,10 +27,8 @@ const Footer = () => {
           <div className={cx('info')}>
             <strong>CONTACT</strong>
             <ul className={cx('contents')}>
-              <li>
-                서울시 영등포구 당산로41길 11, <br />
-                E동 1202호
-              </li>
+              <li>서울시 영등포구 당산로41길 11, E동 1202호</li>
+              <li>ceo@sysmetic.co.kr</li>
               <li>+82-2-6338-1880</li>
             </ul>
           </div>

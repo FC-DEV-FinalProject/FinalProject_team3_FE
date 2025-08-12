@@ -6,7 +6,7 @@ import { useAnalysisUploadMutation } from '@/app/(dashboard)/my/_hooks/query/use
 import classNames from 'classnames/bind'
 
 import { Button } from '@/shared/ui/button'
-import { Input } from '@/shared/ui/input'
+import Input from '@/shared/ui/input'
 
 import styles from './styles.module.scss'
 
@@ -184,6 +184,9 @@ const DirectInputForm = ({ strategyId, onClose }: Props) => {
           </div>
         </div>
       ))}
+      <p className={cx('guide-message')}>
+        *일간분석 데이터 업로드 후 통계지표 집계 및 반영까지 약간의 시간이 소요될 수 있습니다.
+      </p>
 
       {error && <p className={cx('error-message')}>{error}</p>}
 

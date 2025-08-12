@@ -8,12 +8,12 @@ import { LinkButton } from '@/shared/ui/link-button'
 import useGetProfile from '../_hooks/query/use-get-profile'
 import UserInfo from './_ui/user-info'
 import UserProfile from './_ui/user-profile'
-import styles from './page.module.scss'
+import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
 
 const MyProfilePage = () => {
-  const { data: profile, isLoading } = useGetProfile()
+  const { data: profile } = useGetProfile()
 
   if (!profile) {
     return null
@@ -25,7 +25,12 @@ const MyProfilePage = () => {
       <div className={cx('wrapper')}>
         <UserInfo profile={profile} />
         <div className={cx('user-profile')}>
-          <UserProfile role={profile.role} nickname={profile.nickname} email={profile.email} />
+          <UserProfile
+            role={profile.role}
+            nickname={profile.nickname}
+            email={profile.email}
+            imageURL={profile.imageUrl ? profile.imageUrl : undefined}
+          />
           <div className={cx('link-button')}>
             <LinkButton href={PATH.PROFILE_WITHDRAW}>탈퇴하기</LinkButton>
           </div>

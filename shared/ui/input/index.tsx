@@ -15,9 +15,10 @@ interface Props extends ComponentPropsWithoutRef<'input'> {
   inputSize?: InputSizeType
   errorMessage?: string | null
   isWhiteDisabled?: boolean
+  hideErrorStyle?: boolean
 }
 
-export const Input = forwardRef<HTMLInputElement, Props>(
+const Input = forwardRef<HTMLInputElement, Props>(
   (
     {
       inputSize = 'medium',
@@ -25,6 +26,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
       value,
       errorMessage,
       isWhiteDisabled = false,
+      hideErrorStyle = false,
       onChange,
       ...props
     },
@@ -39,7 +41,10 @@ export const Input = forwardRef<HTMLInputElement, Props>(
           className={cx(
             'input',
             inputSize,
-            { error: !!errorMessage, 'white-disabled': isWhiteDisabled },
+            {
+              error: !!errorMessage && !hideErrorStyle,
+              'white-disabled': isWhiteDisabled,
+            },
             className
           )}
           {...props}
@@ -51,3 +56,5 @@ export const Input = forwardRef<HTMLInputElement, Props>(
 )
 
 Input.displayName = 'Input'
+
+export default Input

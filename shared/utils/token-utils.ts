@@ -38,8 +38,8 @@ export const refreshToken = async (): Promise<string | null> => {
     setAccessToken(newAccessToken, currentUser)
     pendingRefreshRequests.forEach((callback) => callback(newAccessToken))
     return newAccessToken
-  } catch (error) {
-    console.error('Token refresh failed:', error)
+  } catch (err) {
+    console.error('Token refresh failed:', err)
     return null
   } finally {
     isRefreshInProgress = false
@@ -54,8 +54,8 @@ export const isTokenExpired = (token: string): boolean => {
     const expiryTime = decoded.exp * 1000
 
     return expiryTime - currentTime <= AUTH_TIME.SAFETY_MARGIN
-  } catch (error) {
-    console.error('Token expiry check failed:', error)
+  } catch (err) {
+    console.error('Token expiry check failed:', err)
     return true
   }
 }
@@ -67,8 +67,8 @@ export const isNearExpiry = (token: string): boolean => {
     const expiryTime = decoded.exp * 1000
 
     return expiryTime - currentTime < AUTH_TIME.ADMIN_EXPIRY_WARNING
-  } catch (error) {
-    console.error('Near expiry check failed:', error)
+  } catch (err) {
+    console.error('Near expiry check failed:', err)
     return true
   }
 }
@@ -79,8 +79,8 @@ export const getEmailFromToken = (token: string | null): string | null => {
   try {
     const decoded = jwtDecode<TokenPayloadModel>(token)
     return decoded.email || null
-  } catch (error) {
-    console.error('Email extraction failed:', error)
+  } catch (err) {
+    console.error('Email extraction failed:', err)
     return null
   }
 }
@@ -92,8 +92,8 @@ export const getTimeUntilExpiry = (token: string): number => {
     const expiryTime = decoded.exp * 1000
 
     return Math.max(0, expiryTime - currentTime)
-  } catch (error) {
-    console.error('Time until expiry calculation failed:', error)
+  } catch (err) {
+    console.error('Time until expiry calculation failed:', err)
     return 0
   }
 }

@@ -2,6 +2,8 @@ $small-width: 90px;
 $small-height: 30px;
 $large-width: 160px;
 $large-height: 40px;
+$medium-width: 124px;
+$medium-height: 30px;
 
 $color-selected-text: #171717;
 
@@ -15,9 +17,17 @@ $color-selected-text: #171717;
     height: fit-content;
   }
 
+  &-medium {
+    width: $medium-width;
+    height: fit-content;
+  }
+
   &-large {
     width: $large-width;
     height: fit-content;
+    @include tablet-md {
+      width: $medium-width;
+    }
   }
 }
 
@@ -63,11 +73,21 @@ $color-selected-text: #171717;
   padding: 3px 6px 3px 10px;
 }
 
+.medium {
+  width: $medium-width;
+  height: $medium-height;
+  padding: 3px 6px 3px 10px;
+}
+
 .large {
   width: $large-width;
   height: $large-height;
   padding-left: 10.5px;
   padding-right: 14.5px;
+  @include tablet-md {
+    width: $medium-width;
+    height: $medium-height;
+  }
 }
 
 .options {
@@ -89,9 +109,17 @@ $color-selected-text: #171717;
     max-height: 180px;
   }
 
+  &.medium {
+    width: $medium-width;
+    max-height: 180px;
+  }
+
   &.large {
     width: $large-width;
     max-height: 200px;
+    @include tablet-md {
+      width: $medium-width;
+    }
   }
 }
 

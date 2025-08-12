@@ -130,8 +130,8 @@ export const useAuthStore = create<AuthStoreType>()((set) => ({
           })
           return
         }
-      } catch (error) {
-        console.error('Failed to parse session user data:', error)
+      } catch (err) {
+        console.error('Failed to parse session user data:', err)
         sessionStorage.removeItem(STORAGE_KEYS.USER)
       }
     }
@@ -146,8 +146,8 @@ export const useAuthStore = create<AuthStoreType>()((set) => ({
             isKeepLoggedIn: true,
           })
         }
-      } catch (error) {
-        console.error('Failed to parse local user data:', error)
+      } catch (err) {
+        console.error('Failed to parse local user data:', err)
         localStorage.removeItem(STORAGE_KEYS.USER)
       }
     }

@@ -5,6 +5,8 @@ import dynamic from 'next/dynamic'
 import Highcharts from 'highcharts'
 import mouseWheelZoom from 'highcharts/modules/mouse-wheel-zoom'
 
+import { processChartData } from '@/shared/utils/chart'
+
 mouseWheelZoom(Highcharts)
 
 const HighchartsReact = dynamic(() => import('highcharts-react-official'), {
@@ -25,6 +27,12 @@ interface Props {
 }
 
 const AverageMetricsChart = ({ data }: Props) => {
+  const avgReferencePriceData = processChartData(data.data.avgReferencePrice)
+  const highestSmScoreReferencePriceData = processChartData(data.data.highestSmScoreReferencePrice)
+  const highestSubscribeScoreReferencePriceData = processChartData(
+    data.data.highestSubscribeScoreReferencePrice
+  )
+
   const chartOptions: Highcharts.Options = {
     chart: {
       type: 'areaspline',
@@ -152,7 +160,7 @@ const AverageMetricsChart = ({ data }: Props) => {
       {
         type: 'areaspline',
         name: '평균',
-        data: data.data.avgReferencePrice,
+        data: avgReferencePriceData,
         color: '#FF4F1F',
         yAxis: 0,
         stickyTracking: false,
@@ -161,7 +169,7 @@ const AverageMetricsChart = ({ data }: Props) => {
       {
         type: 'spline',
         name: 'SM SCORE 1위',
-        data: data.data.highestSmScoreReferencePrice,
+        data: highestSmScoreReferencePriceData,
         color: '#6877FF',
         yAxis: 1,
         stickyTracking: false,
@@ -170,7 +178,7 @@ const AverageMetricsChart = ({ data }: Props) => {
       {
         type: 'spline',
         name: '구독 1위',
-        data: data.data.highestSubscribeScoreReferencePrice,
+        data: highestSubscribeScoreReferencePriceData,
         color: '#FFE070',
         yAxis: 1,
         stickyTracking: false,

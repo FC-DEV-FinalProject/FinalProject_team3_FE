@@ -1,12 +1,22 @@
-// API Request Data
 export interface DailyAnalysisModel {
   date: string
   principal: number
   transaction: number
   dailyProfitLoss: number
-  dailyProfitLossRate: number
+  dailyProfitLossRate: number | string
   cumulativeProfitLoss: number
-  cumulativeProfitLossRate: number
+  cumulativeProfitLossRate: number | string
+}
+
+export interface MyDailyAnalysisModel {
+  dailyAnalysisId: number
+  dailyDate: string
+  transaction: number
+  dailyProfitLoss: number
+  dailyProfitLossRate: number | string
+  principal: number
+  cumulativeProfitLoss: number
+  cumulativeProfitLossRate: number | string
 }
 
 export interface MonthlyAnalysisModel {
@@ -14,9 +24,9 @@ export interface MonthlyAnalysisModel {
   monthlyAveragePrincipal: number
   depositsWithdrawals: number
   monthlyProfitLoss: number
-  monthlyProfitLossRate: number
+  monthlyProfitLossRate: number | string
   cumulativeProfitLoss: number
-  cumulativeProfitLossRate: number
+  cumulativeProfitLossRate: number | string
 }
 
 export interface ProfitRateChartDataModel {
@@ -62,6 +72,7 @@ export interface StrategyDetailsInformationModel extends BaseStrategyModel {
   kpRatio: number
   finalProfitLossDate: string
   createdAt: string
+  hasProposal: boolean
 }
 
 export interface StrategyCardModel {
@@ -81,4 +92,20 @@ export interface AnalysisDataModel {
   date: string
   transaction: number
   dailyProfitLoss: number
+}
+
+export interface ImageDataModel {
+  id: number
+  imageUrl: string
+  title: string
+}
+
+export interface AccountImageDataModel {
+  content: ImageDataModel
+  first: boolean
+  last: boolean
+  page: number
+  size: number
+  totalElements: number
+  totalPages: number
 }

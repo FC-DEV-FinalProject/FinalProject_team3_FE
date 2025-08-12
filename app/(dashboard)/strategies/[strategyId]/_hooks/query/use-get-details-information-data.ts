@@ -1,5 +1,6 @@
 import { UseQueryResult, useQuery } from '@tanstack/react-query'
 
+import { QUERY_KEY } from '@/shared/constants/query-key'
 import { StrategyDetailsInformationModel } from '@/shared/types/strategy-data'
 
 import getDetailsInformation from '../../_api/get-details-information'
@@ -16,7 +17,7 @@ const useGetDetailsInformationData = ({
   detailsInformationData: StrategyDetailsInformationModel
 }> => {
   return useQuery({
-    queryKey: ['strategyDetails', strategyId],
+    queryKey: [QUERY_KEY.STRATEGY_DETAILS, strategyId],
     queryFn: () => getDetailsInformation(strategyId),
   })
 }

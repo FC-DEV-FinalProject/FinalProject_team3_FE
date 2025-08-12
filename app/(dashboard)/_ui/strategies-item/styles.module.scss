@@ -31,6 +31,9 @@
   .mdd,
   .sm-score {
     @include typo-b2;
+    @include tablet-md {
+      font-size: $text-b3;
+    }
   }
   .profit {
     & span {
@@ -39,6 +42,9 @@
     p {
       @include typo-b2;
       color: $color-orange-500;
+      @include tablet-md {
+        font-size: $text-b3;
+      }
     }
   }
 }
@@ -61,6 +67,10 @@
     & p {
       margin-left: 10px;
       @include typo-b2;
+      @include tablet-md {
+        font-size: $text-b3;
+        margin-left: 4px;
+      }
     }
   }
   .total-subscribe-star {
@@ -69,8 +79,14 @@
     height: 20px;
     gap: 6px;
     padding-top: 10px;
-    & p {
+    & p,
+    span {
       @include typo-c1;
+    }
+    @include tablet-md {
+      & span {
+        display: none;
+      }
     }
   }
 }
@@ -80,6 +96,9 @@
     background: transparent;
     svg {
       width: 36px;
+      @include tablet-md {
+        width: 30px;
+      }
     }
   }
 }
@@ -93,6 +112,9 @@
   display: flex;
   align-items: center;
   column-gap: 4px;
+  overflow: hidden;
+  min-height: 24px;
+  max-height: 44px;
   .icon-wrapper {
     .icon {
       position: relative;
@@ -112,7 +134,11 @@
   }
   &.details {
     flex-wrap: wrap;
-    max-height: 50px;
     row-gap: 1px;
   }
+}
+
+.no-data {
+  @include typo-b3;
+  color: $color-gray-600;
 }

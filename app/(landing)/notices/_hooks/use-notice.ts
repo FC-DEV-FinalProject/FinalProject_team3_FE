@@ -1,5 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 
+import { QUERY_KEY } from '@/shared/constants/query-key'
+
 import getNotices from '../_api/get-notice'
 
 interface Props {
@@ -9,7 +11,7 @@ interface Props {
 
 const useGetNotices = ({ page, size }: Props = {}) => {
   return useQuery({
-    queryKey: ['notices', page, size],
+    queryKey: [QUERY_KEY.NOTICES, page, size],
     queryFn: () => getNotices({ page, size }),
   })
 }

@@ -2,17 +2,6 @@
   margin-top: 80px;
 }
 
-.strategy-layout {
-  display: flex;
-  position: relative;
-
-  .strategy {
-    width: calc(100% - $strategy-sidebar-width);
-    max-width: $max-width;
-    padding-right: 10px;
-  }
-}
-
 .skeleton-side-bar {
   width: $strategy-sidebar-width;
   position: absolute;

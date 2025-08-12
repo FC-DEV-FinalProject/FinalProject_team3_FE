@@ -15,9 +15,10 @@ const cx = classNames.bind(styles)
 
 interface Props {
   strategyId: number
+  isMyStrategy: boolean
 }
 
-const ReviewContainer = ({ strategyId }: Props) => {
+const ReviewContainer = ({ strategyId, isMyStrategy }: Props) => {
   const [currentPage, setCurrentPage] = useState(1)
   const { data: reviewData } = useGetReviewsData({ strategyId, page: currentPage })
 
@@ -31,7 +32,7 @@ const ReviewContainer = ({ strategyId }: Props) => {
           totalElements={reviewData?.reviews.totalElements}
         />
       </div>
-      <AddReview strategyId={strategyId} />
+      <AddReview strategyId={strategyId} isMyStrategy={isMyStrategy} />
       {reviewData && reviewData.reviews.content.length !== 0 ? (
         <ReviewList
           strategyId={strategyId}

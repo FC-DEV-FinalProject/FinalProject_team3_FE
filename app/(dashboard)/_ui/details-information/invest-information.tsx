@@ -8,16 +8,17 @@ interface Props {
   stock: string[]
   trade: string
   cycle: string
+  isEditable?: boolean
 }
 
-const InvestInformation = ({ stock, trade, cycle }: Props) => {
+const InvestInformation = ({ stock, trade, cycle, isEditable = false }: Props) => {
   const investData = [
     { title: '투자 종목', data: stock.join(',') },
     { title: '매매 유형', data: trade },
     { title: '투자 주기', data: cycle },
   ]
   return (
-    <div className={cx('invest-container')}>
+    <div className={cx('invest-container', { edit: isEditable })}>
       {investData.map((data, idx) => (
         <div key={`${data}${idx}`} className={cx('info-item')}>
           <p className={cx('invest-title')}>{data.title}</p>

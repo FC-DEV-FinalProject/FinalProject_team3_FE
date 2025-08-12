@@ -1,0 +1,48 @@
+.upload-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 170px 170px 160px;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  .label {
+    @include typo-b3;
+    color: $color-gray-800;
+  }
+
+  .data-input {
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid $color-gray-200;
+
+    &::placeholder {
+      color: $color-gray-400;
+      @include typo-c1;
+    }
+  }
+}
+
+.error-message {
+  color: $color-orange-700;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 32px;
+}

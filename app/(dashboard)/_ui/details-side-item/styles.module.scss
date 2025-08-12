@@ -15,10 +15,15 @@
 
 .side-item,
 .side-items {
-  width: 276px;
+  width: 100%;
   background-color: $color-white;
   border-radius: 5px;
   margin-bottom: 20px;
+
+  &.edit {
+    background-color: $color-gray-200;
+  }
+
   .title {
     font-weight: $text-bold;
     font-size: $text-b2;
@@ -42,5 +47,13 @@
   align-items: center;
   p {
     margin: 0 4px 0 11px;
+    @include tablet-md {
+      margin: 0 2px 0 4px;
+    }
   }
+}
+
+.trader-button {
+  height: 30px;
+  padding: 0;
 }

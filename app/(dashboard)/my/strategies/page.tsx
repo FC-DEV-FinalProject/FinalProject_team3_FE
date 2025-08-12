@@ -1,7 +1,8 @@
 'use client'
 
-import { Suspense } from 'react'
+import React, { Suspense } from 'react'
 
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/navigation'
 
 import classNames from 'classnames/bind'
@@ -11,8 +12,15 @@ import { Button } from '@/shared/ui/button'
 import Title from '@/shared/ui/title'
 
 import ListHeader from '../../_ui/list-header'
-import MyStrategyList from './_ui/my-strategy-list'
+import StrategiesItemSkeleton from '../../_ui/strategies-item/skeleton'
 import styles from './styles.module.scss'
+
+const MyStrategyList = React.lazy(() => import('./_ui/my-strategy-list'))
+
+const DynamicStrategySkeleton = dynamic(() => import('../../_ui/strategies-item/skeleton'), {
+  loading: () => <StrategiesItemSkeleton />,
+  ssr: false,
+})
 
 const cx = classNames.bind(styles)
 
@@ -30,10 +38,20 @@ const MyStrategiesPage = () => {
         </Button>
       </div>
       <ListHeader type="my" />
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Skeleton />}>
         <MyStrategyList />
       </Suspense>
     </div>
+  )
+}
+
+const Skeleton = () => {
+  return (
+    <>
+      {Array.from({ length: 4 }, (_, idx) => (
+        <DynamicStrategySkeleton key={idx} />
+      ))}
+    </>
   )
 }
 

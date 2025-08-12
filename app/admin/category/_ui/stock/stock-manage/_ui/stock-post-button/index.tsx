@@ -7,9 +7,10 @@ import { RegisterIcon } from '@/public/icons'
 import { useQueryClient } from '@tanstack/react-query'
 import classNames from 'classnames/bind'
 
+import { QUERY_KEY } from '@/shared/constants/query-key'
 import useModal from '@/shared/hooks/custom/use-modal'
 import { Button } from '@/shared/ui/button'
-import { Input } from '@/shared/ui/input'
+import Input from '@/shared/ui/input'
 import Modal from '@/shared/ui/modal'
 
 import useStrategyIconPost from '../../../../shared/_hooks/use-category-icon-post'
@@ -35,7 +36,7 @@ const StockPostButton = () => {
     try {
       await onSubmit(e)
       closeModal()
-      queryClient.invalidateQueries({ queryKey: ['adminStocks'] })
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.ADMIN_STOCKS] })
     } catch (err) {
       console.error('Error : ' + err)
     }

@@ -1,5 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
+import { QUERY_KEY } from '@/shared/constants/query-key'
+
 import ToggleTradeActiveState from '../../_api/toggle-trade-active-state'
 
 const useToggoleTradeActiveState = (tradeTypeId: number) => {
@@ -9,7 +11,7 @@ const useToggoleTradeActiveState = (tradeTypeId: number) => {
     mutationFn: () => ToggleTradeActiveState(tradeTypeId),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['adminTrades'],
+        queryKey: [QUERY_KEY.ADMIN_TRADES],
       })
     },
     onError: (err) => {

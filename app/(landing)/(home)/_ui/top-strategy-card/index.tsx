@@ -1,7 +1,10 @@
-import { StarIcon } from '@/public/icons'
+import Link from 'next/link'
+
 import classNames from 'classnames/bind'
 
+import { PATH } from '@/shared/constants/path'
 import Avatar from '@/shared/ui/avatar'
+import TotalStar from '@/shared/ui/total-star'
 
 import LineChart from '../line-chart'
 import styles from './styles.module.scss'
@@ -15,12 +18,17 @@ import {
 const cx = classNames.bind(styles)
 
 interface Props {
+  id: number
   size?: CardSizeType
   children: React.ReactNode
 }
 
-const TopStrategyCard = ({ size, children }: Props) => {
-  return <div className={cx('card-container', size)}>{children}</div>
+const TopStrategyCard = ({ id, size, children }: Props) => {
+  return (
+    <Link className={cx('card-container', size)} href={`${PATH.STRATEGIES}/${id}`}>
+      {children}
+    </Link>
+  )
 }
 
 const ContentsWrapper = ({ children }: { children: React.ReactNode }) => {
@@ -48,12 +56,7 @@ const ContentDetails = ({
   return (
     <div className={cx('content-details-wrapper')}>
       <span className={cx('subscription')}>{subscriptionCount.toLocaleString()}명 구독</span>
-      <div className={cx('rating-wrapper')}>
-        <StarIcon width="24px" height="24px" />
-        <span>
-          {averageRating} ({reviewCount})
-        </span>
-      </div>
+      <TotalStar averageRating={averageRating} totalElements={reviewCount} />
     </div>
   )
 }
@@ -62,7 +65,7 @@ const SmScore = ({ score }: { score: number }) => {
   return (
     <div className={cx('score-wrapper')}>
       <span className={cx('label')}>SM SCORE</span>
-      <span className={cx('score')}>{score}</span>
+      <span className={cx('score')}>{score.toFixed(1)}</span>
     </div>
   )
 }

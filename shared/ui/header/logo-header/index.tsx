@@ -1,4 +1,3 @@
-// NOTE: 이름 공모전 개최
 import Logo from '@/shared/ui/logo'
 
 import Header from '..'

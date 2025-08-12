@@ -110,12 +110,16 @@
 .user {
   display: flex;
   flex-direction: column;
+  margin-left: -4px;
 
   .nickname {
     color: $color-gray-800;
   }
 
   .email {
-    font-size: $text-c2;
+    width: 90%;
+    font-size: $text-c1;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }

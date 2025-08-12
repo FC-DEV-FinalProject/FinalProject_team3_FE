@@ -10,7 +10,7 @@ const cx = classNames.bind(styles)
 
 interface Props {
   nickname: string
-  imageUrl: string
+  imageUrl?: string
   strategyCount: number
   subscriberCount: number
   userId: number

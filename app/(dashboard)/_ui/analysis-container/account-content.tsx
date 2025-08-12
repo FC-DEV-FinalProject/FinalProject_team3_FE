@@ -8,6 +8,7 @@ import classNames from 'classnames/bind'
 
 import { ACCOUNT_PAGE_COUNT } from '@/shared/constants/count-per-page'
 import useModal from '@/shared/hooks/custom/use-modal'
+import { ImageDataModel } from '@/shared/types/strategy-data'
 import { Button } from '@/shared/ui/button'
 import Checkbox from '@/shared/ui/check-box'
 import AccountImageModal from '@/shared/ui/modal/account-image-modal'
@@ -21,12 +22,6 @@ import useGetAccountImages from '../../strategies/[strategyId]/_hooks/query/use-
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
-
-export interface ImageDataModel {
-  id: number
-  imageUrl: string
-  title: string
-}
 
 interface Props {
   strategyId: number
@@ -80,12 +75,12 @@ const AccountContent = ({ strategyId, currentPage, onPageChange, isEditable = fa
         imageIds: selectedImages,
       })
       setSelectedImages([])
-    } catch (error) {
-      console.error('Failed to delete images:', error)
+    } catch (err) {
+      console.error('Failed to delete images:', err)
     }
   }
 
-  if (!data || !Array.isArray(data.content) || isLoading) return null
+  if (!Array.isArray(data?.content) || isLoading) return null
 
   const imagesData = data.content
   const croppedImagesData: ImageDataModel[] = sliceArray(
@@ -95,6 +90,7 @@ const AccountContent = ({ strategyId, currentPage, onPageChange, isEditable = fa
   )
 
   const isTwoLines = (croppedImagesData?.length || 0) > 4
+
   return (
     <div className={cx('table-wrapper')}>
       {isEditable && (
@@ -118,7 +114,7 @@ const AccountContent = ({ strategyId, currentPage, onPageChange, isEditable = fa
           </Button>
         </div>
       )}
-      {croppedImagesData && croppedImagesData.length !== 0 ? (
+      {croppedImagesData?.length > 0 ? (
         <>
           <div className={cx('account-images-container', isTwoLines && 'line')}>
             {croppedImagesData?.map((imageData: ImageDataModel) => (

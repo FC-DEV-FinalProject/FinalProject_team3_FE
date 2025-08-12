@@ -1,4 +1,5 @@
 import axiosInstance from '@/shared/api/axios'
+import { StrategiesModel } from '@/shared/types/strategy-data'
 
 export interface StockTypeInfoModel {
   stockTypeIconUrls: string[]
@@ -10,30 +11,11 @@ export interface ProfitRateChartDataModel {
   profitRates: number[]
 }
 
-export interface StrategyModel {
-  strategyId: number
-  strategyName: string
-  traderImgUrl: string
-  nickname: string
-  stockTypeInfo: StockTypeInfoModel
-  tradeTypeIconUrl: string
-  tradeTypeName: string
-  profitRateChartData: ProfitRateChartDataModel
-  mdd: number
-  smScore: number
-  cumulativeProfitRate: number
-  recentYearProfitLossRate: number
-  subscriptionCount: number
-  averageRating: number
-  totalReviews: number
-  isSubscribed: boolean
-}
-
-interface TraderStrategiesResponseModel {
+export interface TraderStrategiesResponseModel {
   isSuccess: boolean
   message: string
   result: {
-    content: StrategyModel[]
+    content: StrategiesModel[]
     page: number
     size: number
     totalElements: number

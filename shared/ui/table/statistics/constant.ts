@@ -35,7 +35,7 @@ export const inKoreanData = {
   tradingInfo: '거래 관련 정보',
 } as const
 
-export const STATISTICS_PERCENT = [
+export const STATISTICS_FORMATTED_PERCENT = [
   '누적 수익률',
   '최대 누적 수익률',
   '평균 손익률',
@@ -46,12 +46,17 @@ export const STATISTICS_PERCENT = [
   '승률',
 ]
 
+export const STATISTICS_PERCENT = ['자산 수익률']
+
 export const STATISTICS_DATE = [
   '고점 갱신 후 경과일',
   '총 거래 일수',
   '총 이익 일수',
   '총 손실 일수',
-  '현재 연속 손익 일수',
+  '현재 연속 손실 일수',
   '최대 연속 이익 일수',
   '최대 연속 손실 일수',
+  '운용 기간',
 ]
+
+export const STATISTICS_RAW = ['시작 일자', '종료 일자', 'Profit Factor']

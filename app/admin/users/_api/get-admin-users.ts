@@ -10,7 +10,7 @@ interface ArgModel {
   size?: number
 }
 
-const getAdminUsers = async ({ role, condition, keyword, page = 1, size }: ArgModel) => {
+const getAdminUsers = async ({ role, condition, keyword, page = 1, size = 10 }: ArgModel) => {
   try {
     const res = await axiosInstance<AdminUsersResponeseModel>('/api/admin/users', {
       params: {

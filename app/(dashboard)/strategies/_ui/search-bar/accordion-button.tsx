@@ -2,7 +2,7 @@
 
 import { useContext } from 'react'
 
-import { CloseIcon, OpenIcon } from '@/public/icons'
+import { CloseIcon, ModalAlertIcon, OpenIcon } from '@/public/icons'
 import classNames from 'classnames/bind'
 
 import useSearchingItemStore from './_store/use-searching-item-store'
@@ -21,6 +21,7 @@ interface Props {
 const AccordionButton = ({ optionId, title, size }: Props) => {
   const { openIds, handleButtonIds } = useContext(AccordionContext)
   const searchTerms = useSearchingItemStore((state) => state.searchTerms)
+  const errOptions = useSearchingItemStore((state) => state.errOptions)
 
   const hasOpenId = openIds?.[optionId]
   const clickedValue = searchTerms[optionId]
@@ -30,7 +31,10 @@ const AccordionButton = ({ optionId, title, size }: Props) => {
       <button onClick={() => handleButtonIds(optionId, !hasOpenId)}>
         <p>
           {title}
-          {Array.isArray(clickedValue) &&
+          {errOptions?.includes(optionId) ? (
+            <ModalAlertIcon />
+          ) : (
+            Array.isArray(clickedValue) &&
             clickedValue?.length !== 0 &&
             (clickedValue.length !== size ? (
               <span>
@@ -38,7 +42,8 @@ const AccordionButton = ({ optionId, title, size }: Props) => {
               </span>
             ) : (
               <span>(All)</span>
-            ))}
+            ))
+          )}
         </p>
         {hasOpenId ? <CloseIcon /> : <OpenIcon />}
       </button>

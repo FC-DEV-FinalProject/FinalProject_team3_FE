@@ -15,20 +15,26 @@ const COMPLETE_MESSAGE = {
 }
 
 interface Props {
-  nickname: string
-  userType: UserType
+  nickname?: string
+  userType?: UserType
 }
 
 const SignupCompleteMessage = ({ nickname, userType }: Props) => {
   return (
     <section className={cx('container')}>
-      <p>{nickname}님의 회원가입이 완료되었습니다.</p>
-      <p>
-        지금 바로 인베스트메틱
-        <Logo width={42} />
-        에서 <br />
-        {COMPLETE_MESSAGE[userType]}
-      </p>
+      {nickname && userType ? (
+        <>
+          <p>{nickname}님의 회원가입이 완료되었습니다.</p>
+          <p>
+            지금 바로 인베스트메틱
+            <Logo width={42} />
+            에서 <br />
+            {COMPLETE_MESSAGE[userType]}
+          </p>
+        </>
+      ) : (
+        <p>회원가입이 완료되었습니다.</p>
+      )}
     </section>
   )
 }

@@ -1,0 +1,19 @@
+.title {
+  margin: $header-height 0 26px 13px;
+}
+
+.container {
+  padding: 42px 45px 37px;
+  border-radius: 8px;
+  margin-bottom: 42px;
+  background-color: $color-white;
+}
+
+.color-primary-500 {
+  color: $color-orange-500;
+}
+
+.condition-search {
+  display: flex;
+  gap: 24px;
+}

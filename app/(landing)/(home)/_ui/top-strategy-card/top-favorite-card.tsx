@@ -10,6 +10,7 @@ interface Props extends TopStrategyCardCommonProps {
 }
 
 const TopFavoriteCard = ({
+  id,
   ranking,
   nickname,
   title,
@@ -20,7 +21,7 @@ const TopFavoriteCard = ({
   reviewCount,
 }: Props) => {
   return (
-    <TopStrategyCard>
+    <TopStrategyCard id={id}>
       <TopStrategyCard.ContentsWrapper>
         <TopStrategyCard.Content ranking={ranking} nickname={nickname} title={title} />
         <TopStrategyCard.ContentDetails

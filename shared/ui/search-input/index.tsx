@@ -10,18 +10,26 @@ import styles from './styles.module.scss'
 const cx = classNames.bind(styles)
 
 interface Props extends ComponentPropsWithoutRef<'input'> {
+  className?: string
   placeholder?: string
   onSearchIconClick?: () => void
 }
 
-export const SearchInput = forwardRef<HTMLInputElement, Props>(
-  ({ placeholder = '', onSearchIconClick, value, onChange, ...props }: Props, ref) => {
+const SearchInput = forwardRef<HTMLInputElement, Props>(
+  ({ placeholder = '', className, onSearchIconClick, value, onChange, ...props }: Props, ref) => {
+    const handleEnterSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === 'Enter' && onSearchIconClick) {
+        onSearchIconClick()
+      }
+    }
+
     return (
-      <div className={cx('search-input-container')}>
+      <div className={cx('search-input-container', className)}>
         <input
           ref={ref}
           value={value}
           onChange={onChange}
+          onKeyDown={(e) => handleEnterSearch(e)}
           placeholder={placeholder}
           className={cx('search-input')}
           {...props}
@@ -33,3 +41,5 @@ export const SearchInput = forwardRef<HTMLInputElement, Props>(
 )
 
 SearchInput.displayName = 'SearchInput'
+
+export default SearchInput

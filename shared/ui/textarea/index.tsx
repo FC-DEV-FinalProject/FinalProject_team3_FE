@@ -12,7 +12,7 @@ interface Props extends ComponentProps<'textarea'> {
   rows?: number
 }
 
-export const Textarea = forwardRef<HTMLTextAreaElement, Props>(
+const Textarea = forwardRef<HTMLTextAreaElement, Props>(
   ({ rows = 5, className, value, onChange, ...props }, ref) => {
     return (
       <textarea
@@ -28,3 +28,5 @@ export const Textarea = forwardRef<HTMLTextAreaElement, Props>(
 )
 
 Textarea.displayName = 'Textarea'
+
+export default Textarea

@@ -24,8 +24,5 @@ export interface StockResponseModel extends StockResponseBaseModel<boolean> {
 // eslint-disable-next-line
 export interface ToggleStockActiveStateResponseModel extends StockResponseBaseModel<boolean> {}
 
-export interface PresignedUrlResponseModel extends StockResponseBaseModel<boolean> {
-  result: {
-    presignedUrl: string
-  }
-}
+// eslint-disable-next-line
+export interface DeleteInactiveStockResponseModel extends StockResponseBaseModel<boolean> {}

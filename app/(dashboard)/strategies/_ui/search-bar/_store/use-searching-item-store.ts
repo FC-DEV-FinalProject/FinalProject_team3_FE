@@ -15,7 +15,7 @@ interface ActionModel {
   setRangeValue: (key: keyof SearchTermsModel, type: keyof RangeModel, value: number) => void
   setSearchWord: (searchWord: string) => void
   resetState: () => void
-  validateRangeValues: () => void
+  validateRangeValues: () => StateModel['errOptions']
 }
 
 interface ActionsModel {
@@ -95,6 +95,7 @@ const useSearchingItemStore = create<StateModel & ActionsModel>((set, get) => ({
         return false
       })
       set({ errOptions })
+      return errOptions
     },
   },
 }))

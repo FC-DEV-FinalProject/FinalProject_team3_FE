@@ -20,7 +20,7 @@ const HeaderLinks = ({ isLoggedIn }: Props) => {
         </LinkButton>
       )}
       {isLoggedIn ? (
-        <Button onClick={logout} size="small" variant="filled">
+        <Button onClick={() => logout()} size="small" variant="filled">
           로그아웃
         </Button>
       ) : (

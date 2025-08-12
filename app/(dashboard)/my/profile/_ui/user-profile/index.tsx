@@ -10,9 +10,10 @@ interface Props {
   role: string
   nickname: string
   email: string
+  imageURL?: string | undefined
 }
 
-const UserProfile = ({ role, nickname, email }: Props) => {
+const UserProfile = ({ role, nickname, email, imageURL }: Props) => {
   return (
     <div className={cx('container')}>
       <p className={cx('title')}>프로필 정보</p>
@@ -24,7 +25,7 @@ const UserProfile = ({ role, nickname, email }: Props) => {
           <p className={cx('email')}>{email}</p>
         </div>
         <div className={cx('right-wrapper')}>
-          <Avatar size="xlarge" />
+          <Avatar size="xlarge" src={imageURL} />
         </div>
       </div>
     </div>

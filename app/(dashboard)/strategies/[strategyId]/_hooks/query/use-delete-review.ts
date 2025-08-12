@@ -1,5 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
+import { QUERY_KEY } from '@/shared/constants/query-key'
+
 import deleteReview from '../../_api/delete-review'
 
 const useDeleteReview = (strategyId: number) => {
@@ -8,7 +10,7 @@ const useDeleteReview = (strategyId: number) => {
     mutationFn: ({ strategyId, reviewId }: { strategyId: number; reviewId: number }) =>
       deleteReview(strategyId, reviewId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['reviews', strategyId] })
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.STRATEGY_REVIEWS, strategyId] })
     },
   })
 }

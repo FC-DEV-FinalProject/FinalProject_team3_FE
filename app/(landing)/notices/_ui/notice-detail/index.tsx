@@ -3,36 +3,17 @@
 import { DownloadIcon } from '@/public/icons'
 import classNames from 'classnames/bind'
 
-import axios from '@/shared/api/axios'
-
+import { handleNoticeFileDownload } from '../../_api/get-notice-file'
 import useNoticeDetail from '../../_hooks/use-notice-detail'
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
 
 const NoticeDetail = ({ noticeId }: { noticeId: number }) => {
-  const { data: notice, isLoading } = useNoticeDetail(noticeId)
+  const { data: notice } = useNoticeDetail(noticeId)
 
-  const handleSave = async (fileName: string, noticeFileId: number) => {
-    try {
-      const response = await axios.get(`/api/files/download/${noticeFileId}`, {
-        responseType: 'blob',
-      })
-
-      const blob = new Blob([response.data])
-      const url = window.URL.createObjectURL(blob)
-
-      const link = document.createElement('a')
-      link.href = url
-      link.download = fileName
-      document.body.appendChild(link)
-      link.click()
-
-      link.remove()
-      window.URL.revokeObjectURL(url)
-    } catch (error) {
-      console.error('파일 다운로드 중 오류 발생:', error)
-    }
+  const handleSave = (fileName: string, noticeFileId: number) => {
+    handleNoticeFileDownload(fileName, noticeId, noticeFileId)
   }
 
   return (
@@ -42,7 +23,9 @@ const NoticeDetail = ({ noticeId }: { noticeId: number }) => {
         <div className={cx('date')}>{notice?.createdAt}</div>
       </div>
       <div className={cx('top-line')}></div>
-      <div className={cx('content')}>{notice?.content}</div>
+      <div className={cx('content')}>
+        <pre>{notice?.content}</pre>
+      </div>
       <div className={cx('bottom-line')}></div>
 
       <div className={cx('attach-file')}>
@@ -58,7 +41,10 @@ const NoticeDetail = ({ noticeId }: { noticeId: number }) => {
               >
                 {file.fileName}
               </div>
-              <DownloadIcon className={cx('file-download')} onClick={() => handleSave} />
+              <DownloadIcon
+                className={cx('file-download')}
+                onClick={() => handleSave(file.fileName, file.noticeFileId)}
+              />
             </div>
           ))}
         </div>

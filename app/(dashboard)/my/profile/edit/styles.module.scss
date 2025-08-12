@@ -1,0 +1,27 @@
+.container {
+  padding: 20px 28px;
+}
+
+.title {
+  margin-top: 40px;
+  @include typo-h4;
+  margin-bottom: 22px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 28px;
+  height: 100%;
+}
+
+.user-profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+.link-button {
+  align-self: flex-end;
+  margin-top: 25px;
+}

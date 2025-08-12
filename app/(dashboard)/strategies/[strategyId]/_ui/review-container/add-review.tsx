@@ -7,12 +7,12 @@ import classNames from 'classnames/bind'
 import useModal from '@/shared/hooks/custom/use-modal'
 import { Button } from '@/shared/ui/button'
 import { ErrorMessage } from '@/shared/ui/error-message'
-import { Textarea } from '@/shared/ui/textarea'
+import ReviewGuideModal from '@/shared/ui/modal/review-guide-modal'
+import Textarea from '@/shared/ui/textarea'
 
 import usePatchReview from '../../_hooks/query/use-patch-review'
 import usePostReview from '../../_hooks/query/use-post-review'
 import StarRating from '../star-rating/index'
-import ReviewGuideModal from './review-guide-modal'
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
@@ -20,6 +20,7 @@ const cx = classNames.bind(styles)
 interface Props {
   strategyId: number
   reviewId?: number
+  isMyStrategy?: boolean
   isEditable?: boolean
   content?: string
   starRating?: number
@@ -29,6 +30,7 @@ interface Props {
 const AddReview = ({
   strategyId,
   reviewId,
+  isMyStrategy,
   isEditable = false,
   content,
   starRating,
@@ -114,7 +116,12 @@ const AddReview = ({
           </Button>
         )}
       </div>
-      <ReviewGuideModal isModalOpen={isModalOpen} isErr={isError} onCloseModal={closeModal} />
+      <ReviewGuideModal
+        isModalOpen={isModalOpen}
+        isErr={isError}
+        isMyStrategy={isMyStrategy}
+        onCloseModal={closeModal}
+      />
     </div>
   )
 }

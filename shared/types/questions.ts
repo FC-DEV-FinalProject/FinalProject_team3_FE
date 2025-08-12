@@ -13,15 +13,24 @@ export type QuestionSearchConditionType =
   | 'INVESTOR_NAME'
   | 'STRATEGY_NAME'
 
+export interface QuestionUserModel {
+  id: number
+  userName: string
+  profileImageUrl: string
+}
+
 export interface QuestionModel {
   questionId: number
   title: string
   questionContent: string
-  strategyName: string
-  nickname: string
-  profileImageUrl: string
+  strategy: {
+    id: number
+    name: string
+  }
   stateCondition: QuestionStateConditionType
   createdAt: string
+  investor?: QuestionUserModel
+  trader?: QuestionUserModel
 }
 
 export interface AnswerModel {

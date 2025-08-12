@@ -3,7 +3,7 @@
 import classNames from 'classnames/bind'
 
 import Pagination from '@/shared/ui/pagination'
-import { SearchInput } from '@/shared/ui/search-input'
+import SearchInput from '@/shared/ui/search-input'
 import Select from '@/shared/ui/select'
 import VerticalTable from '@/shared/ui/table/vertical'
 import Tabs from '@/shared/ui/tabs'
@@ -19,20 +19,20 @@ const cx = classNames.bind(styles)
 
 const AdminUsersPage = () => {
   const {
+    searchParams,
     searchOptions,
     tabs,
     select,
     setSelect,
     activeTab,
-    setActiveTab,
     inputValue,
     setInputValue,
-    keyword,
-    condition,
     setConditionAndKeyword,
+    setCurrentPage,
+    onTabChange,
   } = useUserSearch()
 
-  const { isLoading, data } = useAdminUsers({ role: activeTab, condition, keyword })
+  const { isLoading, data } = useAdminUsers(searchParams)
 
   if (isLoading || !data) return null
 
@@ -40,7 +40,7 @@ const AdminUsersPage = () => {
     <>
       <Title label="회원 관리" className={cx('title')} />
       <section className={cx('container')}>
-        <Tabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
+        <Tabs tabs={tabs} activeTab={activeTab} onTabChange={onTabChange} />
         <AdminContentsHeader
           Left={
             <span>
@@ -69,12 +69,31 @@ const AdminUsersPage = () => {
           }
         />
         <VerticalTable
-          tableHead={['No.', '프로필', '이름', '닉네임', '이메일', '전화번호', '회원분류', '탈퇴']}
-          tableBody={setTableBody(data?.content)}
-          countPerPage={10}
+          tableHead={[
+            'No.',
+            '프로필',
+            '이름',
+            '닉네임',
+            '가입 일자',
+            '이메일',
+            '전화번호',
+            '회원분류',
+            '탈퇴',
+          ]}
+          tableBody={setTableBody({
+            data: data?.content,
+            page: data?.page,
+            countPerPage: data.size,
+          })}
+          countPerPage={data.size}
           currentPage={1}
+          colWidths={[1.2, 1.5, 1.5, 2, 2, 3, 2, 2, 2]}
         />
-        <Pagination currentPage={data?.page} maxPage={data?.totalPages} onPageChange={() => {}} />
+        <Pagination
+          currentPage={data?.page}
+          maxPage={data?.totalPages}
+          onPageChange={(page) => setCurrentPage(page)}
+        />
       </section>
     </>
   )

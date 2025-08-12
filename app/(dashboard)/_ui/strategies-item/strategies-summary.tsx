@@ -42,7 +42,7 @@ const StrategiesSummary = ({
       </div>
       <div className={cx('total-subscribe-star')}>
         <p>구독 {subscriptionCount}개</p>
-        <p>|</p>
+        <span>|</span>
         <TotalStar averageRating={averageRating} totalElements={totalReview} textColor="black" />
       </div>
     </div>

@@ -4,36 +4,68 @@
 
   table {
     width: 100%;
-    font-size: $text-c1;
+    font-size: $text-b3;
+    table-layout: fixed;
 
     thead {
       background-color: $color-gray-100;
     }
 
     td {
-      padding: 0 20px;
-      height: 40px;
+      padding: 0 4px;
+      height: 44px;
       text-align: start;
       vertical-align: middle;
       border-top: 1px solid $color-gray-200;
       border-bottom: 1px solid $color-gray-200;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    & td:first-child {
+      padding-left: 20px;
+      @include tablet-md {
+        padding-left: 10px;
+      }
+    }
+
+    td:has(div[class*='dropdown']) {
+      overflow: visible;
     }
 
     .button-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       padding: 0;
       text-align: right;
     }
+  }
+  @include tablet-md {
+    padding: 10px;
+    table {
+      height: 40px;
+      font-size: $text-c1;
+    }
+  }
 
-    .edit-button,
-    .delete-button {
-      min-width: 60px;
-      height: 24px;
-      padding: 7px 16px;
-    }
-    .edit-button {
-      border: 1px solid $color-gray-300;
-      margin-right: 8px;
-    }
+  .skeleton-cell {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skeleton-content {
+    @include skeleton;
+    width: 70%;
+    height: 16px;
+    margin: 4px 0;
+  }
+
+  .skeleton-button {
+    width: 80px;
+    height: 24px;
+    background: $color-gray-200;
+    border-radius: 4px;
   }
 }
 

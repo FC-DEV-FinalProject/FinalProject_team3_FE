@@ -4,7 +4,6 @@ import { useRef, useState } from 'react'
 
 import { useParams, useRouter } from 'next/navigation'
 
-import usePostQuestion from '@/app/(dashboard)/strategies/[strategyId]/_hooks/query/use-post-question'
 import classNames from 'classnames/bind'
 
 import { PATH } from '@/shared/constants/path'
@@ -12,13 +11,13 @@ import { useAuthStore } from '@/shared/stores/use-auth-store'
 import { Button } from '@/shared/ui/button'
 import { ErrorMessage } from '@/shared/ui/error-message'
 import AddQuestionModal from '@/shared/ui/modal/add-question-modal'
-import { Textarea } from '@/shared/ui/textarea'
+import QuestionDeleteModal from '@/shared/ui/modal/question-delete-modal'
+import Textarea from '@/shared/ui/textarea'
 
 import useDeleteAnswer from '../../../_hooks/query/use-delete-answer'
 import useDeleteQuestion from '../../../_hooks/query/use-delete-question'
 import useGetQuestionDetails from '../../../_hooks/query/use-get-question-details'
 import usePostAnswer from '../../../_hooks/query/use-post-answer'
-import QuestionDeleteModal from '../../../_ui/modal/question-delete-modal'
 import QuestionDetailCard from '../question-detail-card'
 import styles from './styles.module.scss'
 
@@ -38,7 +37,7 @@ const QuestionContainer = () => {
   const { mutate: submitAnswer } = usePostAnswer(parseInt(questionId as string))
   const { mutate: deleteAnswer } = useDeleteAnswer()
   const { mutate: deleteQuestion } = useDeleteQuestion()
-  const { mutate: postQuestion } = usePostQuestion()
+
   const { data: questionDetails } = useGetQuestionDetails({
     questionId: parseInt(questionId as string),
   })
@@ -130,6 +129,7 @@ const QuestionContainer = () => {
           title={questionDetails.title}
           contents={questionDetails.content}
           nickname={questionDetails.nickname}
+          profileImage={questionDetails.profileImageUrl}
           createdAt={questionDetails.createdAt}
           status={questionDetails.state === 'WAITING' ? '답변 대기' : '답변 완료'}
           onDelete={handleDeleteQuestionClick}
@@ -140,6 +140,7 @@ const QuestionContainer = () => {
             isAuthor={isTrader}
             contents={questionDetails.answer.content}
             nickname={questionDetails.answer.nickname}
+            profileImage={questionDetails.answer.profileImageUrl}
             createdAt={questionDetails.answer.createdAt}
             onDelete={handleDeleteAnswerClick}
           />

@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import { Fragment } from 'react'
 
 import classNames from 'classnames/bind'
 
@@ -62,10 +62,10 @@ const QuestionDetailCard = ({
       </div>
       <div className={cx('card-contents')}>
         {contents.split('\n').map((line, idx) => (
-          <React.Fragment key={line + idx}>
+          <Fragment key={line + idx}>
             {line}
             <br />
-          </React.Fragment>
+          </Fragment>
         ))}
       </div>
     </div>

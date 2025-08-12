@@ -16,20 +16,22 @@ const RangeContainer = ({ optionId }: Props) => {
   const errOptions = useSearchingItemStore((state) => state.errOptions)
   const searchTerms = useSearchingItemStore((state) => state.searchTerms)
   const { setRangeValue } = useSearchingItemStore((state) => state.actions)
+  const option = searchTerms?.[optionId] as RangeModel | null
 
   const handleRangeValue = (e: React.ChangeEvent<HTMLInputElement>, type: 'min' | 'max') => {
-    const value = Number(e.target.value)
-    setRangeValue(optionId, type, value)
+    const value = e.target.value === '' ? null : Number(e.target.value)
+    setRangeValue(optionId, type, value ?? 0)
   }
 
-  const option = searchTerms?.[optionId] as RangeModel | null
+  const getDisplayValue = (value: number | null | undefined): string =>
+    value === null || value === undefined ? '' : String(value)
 
   return (
     <div className={cx('range-container')}>
       <div className={cx('range-wrapper')}>
         <input
           className={cx('range')}
-          value={option?.min ?? ''}
+          value={getDisplayValue(option?.min)}
           type="number"
           placeholder="0"
           onChange={(e) => handleRangeValue(e, 'min')}
@@ -37,7 +39,7 @@ const RangeContainer = ({ optionId }: Props) => {
         <span>~</span>
         <input
           className={cx('range')}
-          value={option?.max ?? ''}
+          value={getDisplayValue(option?.max)}
           type="number"
           placeholder="0"
           onChange={(e) => handleRangeValue(e, 'max')}

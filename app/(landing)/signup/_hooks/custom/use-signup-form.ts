@@ -7,7 +7,8 @@ import { PATH } from '@/shared/constants/path'
 
 import { signup } from '../../_api/signup'
 import { SIGNUP_ERROR_MESSAGES } from '../../_constants/signup'
-import { getUserTypeCookie, setNicknameCookie } from '../../_lib/cookies'
+import { setNicknameCookie } from '../../_lib/cookies'
+import useSignupStore from '../../_store/use-signup-store'
 import {
   SignupFormDataModel,
   SignupFormErrorsModel,
@@ -45,6 +46,8 @@ const useSignupForm = () => {
   const [formState, setFormState] = useState<SignupFormStateModel>(initialFormState)
   const [isValidated, setIsValidated] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const userType = useSignupStore((state) => state.userType)
+  const { setNickname } = useSignupStore((state) => state.actions)
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -132,8 +135,6 @@ const useSignupForm = () => {
       return
     }
 
-    const role = getUserTypeCookie()
-
     try {
       const formData: SignupFormDataModel = {
         name: form.name,
@@ -141,7 +142,7 @@ const useSignupForm = () => {
         phone: form.phone,
         password: form.password,
         email: form.email,
-        role: role || 'INVESTOR',
+        role: userType,
         infoAgreement: form.isMarketingAgreed,
         birthYear: form.birthYear,
         birthMonth: form.birthMonth,
@@ -152,6 +153,7 @@ const useSignupForm = () => {
 
       await signup(formData)
       setNicknameCookie(form.nickname)
+      setNickname(form.nickname)
       router.push(PATH.SIGN_UP_COMPLETE)
     } catch (err) {
       console.error('회원가입 실패:', err)

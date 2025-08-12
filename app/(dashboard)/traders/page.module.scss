@@ -21,6 +21,14 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 24px 32px;
   margin-bottom: 30px;
+
+  @include tablet-md {
+    gap: 16px;
+  }
+
+  @include mobile {
+    gap: 16px;
+  }
 }
 
 .pagination-wrapper {
